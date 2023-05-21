@@ -1,0 +1,24 @@
+{
+  "name": "common",
+  "version": "0.0.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "main": "./src/index.tsx",
+  "files": [
+    "src"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "config": "*",
+    "postcss": "^8.4.20",
+    "react": "^18.2.0",
+    "tsconfig": "*",
+    "typescript": "^4.9.4"
+  }
+}

@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#__next {
+  @apply h-full;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply font-bold;
+}
+
+.c,
+.cc {
+  @apply flex justify-center items-center;
+}
+
+.cc {
+  @apply flex-col;
+}
+
+.fc {
+  @apply flex-col;
+}
+
+.f {
+  @apply flex;
+}
+
+h1 {
+  font-size: 32px;
+  line-height: 52px;
+}
+
+h2 {
+  font-size: 28px;
+  line-height: 44px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 38px;
+}
+
+h4 {
+  font-size: 18px;
+  line-height: 28px;
+}
