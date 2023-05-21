@@ -1,16 +1,24 @@
 import React from "react";
-import { NextPageWithLayout, Button, AuthLayout } from "common";
+import {
+  NextPageWithLayout,
+  Button,
+  AuthLayout,
+  Input,
+  PasswordInput,
+} from "common";
 
 const Login: NextPageWithLayout = () => {
   return (
-    <div>
-      <Button>Submit</Button>
+    <div className="space-y-5 w-80 md:w-96">
+      <Input label="Email" type="email" placeholder="Enter your email" />
+      <PasswordInput label="Password" placeholder="Enter your password" />
+      <Button className="!w-full !py-2.5 font-semibold">Submit</Button>
     </div>
   );
 };
 
 Login.getLayout = (page) => (
-  <AuthLayout heading="Login" subheading="Login to employee's dashboard">
+  <AuthLayout heading="Login" subheading="Employee dashboard">
     {page}
   </AuthLayout>
 );
