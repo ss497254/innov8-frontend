@@ -4,9 +4,9 @@ import { Spinner } from "./Spinner";
 const BtnSizes = {
   xs: "text-xs px-2.5 py-1",
   sm: "text-sm leading-4 px-3 py-2",
-  md: "text-sm px-5 py-2",
+  md: "text-base px-5 py-2",
   lg: "text-base px-6 py-2",
-  xl: "text-base px-7 py-3",
+  xl: "text-lg px-7 py-3",
 };
 
 const ButtonType = {

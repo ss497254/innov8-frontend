@@ -18,7 +18,7 @@ const Login: NextPageWithLayout = () => {
       </div>
       <Input label="Email" type="email" placeholder="Enter your email" />
       <PasswordInput label="Password" placeholder="Enter your password" />
-      <Button className="!w-full !py-2.5 font-semibold">Submit</Button>
+      <Button className="!w-full font-medium">Submit</Button>
     </div>
   );
 };

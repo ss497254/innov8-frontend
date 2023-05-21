@@ -18,11 +18,12 @@ export const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({ url }) => {
         }
       }}
       loading={loading}
+      size="lg"
       btn="danger"
-      className="w-full text-lg font-semibold"
+      className="w-full font-medium"
     >
-      <GoogleIcon className="mr-3" size={18} />
-      Login with Google
+      <GoogleIcon className="mr-3" size={20} />
+      Continue with Google
     </Button>
   );
 };

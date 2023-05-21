@@ -1,17 +1,12 @@
 import React from "react";
-
-const sizes = {
-  sm: "py-1 px-2 text-sm placeholder:text-xs rounded",
-  md: "py-2 px-3 placeholder:text-sm rounded-md",
-  lg: "py-2.5 px-4 placeholder:text-sm rounded-lg",
-};
+import { sizes } from "./Input";
 
 interface TextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
   label: string;
   containerClassName?: string;
   error?: string;
-  size: keyof typeof sizes;
+  size?: keyof typeof sizes;
 }
 
 export const Textarea: React.FC<TextareaProps> = ({

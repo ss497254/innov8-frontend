@@ -37,7 +37,7 @@ interface InputProps
   label: string;
   containerClassName?: string;
   error?: string;
-  size: keyof typeof sizes;
+  size?: keyof typeof sizes;
 }
 
 export const PasswordInput: React.FC<InputProps> = ({
