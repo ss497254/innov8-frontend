@@ -1,4 +1,4 @@
-function SvgSolidLogOut(
+export function LogoutIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -15,5 +15,3 @@ function SvgSolidLogOut(
     </svg>
   );
 }
-
-export default SvgSolidLogOut;

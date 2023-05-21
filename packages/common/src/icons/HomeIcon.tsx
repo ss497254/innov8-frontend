@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SvgSolidHome(
+export function HomeIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -24,5 +24,3 @@ function SvgSolidHome(
     </svg>
   );
 }
-
-export default SvgSolidHome;

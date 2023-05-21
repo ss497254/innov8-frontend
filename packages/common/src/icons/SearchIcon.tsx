@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidSearch(
+export function SearchIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -28,5 +28,3 @@ function SvgSolidSearch(
     </svg>
   );
 }
-
-export default SvgSolidSearch;

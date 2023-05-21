@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default function BackIcon(
+export function BackIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (

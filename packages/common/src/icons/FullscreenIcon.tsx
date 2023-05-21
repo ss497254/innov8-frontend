@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidFullscreen(
+export function FullscreenIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -20,5 +20,3 @@ function SvgSolidFullscreen(
     </svg>
   );
 }
-
-export default SvgSolidFullscreen;

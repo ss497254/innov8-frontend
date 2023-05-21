@@ -1,6 +1,8 @@
 import * as React from "react";
 
-function Sync(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+export function SyncIcon(
+  props: React.SVGProps<SVGSVGElement> & { size?: number }
+) {
   return (
     <svg
       width={props.size || 16}
@@ -18,5 +20,3 @@ function Sync(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
     </svg>
   );
 }
-
-export default Sync;

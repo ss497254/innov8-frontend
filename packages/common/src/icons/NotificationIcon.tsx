@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidNotification(
+export function NotificationIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -16,5 +16,3 @@ function SvgSolidNotification(
     </svg>
   );
 }
-
-export default SvgSolidNotification;

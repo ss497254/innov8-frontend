@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidCalendar(
+export function CalendarIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -26,5 +26,3 @@ function SvgSolidCalendar(
     </svg>
   );
 }
-
-export default SvgSolidCalendar;

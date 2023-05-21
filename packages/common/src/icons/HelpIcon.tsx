@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidHelp(
+export function HelpIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -16,5 +16,3 @@ function SvgSolidHelp(
     </svg>
   );
 }
-
-export default SvgSolidHelp;

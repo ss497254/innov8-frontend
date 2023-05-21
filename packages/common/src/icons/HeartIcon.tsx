@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function Heart(
+export function HeartIcon(
   props: React.SVGProps<SVGSVGElement> & {
     size?: number;
     fillCurrent?: boolean;
@@ -22,5 +22,3 @@ function Heart(
     </svg>
   );
 }
-
-export default Heart;

@@ -1,6 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidBug(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+export function BugIcon(
+  props: React.SVGProps<SVGSVGElement> & { size?: number }
+) {
   return (
     <svg
       width={props.size || 16}
@@ -14,5 +16,3 @@ function SvgSolidBug(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
     </svg>
   );
 }
-
-export default SvgSolidBug;

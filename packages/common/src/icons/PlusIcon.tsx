@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidMessages(
+export function PlusIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -34,5 +34,3 @@ function SvgSolidMessages(
     </svg>
   );
 }
-
-export default SvgSolidMessages;

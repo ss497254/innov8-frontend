@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidSettings(
+export function SettingsIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (
@@ -16,5 +16,3 @@ function SvgSolidSettings(
     </svg>
   );
 }
-
-export default SvgSolidSettings;

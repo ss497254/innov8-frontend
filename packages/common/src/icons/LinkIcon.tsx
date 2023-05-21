@@ -1,6 +1,6 @@
 import * as React from "react";
 
-function SolidLink(
+export function LinkIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ): JSX.Element {
   return (
@@ -19,5 +19,3 @@ function SolidLink(
     </svg>
   );
 }
-
-export default SolidLink;

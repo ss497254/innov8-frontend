@@ -1,6 +1,8 @@
-import * as React from 'react';
+import * as React from "react";
 
-function SvgSolidNew(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
+export function NewIcon(
+  props: React.SVGProps<SVGSVGElement> & { size?: number }
+) {
   return (
     <svg
       width={props.size || 16}
@@ -27,5 +29,3 @@ function SvgSolidNew(props: React.SVGProps<SVGSVGElement> & { size?: number }) {
     </svg>
   );
 }
-
-export default SvgSolidNew;
