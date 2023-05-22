@@ -1,9 +1,12 @@
 import React from "react";
 import { ProfileIcon } from "../../icons";
-import { NavBar } from "../../ui/Navbar";
-import { NotificationDropdown, ProfileDropdown } from "../../ui/NavbarDropdown";
-import { SearchBar } from "../../ui/Search";
-import { Sidebar } from "../../ui/Sidebar/Sidebar";
+import {
+  NotificationDropdown,
+  ProfileDropdown,
+  SearchBar,
+  Sidebar,
+  NavBar,
+} from "../../ui";
 
 interface AppLayoutProps extends React.PropsWithChildren {
   items: {
