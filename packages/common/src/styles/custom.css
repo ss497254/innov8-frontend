@@ -1,0 +1,41 @@
+.animate-text {
+  animation: textchange 1s linear infinite;
+}
+
+@keyframes textchange {
+  to {
+    @apply text-blue-500;
+  }
+  from {
+    @apply text-emerald-500;
+  }
+}
+
+.c,
+.cc {
+  @apply flex justify-center items-center;
+}
+
+.cc {
+  @apply flex-col;
+}
+
+.fc {
+  @apply flex-col;
+}
+
+.f {
+  @apply flex;
+}
+
+.r {
+  @apply relative;
+}
+
+.ic {
+  @apply items-center;
+}
+
+.jc {
+  @apply justify-center;
+}

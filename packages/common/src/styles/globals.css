@@ -15,23 +15,6 @@ h4 {
   @apply font-bold;
 }
 
-.c,
-.cc {
-  @apply flex justify-center items-center;
-}
-
-.cc {
-  @apply flex-col;
-}
-
-.fc {
-  @apply flex-col;
-}
-
-.f {
-  @apply flex;
-}
-
 h1 {
   font-size: 32px;
   line-height: 40px;
