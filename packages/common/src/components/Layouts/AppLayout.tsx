@@ -1,5 +1,8 @@
 import React from "react";
+import { ProfileIcon } from "../../icons";
 import { NavBar } from "../../ui/Navbar";
+import { NotificationDropdown, ProfileDropdown } from "../../ui/NavbarDropdown";
+import { SearchBar } from "../../ui/Search";
 import { Sidebar } from "../../ui/Sidebar/Sidebar";
 
 interface AppLayoutProps extends React.PropsWithChildren {
@@ -16,11 +19,15 @@ interface AppLayoutProps extends React.PropsWithChildren {
 export const AppLayout: React.FC<AppLayoutProps> = ({ children, items }) => {
   return (
     <main className="lg:pl-64 relative h-full">
-      <NavBar />
+      <NavBar className="space-x-3">
+        <SearchBar width="md:!w-96" />
+        <div className="md:flex-grow" />
+        <NotificationDropdown />
+        <ProfileDropdown>
+          <ProfileIcon size={42} />
+        </ProfileDropdown>
+      </NavBar>
       {children}
-      <div className="h-screen bg-blue-300"></div>
-      <div className="h-screen bg-blue-400"></div>
-      <div className="h-screen bg-red-400"></div>
       <Sidebar items={items} />
     </main>
   );

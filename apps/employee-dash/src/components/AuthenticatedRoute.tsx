@@ -1,10 +1,11 @@
 import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
-  CalendarIcon,
+  BugIcon,
+  DashboardIcon,
   NotificationIcon,
-  HomeIcon,
+  ProfileIcon,
   SettingsIcon,
-  WarningIcon,
+  TickIcon,
 } from "common/src/icons";
 import React from "react";
 
@@ -12,22 +13,33 @@ export const items = [
   {
     heading: "",
     items: [
-      { href: "/", icon: <HomeIcon size={18} />, title: "Home" },
+      { href: "/", icon: <DashboardIcon size={22} />, title: "Dashboard" },
       {
         href: "/notifications",
-        icon: <HomeIcon />,
+        icon: <TickIcon size={24} />,
+        title: "My Tasks",
+      },
+      {
+        href: "/notifications",
+        icon: <NotificationIcon size={22} />,
         title: "Notifications",
       },
-      { href: "/messages", icon: <CalendarIcon />, title: "Messages" },
-      { href: "/channels", icon: <HomeIcon />, title: "Channels" },
+      {
+        href: "/calendar",
+        icon: <BugIcon size={22} className="py-0.5" />,
+        title: "Calendar",
+      },
     ],
   },
   {
     heading: "Manage",
     items: [
-      { href: "/profile", icon: <NotificationIcon />, title: "Profile" },
-      { href: "/server", icon: <WarningIcon />, title: "Server" },
-      { href: "/settings", icon: <SettingsIcon />, title: "Settings" },
+      { href: "/profile", icon: <ProfileIcon size={24} />, title: "Profile" },
+      {
+        href: "/settings",
+        icon: <SettingsIcon size={20} />,
+        title: "Settings",
+      },
     ],
   },
 ];

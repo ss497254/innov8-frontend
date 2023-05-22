@@ -1,20 +1,24 @@
 import React from "react";
-import { useSidebarDrawerStore } from "../../stores/useSidebarDrawerStore";
 import { HamburgerIcon } from "../../icons";
+import { useSidebarDrawerStore } from "../../stores/useSidebarDrawerStore";
 import { IconButton } from "../IconButton";
-import { SearchBar } from "../Search";
 
-interface props {}
+interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export const NavBar: React.FC<props> = () => {
+export const NavBar: React.FC<NavbarProps> = ({ children, className }) => {
   const { toggleOpen: toggleSidebar } = useSidebarDrawerStore();
 
   return (
-    <div className="flex items-center w-full px-4 md:px-6 bg-white font-semibold h-16">
-      <IconButton onClick={toggleSidebar} className="mr-4 lg:hidden">
+    <div
+      className={[
+        "flex items-center w-full px-4 bg-white font-semibold h-16",
+        className,
+      ].join(" ")}
+    >
+      <IconButton onClick={toggleSidebar} className="lg:hidden">
         <HamburgerIcon />
       </IconButton>
-      <SearchBar />
+      {children}
     </div>
   );
 };

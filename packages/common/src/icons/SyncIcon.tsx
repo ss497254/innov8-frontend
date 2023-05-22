@@ -8,7 +8,7 @@ export function SyncIcon(
       width={props.size || 16}
       height={props.size || 16}
       fill="currentColor"
-      viewBox="-3 0 24 24"
+      viewBox="-4 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

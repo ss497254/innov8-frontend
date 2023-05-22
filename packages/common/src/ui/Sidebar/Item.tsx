@@ -13,11 +13,11 @@ export const Item: React.FC<ItemProps> = ({ href, icon, title, active }) => {
     <Link href={href}>
       <div
         className={[
-          "flex items-center px-4 [&>svg]:mr-4 py-2.5 cursor-pointer w-full mb-2 transition font-medium duration-300 hover:bg-gray-200 rounded-lg",
+          "flex items-center px-4 mb-3 py-2.5 cursor-pointer w-full transition font-medium duration-300 hover:bg-gray-200 rounded-lg",
           active ? "bg-dark-200 shadow text-black" : "",
         ].join(" ")}
       >
-        {icon}
+        <div className="c w-8 mr-2">{icon}</div>
         {title}
       </div>
     </Link>

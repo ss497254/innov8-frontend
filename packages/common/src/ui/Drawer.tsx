@@ -28,7 +28,7 @@ export const Drawer: React.FC<props> = ({
     <>
       <div
         className={[
-          "fc border-gray-200 duration-400 top-0 left-0 fixed z-50 h-screen w-64 scroll-thin",
+          "fc border-gray-200 duration-500 top-0 left-0 fixed z-50 h-screen w-64 scroll-thin",
           cn,
           dir === "left" ? "border-r" : "border-l",
           className,
@@ -41,7 +41,7 @@ export const Drawer: React.FC<props> = ({
         onClick={toggleOpen}
         className={
           backdrop && open
-            ? "absolute inset-y-0 z-10 w-screen backdrop-blur-sm"
+            ? "absolute inset-y-0 z-10 w-screen bg-gray-900/20"
             : undefined
         }
       />

@@ -3,12 +3,12 @@ import { SearchIcon } from "../../icons";
 import { Spinner } from "../Spinner";
 import { SearchOverlay } from "./SearchOverlay";
 
-export const SearchBar = ({ className = "", isLoading = false }) => {
+export const SearchBar = ({ className = "", width = "" }) => {
   const [value, setValue] = useState("");
   return (
     <div
       className={[
-        "ic f r z-10 text-gray-600 bg-dark-100 outline-1 outline outline-gray-300 transition duration-200 ease-in-out focus-within:text-gray-900 rounded-lg",
+        "ic f r z-10 text-gray-600 h-9 bg-dark-100 outline-1 outline outline-gray-300 transition duration-200 ease-in-out focus-within:text-gray-900 rounded-lg",
         className,
       ].join(" ")}
     >
@@ -16,7 +16,8 @@ export const SearchBar = ({ className = "", isLoading = false }) => {
         <SearchIcon />
       </div>
       <input
-        className="outline-none py-1.5 bg-inherit"
+        className={"outline-none py-1.5 bg-inherit " + width}
+        style={{ width: 120 }}
         placeholder="Search"
         value={value}
         onChange={(e) => setValue(e.target.value)}
