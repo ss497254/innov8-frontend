@@ -5,6 +5,7 @@ export * from "./Input";
 export * from "./Modal";
 export * from "./Navbar";
 export * from "./NavbarDropdown";
+export * from "./OrSeparator";
 export * from "./Search";
 export * from "./Sidebar";
 export * from "./Spinner";
