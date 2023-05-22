@@ -1,6 +1,7 @@
 import { NextPageWithLayout } from "common/src/types";
 import { Input, PasswordInput, Button } from "common/src/ui";
 import { AuthLayout, GoogleAuthButton } from "common/src/components";
+import Link from "next/link";
 
 const Login: NextPageWithLayout = () => {
   return (
@@ -13,6 +14,14 @@ const Login: NextPageWithLayout = () => {
       <Input label="Email" type="email" placeholder="Enter your email" />
       <PasswordInput label="Password" placeholder="Enter your password" />
       <Button className="!w-full font-medium">Submit</Button>
+      <div>
+        Don't have an account?{" "}
+        <Link href="/register">
+          <span className="font-semibold text-blue-500 hover:underline">
+            Register
+          </span>
+        </Link>
+      </div>
     </div>
   );
 };

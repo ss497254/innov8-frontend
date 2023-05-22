@@ -71,12 +71,12 @@ export const PasswordInput: React.FC<InputProps> = ({
           ].join(" ")}
           {...props}
         />
-        <div
+        <button
           className="absolute right-2 bottom-1 top-1 bg-gray-200 my-auto h-7 w-7 p-1 rounded text-gray-700"
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? <EyeOpen /> : <EyeClose />}
-        </div>
+        </button>
       </div>
       {error && <p className="text-xs text-red-500 ml-1 mt-1">{error}</p>}
     </div>

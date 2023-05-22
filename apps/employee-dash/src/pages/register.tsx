@@ -7,6 +7,7 @@ import {
   PasswordInput,
   GoogleAuthButton,
 } from "common";
+import Link from "next/link";
 
 const Register: NextPageWithLayout = () => {
   return (
@@ -21,6 +22,14 @@ const Register: NextPageWithLayout = () => {
       <Input label="Lastname" type="text" placeholder="Enter your lastname" />
       <PasswordInput label="Password" placeholder="Enter your password" />
       <Button className="!w-full font-medium">Submit</Button>
+      <div>
+        Already have an account?{" "}
+        <Link href="/login">
+          <span className="font-semibold text-blue-500 hover:underline">
+            Login
+          </span>
+        </Link>
+      </div>
     </div>
   );
 };
