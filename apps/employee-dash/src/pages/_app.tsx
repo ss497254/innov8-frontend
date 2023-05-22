@@ -1,11 +1,7 @@
-import React from "react";
-import "src/styles/globals.css";
-import "common/src/styles/globals.css";
-import "common/src/styles/fonts.css";
-import "common/src/styles/toast.css";
-import "common/src/styles/nprogress.css";
-
 import "common/src/lib/init";
+import "common/src/styles";
+import "src/styles/globals.css";
+
 import { AppPropsWithLayout } from "common/src/types";
 import { ToastContainer } from "common/src/ui";
 
