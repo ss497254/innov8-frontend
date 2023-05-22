@@ -24,7 +24,7 @@ export const Toast = memo(
     const icon = notification_types[type];
     const inverseIndex = total - index - 1;
     const scale = 1 - inverseIndex * 0.06;
-    const opacity = 100 - (inverseIndex / total) * 100;
+    const opacity = 100 - (inverseIndex / total) * 50;
     const y = inverseIndex * 100 * STACKING_OVERLAP;
 
     return (
@@ -38,10 +38,10 @@ export const Toast = memo(
           } as any
         }
       >
-        <div className="border-gray-600 toast-inner">
-          <div className={`icon ${type}`}>{icon}</div>
+        <div className={["toast-inner", type].join(" ")}>
+          <div className={["icon", type].join(" ")}>{icon}</div>
           <div className="toast-content">
-            <h4>{message}</h4>
+            <h4 className="text-ellipsis">{message}</h4>
             <p>{desc}</p>
           </div>
           <button
