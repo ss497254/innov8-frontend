@@ -15,12 +15,12 @@ export const AuthLayout: React.FC<AuthLayoutProps> = ({
   children,
 }) => {
   return (
-    <main className="bg-gray-200 c h-full relative">
+    <main className="bg-gray-200 c min-h-full relative">
       <LogoIcon
         size={28}
         className="absolute top-10 md:left-10 text-indigo-600"
       />
-      <Card className="p-6 md:!p-8">
+      <Card className="p-6 md:!p-8 my-28">
         <h2>{heading}</h2>
         <p className="mb-4">{subheading}</p>
         {children}
