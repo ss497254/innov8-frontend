@@ -23,7 +23,7 @@
 }
 
 .hide-scroll:hover::-webkit-scrollbar-thumb {
-  @apply bg-gray-600;
+  @apply bg-gray-400;
 }
 
 ::-webkit-scrollbar-track {
@@ -31,6 +31,6 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-gray-600;
+  @apply bg-gray-400;
   border-radius: 5px;
 }

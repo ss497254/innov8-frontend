@@ -1,11 +1,11 @@
-import React from "react";
-import { NextPageWithLayout, Button } from "common";
+import { Button, NextPageWithLayout } from "common";
 import { useToastStore } from "common/src/stores/useToastStore";
+import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 
 const Home: NextPageWithLayout = () => {
   const { add } = useToastStore();
   return (
-    <div className="bg-blue-200 h-full">
+    <div className="bg-gray-100 h-full">
       <Button
         size="sm"
         btn="danger"
@@ -61,5 +61,7 @@ const Home: NextPageWithLayout = () => {
     </div>
   );
 };
+
+Home.getLayout = (page) => <AuthenticatedRoute>{page}</AuthenticatedRoute>;
 
 export default Home;

@@ -12,9 +12,7 @@ export const ItemGroup: React.FC<props> = ({ heading, items }) => {
 
   return (
     <div className="mx-4 mb-4">
-      <div className="mx-4 mb-2 text-xs font-semibold uppercase text-dark-200">
-        {heading}
-      </div>
+      <div className="mx-4 mb-2 text-xs font-semibold uppercase">{heading}</div>
       {items.map((item, idx) => (
         <Item
           key={idx}

@@ -3,7 +3,6 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "../../packages/**/*.{js,ts,jsx,tsx}",
-    "./public/index.html",
   ],
   theme: {
     fontFamily: {
@@ -18,6 +17,14 @@ module.exports = {
         "sans-serif",
       ],
       mono: ["Menlo", "Monaco", "Courier New", "monospace"],
+    },
+    extend: {
+      colors: {
+        dark: {
+          100: "#f4f4f4",
+          200: "#efefef",
+        },
+      },
     },
   },
 };

@@ -28,7 +28,7 @@ export const Drawer: React.FC<props> = ({
     <>
       <div
         className={[
-          "flex-c animate border-dark-700 duration-400 top-0 left-0 fixed z-50 h-screen bg-dark-800 w-[280px] scroll-thin",
+          "fc border-gray-200 duration-400 top-0 left-0 fixed z-50 h-screen w-64 scroll-thin",
           cn,
           dir === "left" ? "border-r" : "border-l",
           className,
