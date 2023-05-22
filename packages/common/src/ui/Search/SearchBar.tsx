@@ -8,7 +8,7 @@ export const SearchBar = ({ className = "", width = "" }) => {
   return (
     <div
       className={[
-        "ic f r z-10 text-gray-600 h-9 bg-dark-100 outline-1 outline outline-gray-300 transition duration-200 ease-in-out focus-within:text-gray-900 rounded-lg",
+        "ic f r z-10 text-gray-600 h-9 bg-dark-100 outline-1 outline outline-gray-200 transition duration-200 ease-in-out focus-within:text-gray-900 rounded-lg",
         className,
       ].join(" ")}
     >
@@ -17,7 +17,7 @@ export const SearchBar = ({ className = "", width = "" }) => {
       </div>
       <input
         className={"outline-none py-1.5 bg-inherit " + width}
-        style={{ width: 120 }}
+        style={{ width: "30vw" }}
         placeholder="Search"
         value={value}
         onChange={(e) => setValue(e.target.value)}
@@ -28,7 +28,7 @@ export const SearchBar = ({ className = "", width = "" }) => {
 
       {value && (
         <SearchOverlay>
-          <h4 className="my-auto">Sorry, we are workign on this.</h4>
+          <h4 className="my-auto">Sorry, we are working on this feature.</h4>
         </SearchOverlay>
       )}
     </div>

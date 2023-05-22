@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Button } from "../../ui/Button";
+import { Button } from "../../ui/Buttons/Button";
 
 export const Error404 = () => {
   const [show404, setShow404] = useState<boolean>(false);

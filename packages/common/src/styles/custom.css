@@ -39,3 +39,7 @@
 .jc {
   @apply justify-center;
 }
+
+.b {
+  @apply border border-gray-200;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import { HamburgerIcon } from "../../icons";
 import { useSidebarDrawerStore } from "../../stores/useSidebarDrawerStore";
-import { IconButton } from "../IconButton";
+import { IconButton } from "../Buttons";
 
 interface NavbarProps extends React.HTMLAttributes<HTMLDivElement> {}
 

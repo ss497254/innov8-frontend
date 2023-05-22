@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner } from "./Spinner";
+import { Spinner } from "../Spinner";
 
 const BtnSizes = {
   xs: "text-xs px-2.5 py-1",
@@ -11,6 +11,7 @@ const BtnSizes = {
 
 const ButtonType = {
   default: "bg-blue-500 hover:bg-blue-600",
+  accent: "bg-indigo-500 hover:bg-indigo-600",
   success: "bg-emerald-500 hover:bg-emerald-600",
   danger: "bg-red-500 hover:bg-red-600",
   none: "",
