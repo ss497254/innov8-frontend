@@ -1,12 +1,16 @@
 import { createPortal } from "react-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { useClientOnly } from "../../hooks";
 import { useToastStore } from "../../stores/useToastStore";
-import { Toast } from "src/ui/Toast";
+import { Toast } from "./Toast";
 
 const animationDuration = 400;
 
 export const ToastContainer = () => {
   const { toasts, resume, pause, remove } = useToastStore();
+  const server = useClientOnly();
+
+  if (server) return null;
 
   return createPortal(
     <TransitionGroup

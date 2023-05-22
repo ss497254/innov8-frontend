@@ -4,7 +4,7 @@ import { CloseIcon, HelpIcon, TickIcon, WarningIcon } from "../../icons";
 const STACKING_OVERLAP = 0.9;
 const notification_types = {
   success: <TickIcon size={26} />,
-  error: <WarningIcon size={24} />,
+  error: <WarningIcon size={20} />,
   info: <HelpIcon size={22} />,
   warning: <WarningIcon size={20} />,
 };
@@ -38,7 +38,7 @@ export const Toast = memo(
           } as any
         }
       >
-        <div className="border-600 toast-inner">
+        <div className="border-gray-600 toast-inner">
           <div className={`icon ${type}`}>{icon}</div>
           <div className="toast-content">
             <h4>{message}</h4>

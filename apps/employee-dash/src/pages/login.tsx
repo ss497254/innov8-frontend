@@ -1,12 +1,6 @@
-import React from "react";
-import {
-  NextPageWithLayout,
-  Button,
-  AuthLayout,
-  Input,
-  PasswordInput,
-  GoogleAuthButton,
-} from "common";
+import { NextPageWithLayout } from "common/src/types";
+import { Input, PasswordInput, Button } from "common/src/ui";
+import { AuthLayout, GoogleAuthButton } from "common/src/components";
 
 const Login: NextPageWithLayout = () => {
   return (
