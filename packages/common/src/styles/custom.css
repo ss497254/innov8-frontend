@@ -53,6 +53,10 @@
   @apply justify-center;
 }
 
+.jb {
+  @apply justify-between;
+}
+
 .b {
   @apply border border-gray-200;
 }

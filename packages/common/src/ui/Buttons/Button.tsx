@@ -35,7 +35,7 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const classes = ["relative c text-white rounded-md duration-300"];
+  const classes = ["relative c rounded-md duration-300"];
 
   classes.push(ButtonTypes[btn]);
 

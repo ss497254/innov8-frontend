@@ -9,17 +9,17 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
       <h3></h3>
       <Textarea
         label="Summary"
-        labelClassName="font-bold md:text-lg"
+        labelClassName="!font-bold md:text-lg"
         desc="Provide an executive summary of you idea."
       />
       <Textarea
         label="How will you capture value?"
-        labelClassName="font-bold md:text-lg"
+        labelClassName="!font-bold md:text-lg"
         desc="Give an overview of your revenue model."
       />
       <Textarea
         label="Do you have the competencies within your team to build the MVP?"
-        labelClassName="font-bold md:text-lg"
+        labelClassName="!font-bold md:text-lg"
         desc="Give an overview of your team and what you might need help with."
       />
       <div className="f space-x-5">
