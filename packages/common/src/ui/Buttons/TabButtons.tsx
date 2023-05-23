@@ -20,8 +20,8 @@ export const TabButtons: React.FC<TabButtonsProps> = ({
           key={tab}
           onClick={() => setActiveTab(tab)}
           className={[
-            activeTab === tab ? "" : "hover:text-black/60",
-            "relative text-center w-20 text-sm py-4 font-medium text-black outline-sky-400 transition focus-visible:outline-2",
+            activeTab === tab ? "" : "hover:text-indigo-600",
+            "relative text-center w-20 text-sm py-3 font-medium transition-all !ring-0",
             className,
           ].join(" ")}
           style={{

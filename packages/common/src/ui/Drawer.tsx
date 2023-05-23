@@ -19,6 +19,9 @@ export const Drawer: React.FC<props> = ({
   permanent,
   className = "",
 }) => {
+  if (!open) document.body.classList.remove("modal-body-fixed");
+  else document.body.classList.add("modal-body-fixed");
+
   let cn = "";
 
   if (!permanent && !open)

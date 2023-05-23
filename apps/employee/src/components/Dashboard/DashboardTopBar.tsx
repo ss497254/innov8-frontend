@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Button, Modal, TabButtons } from "common/src/ui";
 import { PlusIcon } from "common/src/icons";
-import { LoginForm } from "common";
+import { Button, Modal, TabButtons } from "common/src/ui";
+import React, { useState } from "react";
+import { ProjectForm } from "../Froms/ProjectForm";
 
 interface DashboardTopBarProps extends React.PropsWithChildren {}
 
@@ -12,23 +12,28 @@ export const DashboardTopBar: React.FC<DashboardTopBarProps> = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="bg-white px-4 border rounded-lg f justify-between">
+    <div>
       <Modal open={modalOpen} setOpen={setModalOpen}>
-        <LoginForm />
+        <ProjectForm />
       </Modal>
-      <TabButtons
-        tabs={tabs}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
-      <Button
-        btn="accent"
-        className="my-2"
-        onClick={() => setModalOpen(!modalOpen)}
-      >
-        <PlusIcon size={14} className="mr-3" />
-        Add new project
-      </Button>
+      <div className="my-4 md:mx-6 f justify-between ic">
+        <h3>Dashboard</h3>
+        <Button
+          btn="accent"
+          className="my-2"
+          onClick={() => setModalOpen(!modalOpen)}
+        >
+          <PlusIcon size={14} className="mr-3" />
+          New project
+        </Button>
+      </div>
+      <div className="px-2 md:mx-4 border-b border-dark-400">
+        <TabButtons
+          tabs={tabs}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </div>
     </div>
   );
 };

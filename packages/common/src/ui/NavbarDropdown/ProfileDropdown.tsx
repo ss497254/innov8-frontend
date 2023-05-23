@@ -37,6 +37,7 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
       <button
         ref={trigger}
         aria-haspopup="true"
+        className="hover:text-indigo-600 rounded-full"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >

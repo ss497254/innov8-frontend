@@ -41,17 +41,17 @@ export const NotificationDropdown: React.FC<
     <div className="r">
       <button
         ref={trigger}
-        className="c bg-dark-200 rounded-full p-1.5 hover:bg-dark-300 transition duration-150"
+        className="c p-2 hover:bg-dark-200 rounded-full transition duration-150"
         aria-haspopup="true"
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <NotificationIcon size={20} />
-        <div className="absolute top-0 right-0 w-2 h-2 bg-rose-500 rounded-full"></div>
+        <NotificationIcon size={28} />
+        <div className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full"></div>
       </button>
 
       <Transition
-        className="origin-top-right z-100 absolute top-full right-0 mr-1 w-96 outline outline-[1px] outline-slate-400
+        className="origin-top-right z-100 absolute top-full right-0 bg-white mr-1 w-96 outline outline-[1px] outline-slate-400
                 rounded-lg shadow-xl overflow-hidden mt-1"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
@@ -66,7 +66,7 @@ export const NotificationDropdown: React.FC<
           onFocus={() => setDropdownOpen(true)}
           onBlur={() => setDropdownOpen(false)}
         >
-          <div className="font-semibold text-white bg-sky-500 py-3 px-4">
+          <div className="font-semibold text-white bg-indigo-600 py-3 px-4">
             Notification
           </div>
           <ul>

@@ -56,3 +56,8 @@
 .b {
   @apply border border-gray-200;
 }
+
+button:focus {
+  @apply ring-2;
+  outline: none;
+}

@@ -28,7 +28,9 @@ export const SearchBar = ({ className = "", width = "" }) => {
 
       {value && (
         <SearchOverlay>
-          <h4 className="my-auto">Sorry, we are working on this feature.</h4>
+          <h4 className="my-auto text-sm md:text-base">
+            Sorry, we are working on this feature.
+          </h4>
         </SearchOverlay>
       )}
     </div>

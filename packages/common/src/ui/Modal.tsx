@@ -1,5 +1,6 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import { CloseIcon } from "../icons";
 
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
@@ -27,14 +28,20 @@ export const Modal: React.FC<ModalProps> = ({
       onClick={() => setOpen(false)}
     >
       <div
-        className={["bg-white p-6 rounded-lg modal-container", className].join(
-          " "
-        )}
+        className={[
+          "bg-white p-6 rounded-lg modal-container r",
+          className,
+        ].join(" ")}
         onClick={(e) => e.stopPropagation()}
         {...props}
       >
         {children}
-        <button onClick={() => setOpen(false)}>Close</button>
+        <button
+          onClick={() => setOpen(false)}
+          className="absolute top-0 right-0 p-2"
+        >
+          <CloseIcon size={22} />
+        </button>
       </div>
     </div>,
     document.querySelector("body")!

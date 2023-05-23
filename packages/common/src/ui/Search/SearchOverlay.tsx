@@ -9,7 +9,7 @@ export const SearchOverlay = forwardRef(
       <div
         ref={ref}
         className={[
-          "absolute flex flex-col rounded-xl pt-12 px-4 bg-dark-100 border border-gray-300 shadow-xl",
+          "absolute flex flex-col rounded-xl pt-12 pb-2 px-4 bg-dark-100 border border-gray-300 shadow-xl",
           className,
         ].join(" ")}
         style={{

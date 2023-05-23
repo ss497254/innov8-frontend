@@ -18,6 +18,7 @@ export * from "./NewIcon";
 export * from "./NotificationIcon";
 export * from "./PlusIcon";
 export * from "./ProfileIcon";
+export * from "./ProjectIcon";
 export * from "./SearchIcon";
 export * from "./SettingsIcon";
 export * from "./ShareIcon";
