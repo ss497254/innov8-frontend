@@ -41,7 +41,7 @@ export const Drawer: React.FC<props> = ({
         onClick={toggleOpen}
         className={
           backdrop && open
-            ? "absolute inset-y-0 z-10 w-screen bg-gray-900/20"
+            ? "absolute inset-y-0 z-10 w-screen bg-gray-900/20 backdrop"
             : undefined
         }
       />

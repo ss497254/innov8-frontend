@@ -1,5 +1,6 @@
 export * from "./Buttons";
 export * from "./Card";
+export * from "./CenterLoading";
 export * from "./Drawer";
 export * from "./Input";
 export * from "./Modal";

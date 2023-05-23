@@ -11,6 +11,19 @@
   }
 }
 
+.backdrop {
+  animation: backdrop-opacity 200ms ease;
+}
+
+@keyframes backdrop-opacity {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .c,
 .cc {
   @apply flex justify-center items-center;

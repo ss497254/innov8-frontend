@@ -7,7 +7,7 @@ export const IconButton: React.FC<
 > = ({ className, children, ...prop }) => {
   return (
     <button
-      className={["p-2.5 rounded-md bg-dark-600", className].join(" ")}
+      className={["p-2.5 rounded-md bg-dark-200", className].join(" ")}
       {...prop}
     >
       {children}
