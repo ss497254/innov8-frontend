@@ -1,5 +1,6 @@
 import React from "react";
 import { Spinner } from "../Spinner";
+import { ButtonTypes } from "./ButtonTypes";
 
 const BtnSizes = {
   xs: "text-xs px-2.5 py-1",
@@ -9,19 +10,11 @@ const BtnSizes = {
   xl: "text-lg px-7 py-3",
 };
 
-const ButtonType = {
-  default: "bg-blue-500 hover:bg-blue-600",
-  accent: "bg-indigo-600 hover:bg-indigo-500",
-  success: "bg-emerald-500 hover:bg-emerald-600",
-  danger: "bg-red-500 hover:bg-red-600",
-  none: "",
-};
-
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
   disabled?: boolean;
-  btn?: keyof typeof ButtonType;
+  btn?: keyof typeof ButtonTypes;
   iconSize?: number;
   icon?: React.ReactNode;
   className?: string;
@@ -42,9 +35,9 @@ export const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const classes = ["relative c text-white rounded-md"];
+  const classes = ["relative c text-white rounded-md duration-300"];
 
-  classes.push(ButtonType[btn]);
+  classes.push(ButtonTypes[btn]);
 
   if (className) {
     classes.push(className);

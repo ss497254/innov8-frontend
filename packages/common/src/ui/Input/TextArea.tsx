@@ -5,7 +5,9 @@ interface TextareaProps
   extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "size"> {
   label: string;
   containerClassName?: string;
+  labelClassName?: string;
   error?: string;
+  desc?: string;
   size?: keyof typeof sizes;
 }
 
@@ -15,17 +17,23 @@ export const Textarea: React.FC<TextareaProps> = ({
   size = "md",
   className,
   error,
+  desc,
   containerClassName,
+  labelClassName,
   ...props
 }) => {
   return (
     <div className={["", containerClassName].join(" ")}>
       <label
         htmlFor={id}
-        className="block mb-1 text-base font-medium text-gray-900"
+        className={[
+          "block mb-1 text-base font-medium text-gray-900",
+          labelClassName,
+        ].join(" ")}
       >
         {label}
       </label>
+      {desc && <p className="text-sm -mt-1 mb-1">{desc}</p>}
       <textarea
         id={id}
         className={[
