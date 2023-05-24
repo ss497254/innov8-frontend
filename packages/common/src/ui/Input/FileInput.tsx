@@ -36,7 +36,7 @@ export const FileInput: React.FC<FileInputProps> = ({
       {desc && <p className="text-sm -mt-1 mb-1">{desc}</p>}
       <label
         htmlFor={id}
-        className="cc w-full h-28 border border-gray-300 rounded-md cursor-pointer bg-gray-50 hover:bg-gray-100"
+        className="cc w-full h-32 border border-gray-300 rounded-md cursor-pointer bg-gray-50 hover:bg-gray-100"
       >
         <svg
           aria-hidden="true"
