@@ -2,12 +2,13 @@ import React from "react";
 import { Spinner } from "../Spinner";
 import { ButtonTypes } from "./ButtonTypes";
 
-const BtnSizes = {
+export const BtnSizes = {
   xs: "text-xs px-2.5 py-1",
   sm: "text-sm leading-4 px-3 py-2",
   md: "text-base px-5 py-2",
   lg: "text-base px-6 py-2",
   xl: "text-lg px-7 py-3",
+  none:""
 };
 
 export interface ButtonProps

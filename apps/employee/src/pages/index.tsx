@@ -9,13 +9,13 @@ let tabs = ["Overview", "List", "Board", "Timeline", "More"];
 const Home: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
   return (
-    <div className="bg-gray-100 h-full p-4">
+    <div className="bg-gray-100 min-h-full p-4">
       <DashboardTopBar
         tabs={tabs}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <div className="f mt-8 max-w-7xl mx-auto space-x-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
         <ProjectStageContainer
           name="Idea generation"
           color="bg-emerald-300"

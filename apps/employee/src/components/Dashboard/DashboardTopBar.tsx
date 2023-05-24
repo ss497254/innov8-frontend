@@ -13,11 +13,11 @@ export const DashboardTopBar: React.FC<DashboardTopBarProps> = memo(
   ({ activeTab, tabs, setActiveTab }) => {
     return (
       <div>
-        <div className="my-4 md:mx-6 f justify-between ic">
+        <div className="my-4 md:mx-6 py-2 f justify-between ic">
           <h3>Dashboard</h3>
           <Link href="/projects/new-project">
-            <Button btn="accent" className="my-2">
-              <PlusIcon size={14} className="mr-3" />
+            <Button btn="accent">
+              <PlusIcon size={14} className="mr-2" />
               New project
             </Button>
           </Link>
