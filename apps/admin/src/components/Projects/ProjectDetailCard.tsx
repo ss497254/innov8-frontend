@@ -1,6 +1,7 @@
 import { Button, IconButton } from "common/src/ui";
 import { EditIcon, CommentsIcon, PaperClipIcon } from "common/src/icons";
 import React from "react";
+import Link from "next/link";
 
 export interface ProjectDetailCardProps extends React.PropsWithChildren {
   title: string;
@@ -16,9 +17,11 @@ export const ProjectDetailCard: React.FC<ProjectDetailCardProps> = ({
   comments,
 }) => {
   return (
-    <div className="bg-white rounded-2xl p-4 space-y-4 shadow-md border">
+    <div className="bg-white rounded-lg p-6 space-y-4 shadow-md border">
       <div className="f jb ic">
-        <h4>{title}</h4>
+        <Link href="#">
+          <h4>{title}</h4>
+        </Link>
         <IconButton className="!p-1">
           <EditIcon size={22} />
         </IconButton>
@@ -26,7 +29,7 @@ export const ProjectDetailCard: React.FC<ProjectDetailCardProps> = ({
       <p className="h-20 overflow-hidden text-ellipsis leading-5 text-sm">
         {desc}
       </p>
-      <div className="f space-x-2">
+      <div className="f space-x-2 ic">
         <Button
           size="sm"
           btn="none"
@@ -44,6 +47,9 @@ export const ProjectDetailCard: React.FC<ProjectDetailCardProps> = ({
           <CommentsIcon className="mr-2" />
           {comments} comments
         </Button>
+        <div className="text-sm font-medium text-right flex-1">
+          {new Date().toDateString()}
+        </div>
       </div>
     </div>
   );

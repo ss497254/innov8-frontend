@@ -14,8 +14,8 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className="mb-6">
-      <div className="text-lg f ic my-4">
+    <div className="my-6 space-y-4">
+      <div className="text-lg f ic">
         <Button
           btn="outline"
           className="!rounded-full"
@@ -29,9 +29,12 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
           />
         </Button>
       </div>
-      {projects.map((project, idx) => (
-        <ProjectDetailCard key={idx} {...project} />
-      ))}
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {open &&
+          projects.map((project, idx) => (
+            <ProjectDetailCard key={idx} {...project} />
+          ))}
+      </div>
     </div>
   );
 };
