@@ -45,9 +45,12 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
           desc="Any supporting documents, pitch deck, etc."
         />
       </div>
-      <Button btn="success" className="mx-auto w-full my-4">
-        Submit
-      </Button>
+      <div className="f space-x-4">
+        <Button className="mx-auto w-full my-4">Save as draft</Button>
+        <Button btn="success" className="mx-auto w-full my-4">
+          Submit
+        </Button>
+      </div>
     </div>
   );
 };
