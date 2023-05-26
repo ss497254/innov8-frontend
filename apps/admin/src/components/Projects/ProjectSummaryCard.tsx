@@ -1,7 +1,8 @@
 import { EditIcon } from "common/src/icons";
 import { IconButton, MultiUserAvatar } from "common/src/ui";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { AssignJudgeModal } from "./AssignJudgeModal";
 
 export interface ProjectSummaryCardProps extends React.PropsWithChildren {
   title: string;
@@ -13,8 +14,11 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   title,
   desc,
 }) => {
+  const [open, setOpen] = useState(false);
+
   return (
     <div className="bg-white rounded-lg p-6 space-y-4 shadow-md border">
+      <AssignJudgeModal open={open} onClose={() => setOpen(false)} />
       <div className="f jb ic space-x-4">
         <Link href="#">
           <h4>{title}</h4>
@@ -28,7 +32,7 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
             "https://xsgames.co/randomusers/assets/avatars/male/38.jpg",
           ]}
         />
-        <IconButton className="!p-1">
+        <IconButton className="!p-1" onClick={() => setOpen(true)}>
           <EditIcon size={22} />
         </IconButton>
       </div>

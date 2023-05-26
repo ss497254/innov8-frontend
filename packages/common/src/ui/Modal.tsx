@@ -5,14 +5,14 @@ import { CloseIcon } from "../icons";
 export interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean;
   children: React.ReactNode;
-  setOpen: (x: boolean) => void;
+  onClose: () => void;
 }
 
 export const Modal: React.FC<ModalProps> = ({
   open,
   className,
   children,
-  setOpen,
+  onClose,
   ...props
 }) => {
   if (!open) {
@@ -25,7 +25,7 @@ export const Modal: React.FC<ModalProps> = ({
   return createPortal(
     <div
       className="absolute inset-0 c bg-gray-800/50 z-50 backdrop"
-      onClick={() => setOpen(false)}
+      onClick={onClose}
     >
       <div
         className={[
@@ -36,10 +36,7 @@ export const Modal: React.FC<ModalProps> = ({
         {...props}
       >
         {children}
-        <button
-          onClick={() => setOpen(false)}
-          className="absolute top-0 right-0 p-2"
-        >
+        <button onClick={onClose} className="absolute top-0 right-0 p-2">
           <CloseIcon size={22} />
         </button>
       </div>
