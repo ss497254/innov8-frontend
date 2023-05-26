@@ -20,9 +20,9 @@ export const TabButtons: React.FC<TabButtonsProps> = ({
           key={tab}
           onClick={() => setActiveTab(tab)}
           className={[
+            className,
             activeTab === tab ? "" : "hover:text-indigo-600",
             "relative text-center w-20 text-sm py-3 font-medium transition-all !ring-0",
-            className,
           ].join(" ")}
           style={{
             WebkitTapHighlightColor: "transparent",

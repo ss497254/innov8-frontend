@@ -12,7 +12,6 @@ export function PlusIcon(
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
-      <g clipPath="url(#clip12)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"
@@ -23,12 +22,6 @@ export function PlusIcon(
           clipRule="evenodd"
           d="M0.000976562 8C0.000976562 7.44772 0.448692 7 1.00098 7H15.001C15.5533 7 16.001 7.44772 16.001 8C16.001 8.55228 15.5533 9 15.001 9H1.00098C0.448692 9 0.000976562 8.55228 0.000976562 8Z"
         />
-      </g>
-      <defs>
-        <clipPath id="clip12">
-          <rect width="16" height="16" fill="white" />
-        </clipPath>
-      </defs>
-    </svg>
+      </svg>
   );
 }

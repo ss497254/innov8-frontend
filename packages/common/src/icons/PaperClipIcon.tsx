@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export function PaperClip(
+export function PaperClipIcon(
   props: React.SVGProps<SVGSVGElement> & { size?: number }
 ) {
   return (

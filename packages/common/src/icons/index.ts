@@ -19,7 +19,7 @@ export * from "./LogoIcon";
 export * from "./LogoutIcon";
 export * from "./NewIcon";
 export * from "./NotificationIcon";
-export * from "./PaperClip";
+export * from "./PaperClipIcon";
 export * from "./PlusIcon";
 export * from "./ProfileIcon";
 export * from "./ProjectIcon";

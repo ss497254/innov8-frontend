@@ -7,18 +7,20 @@ interface props {
   items: Omit<ItemProps, "active">[];
 }
 
+const isActive = (a: string, b: string) => {
+  if (b === "/") return a === "/";
+
+  return a.includes(b);
+};
+
 export const ItemGroup: React.FC<props> = ({ heading, items }) => {
-  const router = useRouter();
+  const { pathname } = useRouter();
 
   return (
-    <div className="mx-4 mb-4">
+    <div className="mb-4">
       <div className="mx-4 mb-2 text-xs font-semibold uppercase">{heading}</div>
       {items.map((item, idx) => (
-        <Item
-          key={idx}
-          active={item.href ? router.pathname === item.href : false}
-          {...item}
-        />
+        <Item key={idx} active={isActive(pathname, item.href)} {...item} />
       ))}
     </div>
   );

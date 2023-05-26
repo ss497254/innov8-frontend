@@ -2,14 +2,14 @@ import { Button, IconButton } from "common/src/ui";
 import { EditIcon, CommentsIcon, PaperClipIcon } from "common/src/icons";
 import React from "react";
 
-export interface ProjectCardProps extends React.PropsWithChildren {
+export interface ProjectDetailCardProps extends React.PropsWithChildren {
   title: string;
   desc: string;
   files: number;
   comments: number;
 }
 
-export const ProjectCard: React.FC<ProjectCardProps> = ({
+export const ProjectDetailCard: React.FC<ProjectDetailCardProps> = ({
   title,
   desc,
   files,
