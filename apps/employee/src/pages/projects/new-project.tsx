@@ -4,7 +4,7 @@ import { ProjectForm } from "src/components/Froms/ProjectForm";
 
 const Projects: NextPageWithLayout = () => {
   return (
-    <div className="bg-gray-100 min-h-full px-4 py-6">
+    <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
       <ProjectForm />
     </div>
   );

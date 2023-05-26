@@ -2,8 +2,8 @@ import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
   BugIcon,
   DashboardIcon,
+  EditIcon,
   NotificationIcon,
-  TickIcon,
 } from "common/src/icons";
 import React from "react";
 
@@ -13,9 +13,9 @@ export const items = [
     items: [
       { href: "/", icon: <DashboardIcon size={22} />, title: "Dashboard" },
       {
-        href: "/notifications",
-        icon: <TickIcon size={24} />,
-        title: "My Tasks",
+        href: "/review-project",
+        icon: <EditIcon size={24} />,
+        title: "Review project",
       },
       {
         href: "/notifications",

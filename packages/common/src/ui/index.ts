@@ -12,4 +12,5 @@ export * from "./OrSeparator";
 export * from "./Search";
 export * from "./Sidebar";
 export * from "./Spinner";
+export * from "./StarRating";
 export * from "./Toast";
