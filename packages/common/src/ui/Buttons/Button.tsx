@@ -38,8 +38,6 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const classes = ["relative c rounded-md duration-300"];
 
-  classes.push(ButtonTypes[btn]);
-
   if (className) {
     classes.push(className);
   }
@@ -47,11 +45,13 @@ export const Button: React.FC<ButtonProps> = ({
   if (size) {
     classes.push(BtnSizes[size]);
   }
-
+  
   if (disabled) {
     classes.push("cursor-not-allowed");
   }
-
+  
+  classes.push(ButtonTypes[btn]);
+  
   return (
     <button disabled={disabled} className={classes.join(" ")} {...props}>
       {loading && (

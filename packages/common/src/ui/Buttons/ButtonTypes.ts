@@ -3,6 +3,6 @@ export const ButtonTypes = {
   accent: "bg-indigo-600 hover:bg-indigo-500 text-white",
   success: "bg-emerald-500 hover:bg-emerald-600 text-white",
   danger: "bg-red-500 hover:bg-red-600 text-white",
-  outline: "border border-dark-200 bg-white",
+  outline: "border border-dark-200",
   none: "",
 };
