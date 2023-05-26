@@ -18,6 +18,7 @@ export * from "./Link";
 export * from "./LinkIcon";
 export * from "./LogoIcon";
 export * from "./LogoutIcon";
+export * from "./MessagesIcon";
 export * from "./NewIcon";
 export * from "./NotificationIcon";
 export * from "./PaperClipIcon";

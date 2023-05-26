@@ -1,13 +1,10 @@
 import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
-  BugIcon,
   DashboardIcon,
   EditIcon,
-  NotificationIcon,
   ProfileIcon,
   ProjectIcon,
   SettingsIcon,
-  TickIcon,
 } from "common/src/icons";
 import React from "react";
 
@@ -23,7 +20,7 @@ export const items = [
       },
       {
         href: "/my-tasks",
-        icon: <TickIcon size={24} />,
+        icon: <EditIcon size={24} />,
         title: "My Tasks",
       },
     ],

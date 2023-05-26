@@ -1,11 +1,11 @@
 import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
-  BugIcon,
   DashboardIcon,
-  ProjectIcon,
+  EditIcon,
+  MessagesIcon,
   ProfileIcon,
+  ProjectIcon,
   SettingsIcon,
-  TickIcon,
 } from "common/src/icons";
 import React from "react";
 
@@ -21,13 +21,13 @@ export const items = [
       },
       {
         href: "/my-tasks",
-        icon: <TickIcon size={24} />,
+        icon: <EditIcon size={24} />,
         title: "My Tasks",
       },
       {
-        href: "/calendar",
-        icon: <BugIcon size={22} className="py-0.5" />,
-        title: "Calendar",
+        href: "/messages",
+        icon: <MessagesIcon size={28} className="py-0.5" />,
+        title: "Messages",
       },
     ],
   },

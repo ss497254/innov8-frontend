@@ -15,7 +15,6 @@ const ReviewProject: NextPageWithLayout = () => {
           label="Project Name"
           labelClassName="md:text-lg"
         />
-
         <Textarea
           disabled
           label="Elevator pitch"
