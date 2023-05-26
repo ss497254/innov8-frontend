@@ -4,6 +4,10 @@ import {
   DashboardIcon,
   EditIcon,
   NotificationIcon,
+  ProfileIcon,
+  ProjectIcon,
+  SettingsIcon,
+  TickIcon,
 } from "common/src/icons";
 import React from "react";
 
@@ -13,24 +17,29 @@ export const items = [
     items: [
       { href: "/", icon: <DashboardIcon size={22} />, title: "Dashboard" },
       {
-        href: "/review-project",
-        icon: <EditIcon size={24} />,
-        title: "Review project",
+        href: "/projects",
+        icon: <ProjectIcon size={22} />,
+        title: "Projects",
       },
       {
-        href: "/notifications",
-        icon: <NotificationIcon size={22} />,
-        title: "Notifications",
+        href: "/my-tasks",
+        icon: <TickIcon size={24} />,
+        title: "My Tasks",
       },
+    ],
+  },
+  {
+    heading: "Manage",
+    items: [
+      { href: "/profile", icon: <ProfileIcon size={24} />, title: "Profile" },
       {
-        href: "/calendar",
-        icon: <BugIcon size={22} className="py-0.5" />,
-        title: "Calendar",
+        href: "/settings",
+        icon: <SettingsIcon size={20} />,
+        title: "Settings",
       },
     ],
   },
 ];
-
 interface AuthenticatedRouteProps extends React.PropsWithChildren {}
 
 export const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({

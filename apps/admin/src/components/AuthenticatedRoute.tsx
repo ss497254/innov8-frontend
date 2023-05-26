@@ -3,6 +3,8 @@ import {
   BugIcon,
   DashboardIcon,
   NotificationIcon,
+  ProfileIcon,
+  SettingsIcon,
   TickIcon,
 } from "common/src/icons";
 import React from "react";
@@ -22,10 +24,17 @@ export const items = [
         icon: <NotificationIcon size={22} />,
         title: "Notifications",
       },
+    ],
+  },
+
+  {
+    heading: "Manage",
+    items: [
+      { href: "/profile", icon: <ProfileIcon size={24} />, title: "Profile" },
       {
-        href: "/calendar",
-        icon: <BugIcon size={22} className="py-0.5" />,
-        title: "Calendar",
+        href: "/settings",
+        icon: <SettingsIcon size={20} />,
+        title: "Settings",
       },
     ],
   },
