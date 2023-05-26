@@ -1,27 +1,15 @@
-.stars-container {
-  display: flex;
-  font-size: 3rem;
-  color: gold;
-}
-.stars-container .star-wrapper {
-  position: relative;
-  width: 3.4rem;
-  margin: 0 1rem;
-  display: grid;
-  place-items: center center;
-}
-.stars-container .star-wrapper .star-background {
+.star-background {
   position: absolute;
-  top: 50%;
+  top: 0%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 32%);
   height: 1.5rem;
   width: 1.5rem;
   border-radius: 50%;
   background: #aaa;
-  cursor: pointer;
 }
-.stars-container .star-wrapper i {
+
+.star-wrapper svg {
   position: relative;
   z-index: 10;
   cursor: pointer;

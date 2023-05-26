@@ -45,7 +45,7 @@ export const NotificationDropdown: React.FC<
         onClick={() => setDropdownOpen(!dropdownOpen)}
         aria-expanded={dropdownOpen}
       >
-        <NotificationIcon size={24} />
+        <NotificationIcon size={26} />
         <div className="absolute top-2.5 right-2.5 w-2 h-2 bg-rose-500 rounded-full"></div>
       </button>
 
