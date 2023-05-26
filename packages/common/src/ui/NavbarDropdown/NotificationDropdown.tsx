@@ -37,7 +37,7 @@ export const NotificationDropdown: React.FC<
   });
 
   return (
-    <div className="r">
+    <div className="r !ml-auto">
       <button
         ref={trigger}
         className="c p-2 hover:bg-dark-200 rounded-full transition duration-150"

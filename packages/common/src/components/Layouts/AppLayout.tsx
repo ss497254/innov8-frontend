@@ -24,7 +24,6 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, items }) => {
     <main className="lg:pl-64 r h-full">
       <NavBar className="space-x-3 md:space-x-4 md:pr-6 r z-10">
         <SearchBar width="md:!w-96" />
-        <div className="hidden md:block flex-1" />
         <NotificationDropdown />
         <ProfileDropdown>
           <ProfileIcon size={42} />
