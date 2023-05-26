@@ -1,7 +1,7 @@
-import { Button } from "common";
-import { CaretIcon } from "common/src/icons";
-import React, { useState } from "react";
-import { ProjectDetailCard } from "./ProjectDetailCard";
+import { ThreeDotsIcon } from "common/src/icons";
+import { Badge, IconButton } from "common/src/ui";
+import React from "react";
+import { ProjectSummaryCard } from "./ProjectSummaryCard";
 
 interface ProjectStatusGroupProps extends React.PropsWithChildren {
   name: string;
@@ -12,29 +12,20 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
   name,
   projects,
 }) => {
-  const [open, setOpen] = useState(false);
   return (
-    <div className="my-6 space-y-4">
-      <div className="text-lg f ic">
-        <Button
-          btn="outline"
-          className="!rounded-full"
-          onClick={() => setOpen(!open)}
-        >
-          {name}
-          <CaretIcon
-            size={22}
-            className="ml-2"
-            style={{ transform: open ? "rotate(180deg)" : "" }}
-          />
-        </Button>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {open &&
-          projects.map((project, idx) => (
-            <ProjectDetailCard key={idx} {...project} />
-          ))}
-      </div>
+    <div className="p-6 my-6 space-y-4 bg-white rounded-lg">
+      <h4 className="text-2xl f ic">
+        {name}
+        <Badge type="green" className="mx-2">
+          {projects.length}
+        </Badge>
+        <IconButton className="ml-auto">
+          <ThreeDotsIcon />
+        </IconButton>
+      </h4>
+      {projects.map((project, idx) => (
+        <ProjectSummaryCard key={idx} {...project} />
+      ))}
     </div>
   );
 };
