@@ -1,12 +1,12 @@
 import { EditIcon } from "common/src/icons";
-import { IconButton, MultiUserAvatar } from "common/src/ui";
+import { Badge, IconButton, MultiUserAvatar } from "common/src/ui";
 import Link from "next/link";
 import React from "react";
 
 export interface ProjectSummaryCardProps extends React.PropsWithChildren {
   title: string;
   desc: string;
-  employees: any[];
+  // employees: any[];
 }
 
 export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
@@ -16,8 +16,9 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   return (
     <div className="bg-white rounded-lg p-6 space-y-4 shadow-md border">
       <div className="f jb ic space-x-4">
-        <Link href="#">
+        <Link href="/projects/34325234/review-project" className="f space-x-3">
           <h4>{title}</h4>
+          <Badge type="blue">In progress</Badge>
         </Link>
         <MultiUserAvatar
           size={24}

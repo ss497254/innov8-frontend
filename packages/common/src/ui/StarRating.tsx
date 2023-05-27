@@ -85,7 +85,7 @@ const Star = ({ i, isHoveringWrapper, active }: any) => {
         initial={{ color: "#aaaaaa" }}
         animate={textControls}
       >
-        {i}
+        {i + 1}
       </motion.div>
     </>
   );

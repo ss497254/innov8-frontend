@@ -1,9 +1,25 @@
 import { NextPageWithLayout } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
+import { ProjectSummaryCard } from "src/components/Projects/ProjectSummaryCard";
 import { ProjectTopBar } from "src/components/Projects/ProjectTopBar";
 
 const tabs = ["To do", "Done"];
+
+const projects = [
+  {
+    title: "Wireframe",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
+    files: 2,
+    comments: 5,
+  },
+  {
+    title: "UX Design",
+    desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
+    files: 5,
+    comments: 12,
+  },
+];
 
 const Projects: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -15,6 +31,11 @@ const Projects: NextPageWithLayout = () => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
+      <div className="my-6 space-y-4">
+        {projects.map((project, idx) => (
+          <ProjectSummaryCard key={idx} {...project} />
+        ))}
+      </div>
     </div>
   );
 };
