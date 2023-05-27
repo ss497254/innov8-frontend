@@ -16,7 +16,7 @@ export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   if (user) return <>{children}</>;
 
-  Router.replace("/login", { query: { next: window.location.pathname } });
+  Router.replace("/login?next=" + window.location.pathname);
 
   return (
     <div className="h-full cc">
