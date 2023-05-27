@@ -12,7 +12,7 @@ const Register: NextPageWithLayout = () => {
     <div className="space-y-4 w-80 md:w-96">
       <GoogleAuthButton url="" />
       <OrSeparator />
-      <RegisterForm />
+      <RegisterForm url="/admin/register" />
       <div>
         Already have an account?{" "}
         <Link href="/login">

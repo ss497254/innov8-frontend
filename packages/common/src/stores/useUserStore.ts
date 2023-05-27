@@ -12,14 +12,16 @@ interface UserState {
 
 export const useUserStore = create<UserState>()((set, get) => ({
   user: undefined,
-  loadUser: async () => {
+  loadUser: () => {
     try {
-      const data = JSON.parse(localStorage.getItem(userKey) || "");
+      const user = JSON.parse(localStorage.getItem(userKey) || "");
 
-      set(data);
+      set({ user });
     } catch {}
   },
   setUser: async (user) => {
+    console.log(user);
+
     set({ user });
 
     try {

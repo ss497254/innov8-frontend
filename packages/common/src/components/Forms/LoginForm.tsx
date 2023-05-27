@@ -1,7 +1,10 @@
+import Router from "next/router";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useApi } from "../../hooks/useApi";
 import { showToast } from "../../lib/showToast";
+import { useUserStore } from "../../stores";
+import { UserType } from "../../types";
 import { Button, Input, PasswordInput } from "../../ui";
 
 interface LoginFormProps extends React.PropsWithChildren {
@@ -12,10 +15,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ url }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
-  const { run, loading } = useApi("POST", url);
+  const { setUser } = useUserStore();
+  const { run, loading } = useApi<UserType>("POST", url);
 
   return (
     <>
@@ -38,8 +41,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({ url }) => {
         onClick={handleSubmit(async (data: any) => {
           const res = await run({ body: JSON.stringify(data) });
           if (res && res.success) {
-            reset();
             showToast("success", "Login successful", res.message);
+            setUser(res.data);
+            Router.replace(window.location.search.replace("?next=", "") || "/");
           } else {
             showToast("error", "Unable to login", res.error);
           }
