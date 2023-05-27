@@ -84,16 +84,16 @@
 }
 
 .toast-inner .icon.error {
-  @apply bg-red-500;
+  @apply bg-red-500/20 text-red-500;
 }
 .toast-inner .icon.success {
-  @apply bg-emerald-500;
+  @apply bg-emerald-500/20 text-emerald-500;
 }
 .toast-inner .icon.info {
-  @apply bg-blue-500;
+  @apply bg-blue-500/20 text-blue-500;
 }
 .toast-inner .icon.warning {
-  @apply bg-orange-500;
+  @apply bg-orange-500/20 text-orange-500;
 }
 
 .toast-content {
