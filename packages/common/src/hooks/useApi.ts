@@ -3,8 +3,9 @@ import { API_URL } from "../lib/constants";
 
 interface ResponseType<T> {
   success: boolean;
-  message?: string;
   data: T;
+  message?: string;
+  error?: string;
 }
 
 export const useApi = <T>(
@@ -13,12 +14,10 @@ export const useApi = <T>(
   options?: RequestInit
 ) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const run = useCallback(
     async ({ parameter = "", data = "", body = "" } = {}) => {
       setLoading(true);
-      setError("");
 
       try {
         const res = await fetch(API_URL + path + parameter, {
@@ -48,15 +47,12 @@ export const useApi = <T>(
         throw new Error(output.message || "Some error occured.");
       } catch (e) {
         console.warn((e as Error).message);
-        setError((e as Error).message);
+        setLoading(false);
+        return { error: (e as Error).message } as ResponseType<T>;
       }
-
-      setLoading(false);
-
-      return undefined;
     },
     [path]
   );
 
-  return { loading, error, run };
+  return { loading, run };
 };

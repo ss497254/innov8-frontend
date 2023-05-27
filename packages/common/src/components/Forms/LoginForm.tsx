@@ -15,7 +15,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ url }) => {
     reset,
     formState: { errors },
   } = useForm();
-  const { run, loading, error } = useApi("POST", url);
+  const { run, loading } = useApi("POST", url);
 
   return (
     <>
@@ -37,9 +37,11 @@ export const LoginForm: React.FC<LoginFormProps> = ({ url }) => {
         loading={loading}
         onClick={handleSubmit(async (data: any) => {
           const res = await run({ body: JSON.stringify(data) });
-          if (res && res.success) reset();
-          else {
-            showToast("error", "Unable to login", error || res?.message);
+          if (res && res.success) {
+            reset();
+            showToast("success", "Login successful", res.message);
+          } else {
+            showToast("error", "Unable to login", res.error);
           }
         })}
       >
