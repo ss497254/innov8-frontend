@@ -30,8 +30,6 @@ export const useUserStore = create<UserState>()((set, get) => ({
     } catch {}
   },
   setUser: async (user) => {
-    console.log(user);
-
     set({ user });
 
     try {
