@@ -1,10 +1,10 @@
 import { NextPageWithLayout } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { ProjectSummaryCard } from "src/components/Projects/ProjectSummaryCard";
+import { ProjectSummaryCard } from "common/src/components";
 import { ProjectTopBar } from "src/components/Projects/ProjectTopBar";
 
-const tabs = ["To do", "Done"];
+const tabs = ["In progress", "Completed"];
 
 const projects = [
   {

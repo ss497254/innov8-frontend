@@ -2,7 +2,7 @@ import { NextPageWithLayout } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { DashboardTopBar } from "src/components/Dashboard/DashboardTopBar";
-import { ProjectStageContainer } from "src/components/Projects/ProjectStageContainer";
+import { ProjectStageContainer } from "common/src/components";
 
 let tabs = ["Overview", "List", "Board", "Timeline", "More"];
 
