@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { sizes } from "./Input";
 
 const EyeOpen = () => (
@@ -40,45 +40,42 @@ interface InputProps
   size?: keyof typeof sizes;
 }
 
-export const PasswordInput: React.FC<InputProps> = ({
-  label,
-  id,
-  size = "md",
-  className,
-  error,
-  containerClassName,
-
-  ...props
-}) => {
-  const [showPassword, setShowPassword] = useState(false);
-  return (
-    <div className={["", containerClassName].join(" ")}>
-      <label
-        htmlFor={id}
-        className="block mb-1 text-base font-medium text-gray-900"
-      >
-        {label}
-      </label>
-      <div className="relative">
-        <input
-          id={id}
-          type={showPassword ? "text" : "password"}
-          className={[
-            "bg-white border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
-            sizes[size],
-            error ? "!outline-red-500" : "",
-            className,
-          ].join(" ")}
-          {...props}
-        />
-        <button
-          className="absolute right-2 bottom-1 top-1 bg-gray-200 my-auto h-7 w-7 p-1 rounded text-gray-700"
-          onClick={() => setShowPassword(!showPassword)}
+export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
+  (
+    { label, id, size = "md", className, error, containerClassName, ...props },
+    ref
+  ) => {
+    const [showPassword, setShowPassword] = useState(false);
+    return (
+      <div className={["", containerClassName].join(" ")}>
+        <label
+          htmlFor={id}
+          className="block mb-1 text-base font-medium text-gray-900"
         >
-          {showPassword ? <EyeOpen /> : <EyeClose />}
-        </button>
+          {label}
+        </label>
+        <div className="relative">
+          <input
+            id={id}
+            type={showPassword ? "text" : "password"}
+            className={[
+              "bg-white border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
+              sizes[size],
+              error ? "!outline-red-500" : "",
+              className,
+            ].join(" ")}
+            {...props}
+            ref={ref}
+          />
+          <button
+            className="absolute right-2 bottom-1 top-1 bg-gray-200 my-auto h-7 w-7 p-1 rounded text-gray-700"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <EyeOpen /> : <EyeClose />}
+          </button>
+        </div>
+        {error && <p className="text-xs text-red-500 ml-1 mt-1">{error}</p>}
       </div>
-      {error && <p className="text-xs text-red-500 ml-1 mt-1">{error}</p>}
-    </div>
-  );
-};
+    );
+  }
+);

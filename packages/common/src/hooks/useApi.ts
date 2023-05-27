@@ -29,8 +29,9 @@ export const useApi = <T>(
             "Content-Type": "application/json",
           },
           ...options,
-          data,
           body,
+          //@ts-ignore
+          data,
         });
 
         let output;
@@ -47,7 +48,6 @@ export const useApi = <T>(
         throw new Error(output.message || "Some error occured.");
       } catch (e) {
         console.warn(e);
-        alert((e as Error).message);
       }
 
       setLoading(false);
