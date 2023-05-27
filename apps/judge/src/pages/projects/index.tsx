@@ -2,7 +2,7 @@ import { NextPageWithLayout } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { ProjectSummaryCard } from "common/src/components";
-import { ProjectTopBar } from "src/components/Projects/ProjectTopBar";
+import { ProjectsTopBar } from "src/components/Projects/ProjectsTopBar";
 
 const tabs = ["In progress", "Completed"];
 
@@ -26,7 +26,7 @@ const Projects: NextPageWithLayout = () => {
 
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
-      <ProjectTopBar
+      <ProjectsTopBar
         tabs={tabs}
         activeTab={activeTab}
         setActiveTab={setActiveTab}

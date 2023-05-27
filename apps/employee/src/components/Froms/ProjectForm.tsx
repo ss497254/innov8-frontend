@@ -5,7 +5,7 @@ interface ProjectFormProps extends React.PropsWithChildren {}
 
 export const ProjectForm: React.FC<ProjectFormProps> = () => {
   return (
-    <div>
+    <div className="my-4">
       <h3>New project form</h3>
       <div className="mt-2 py-4 space-y-6">
         <Input label="Project Name" labelClassName="!font-bold md:text-lg" />

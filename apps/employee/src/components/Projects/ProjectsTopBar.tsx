@@ -22,7 +22,7 @@ export const ProjectsTopBar: React.FC<ProjectsTopBarProps> = memo(
             <SortIcon className="mr-3" /> Sort
           </Button>
         </div>
-        <div className="px-2 border-b border-dark-400">
+        <div className="border-b border-dark-400">
           <TabButtons
             tabs={tabs}
             activeTab={activeTab}

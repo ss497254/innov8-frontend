@@ -22,7 +22,7 @@ export const DashboardTopBar: React.FC<DashboardTopBarProps> = memo(
             </Button>
           </Link>
         </div>
-        <div className="px-2 border-b border-dark-400">
+        <div className="border-b border-dark-400">
           <TabButtons
             tabs={tabs}
             activeTab={activeTab}

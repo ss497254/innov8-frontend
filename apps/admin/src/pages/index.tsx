@@ -2,7 +2,7 @@ import { NextPageWithLayout } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { DashboardTopBar } from "src/components/Dashboard/DashboardTopBar";
-import { ProjectStatusGroup } from "src/components/Projects/ProjectStatusGroup";
+import { ProjectStatusGroup } from "common/src/components";
 
 let tabs = ["Overview", "New", "Working", "Completed", "More"];
 
