@@ -36,10 +36,10 @@ export const LoginForm: React.FC<LoginFormProps> = ({ url }) => {
         className="!w-full font-medium"
         loading={loading}
         onClick={handleSubmit(async (data: any) => {
-          const res = await run(data);
+          const res = await run({ body: JSON.stringify(data) });
           if (res && res.success) reset();
           else {
-            showToast("error", "Unable to login", res?.message);
+            showToast("error", "Unable to login", error || res?.message);
           }
         })}
       >
