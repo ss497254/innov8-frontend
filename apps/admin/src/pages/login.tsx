@@ -9,7 +9,7 @@ const Login: NextPageWithLayout = () => {
     <div className="space-y-5 w-80 md:w-96">
       <GoogleAuthButton url="" />
       <OrSeparator />
-      <LoginForm />
+      <LoginForm url="/admin/login" />
       <div>
         Don't have an account?{" "}
         <Link href="/register">

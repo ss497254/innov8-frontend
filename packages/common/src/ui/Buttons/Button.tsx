@@ -8,7 +8,7 @@ export const BtnSizes = {
   md: "text-base px-5 py-2",
   lg: "text-base px-6 py-2",
   xl: "text-lg px-7 py-3",
-  none:""
+  none: "",
 };
 
 export interface ButtonProps
@@ -45,15 +45,19 @@ export const Button: React.FC<ButtonProps> = ({
   if (size) {
     classes.push(BtnSizes[size]);
   }
-  
+
   if (disabled) {
     classes.push("cursor-not-allowed");
   }
-  
+
   classes.push(ButtonTypes[btn]);
-  
+
   return (
-    <button disabled={disabled} className={classes.join(" ")} {...props}>
+    <button
+      disabled={disabled || loading}
+      className={classes.join(" ")}
+      {...props}
+    >
       {loading && (
         <div className="absolute w-full bg-inherit">
           <Spinner size={22} className="mx-auto" />

@@ -1,12 +1,6 @@
 import { useState, useCallback } from "react";
 import { API_URL } from "../lib/constants";
-
-interface ResponseType<T> {
-  success: boolean;
-  data: T;
-  message?: string;
-  error?: string;
-}
+import { ResponseType } from "../types";
 
 export const useApi = <T>(
   method: "GET" | "POST" | "PUT",
@@ -33,10 +27,10 @@ export const useApi = <T>(
           data,
         });
 
-        let output;
+        let output: ResponseType<T>;
 
         if (res.headers.get("Content-Type")?.includes("application/json"))
-          output = (await res.json()) as ResponseType<T>;
+          output = await res.json();
         else throw new Error(await res.text());
 
         if (res.ok) {

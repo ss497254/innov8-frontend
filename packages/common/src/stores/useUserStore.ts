@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { UserType } from "../types";
+import { Cfetch } from "../utils";
 
 const userKey = "User@HVEFX";
 
@@ -14,9 +15,18 @@ export const useUserStore = create<UserState>()((set, get) => ({
   user: undefined,
   loadUser: () => {
     try {
-      const user = JSON.parse(localStorage.getItem(userKey) || "");
+      const user = JSON.parse(localStorage.getItem(userKey) || "") as UserType;
 
-      set({ user });
+      if (user) {
+        set({ user });
+        Cfetch<UserType>(`/${user.role}/me`)
+          .then((res) => {
+            get().setUser(res.data);
+          })
+          .catch(() => {
+            set({ user: undefined });
+          });
+      }
     } catch {}
   },
   setUser: async (user) => {
