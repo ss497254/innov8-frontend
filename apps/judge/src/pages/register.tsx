@@ -26,7 +26,7 @@ const Register: NextPageWithLayout = () => {
 };
 
 Register.getLayout = (page) => (
-  <AuthLayout heading="Register" subheading="Admin dashboard">
+  <AuthLayout heading="Register" subheading="Judge dashboard">
     {page}
   </AuthLayout>
 );

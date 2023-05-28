@@ -1,6 +1,7 @@
 import { create } from "zustand";
+import { showToast } from "../lib/showToast";
 import { UserType } from "../types";
-import { Cfetch } from "../utils";
+import { Rfetch } from "../utils";
 
 const userKey = "User@HVEFX";
 
@@ -17,13 +18,14 @@ export const useUserStore = create<UserState>()((set, get) => ({
     try {
       const user = JSON.parse(localStorage.getItem(userKey) || "") as UserType;
 
-      if (user) {
+      if (user && user.role) {
         set({ user });
-        Cfetch<UserType>(`/${user.role}/me`)
+        Rfetch<UserType>(`/${user.role}/me`)
           .then((res) => {
             get().setUser(res.data);
           })
           .catch(() => {
+            showToast("error", "Session expired", "Please login again");
             set({ user: undefined });
           });
       }

@@ -13,3 +13,6 @@ export const randomNumberFromRange = (max: number, min: number = 0) =>
 
 export const generateId = () =>
   Math.ceil(Math.random() * Math.random() * Math.random() * 1000 * 1000 * 1000);
+
+export const sleep = (timeInMS: number) =>
+  new Promise((res) => setTimeout(res, timeInMS));

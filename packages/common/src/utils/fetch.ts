@@ -1,5 +1,6 @@
 import { API_URL } from "../lib";
 import { ResponseType } from "../types";
+import { sleep } from "./lodash";
 
 export const Cfetch = async <T>(
   input: string,
@@ -26,4 +27,23 @@ export const Cfetch = async <T>(
   }
 
   throw new Error(output.message || "Some error occured.");
+};
+
+export const Rfetch = async <T>(
+  input: string,
+  retry = 3,
+  init?: RequestInit | undefined
+) => {
+  let error;
+  for (let i = 1; i <= retry; i++) {
+    try {
+      return await Cfetch<T>(input, init);
+    } catch (err) {
+      if (i < retry) await sleep(1000);
+      else error = err;
+    }
+  }
+
+  console.warn(error);
+  throw error;
 };
