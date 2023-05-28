@@ -1,20 +1,28 @@
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
+import { ProjectType, ResponseType } from "common/src/types";
 import { Button, Textarea, FileInput, Input } from "common/src/ui";
+import { useRouter } from "next/router";
 import React, { useCallback, useState } from "react";
 import { useForm, FieldValues } from "react-hook-form";
+import useSWRImmutable from "swr/immutable";
 
-interface ProjectFormProps extends React.PropsWithChildren {}
+interface EditProjectFormProps extends React.PropsWithChildren {}
 
 type FormSubmitType = "draft" | "submit";
 
-export const ProjectForm: React.FC<ProjectFormProps> = () => {
+export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const { query } = useRouter();
   const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
+
+  const { data: res, isLoading } = useSWRImmutable<ResponseType<ProjectType>>(
+    query.id && `/employee/projects/${query.id}`
+  );
   const { run, loading } = useApi("POST", "/employee/save-project");
 
   const onSubmitProvider = useCallback(
@@ -31,7 +39,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
 
   return (
     <div className="my-4">
-      <h3>New project form</h3>
+      <h3>Edit project form</h3>
       <div className="mt-2 py-4 space-y-6">
         <Input
           label="Project Name"

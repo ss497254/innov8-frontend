@@ -2,10 +2,12 @@ import { Button, IconButton } from "common/src/ui";
 import { EditIcon, CommentsIcon, PaperClipIcon } from "common/src/icons";
 import React from "react";
 import { ProjectType } from "../../types";
+import Link from "next/link";
 
 export interface ProjectCardProps extends ProjectType {}
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
+  id,
   name,
   elevatorPitch,
   files,
@@ -15,9 +17,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
     <div className="bg-white rounded-2xl p-4 space-y-4 shadow-md border">
       <div className="f jb ic">
         <h4>{name}</h4>
-        <IconButton className="!p-1">
-          <EditIcon size={22} />
-        </IconButton>
+        <Link href={`/projects/${id}/edit-project`}>
+          <IconButton className="!p-1">
+            <EditIcon size={22} />
+          </IconButton>
+        </Link>
       </div>
       <p className="h-20 overflow-hidden text-ellipsis leading-5 text-sm">
         {elevatorPitch}
@@ -31,7 +35,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           <PaperClipIcon className="mr-2" />
           {Math.floor(Math.random() * 10)} files
         </Button>
-
         <Button
           size="sm"
           btn="none"

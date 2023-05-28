@@ -1,4 +1,5 @@
 export interface ProjectType {
+  id: string;
   name: string;
   elevatorPitch: string;
   summary: string;
