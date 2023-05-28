@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { isServer } from "../lib";
 import { showToast } from "../lib/showToast";
 import { UserType } from "../types";
 import { Rfetch } from "../utils";
@@ -15,6 +16,8 @@ interface UserState {
 export const useUserStore = create<UserState>()((set, get) => ({
   user: undefined,
   loadUser: () => {
+    if (isServer) return;
+
     try {
       const user = JSON.parse(localStorage.getItem(userKey) || "") as UserType;
 

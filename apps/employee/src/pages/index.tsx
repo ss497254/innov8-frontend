@@ -19,6 +19,7 @@ const Home: NextPageWithLayout = () => {
         <ProjectStageContainer
           name="Idea generation"
           color="bg-emerald-300"
+          url="/employee/get-projects/drafts"
           projects={[
             {
               title: "Wireframe",
@@ -37,6 +38,7 @@ const Home: NextPageWithLayout = () => {
         <ProjectStageContainer
           name="Idea screening"
           color="bg-violet-300"
+          url="/employee/get-projects/screening"
           projects={[
             {
               title: "Illustration of onboarding",
@@ -49,6 +51,7 @@ const Home: NextPageWithLayout = () => {
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
+          url="/employee/get-projects/bussiness-idea-validation"
           projects={[
             {
               title: "Information Architecture",

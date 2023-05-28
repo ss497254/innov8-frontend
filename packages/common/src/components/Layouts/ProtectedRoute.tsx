@@ -1,5 +1,5 @@
 import Router from "next/router";
-import React, { lazy, useEffect } from "react";
+import React from "react";
 import { useClientOnly } from "../../hooks";
 import { useUserStore } from "../../stores";
 import { Spinner } from "../../ui";

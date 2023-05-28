@@ -35,10 +35,10 @@ export const useApi = <T>(
 
         if (res.ok) {
           setLoading(false);
-          console.warn(output);
           return output;
         }
 
+        console.warn(output);
         throw new Error(output.message || "Some error occured.");
       } catch (e) {
         setLoading(false);
