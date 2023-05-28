@@ -8,6 +8,7 @@ let tabs = ["Overview", "List", "Board", "Timeline", "More"];
 
 const Home: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
+
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
       <DashboardTopBar
@@ -20,47 +21,17 @@ const Home: NextPageWithLayout = () => {
           name="Idea generation"
           color="bg-emerald-300"
           url="/employee/get-projects/drafts"
-          projects={[
-            {
-              title: "Wireframe",
-              desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
-              files: 2,
-              comments: 5,
-            },
-            {
-              title: "UX Design",
-              desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
-              files: 5,
-              comments: 12,
-            },
-          ]}
-        ></ProjectStageContainer>
+        />
         <ProjectStageContainer
           name="Idea screening"
           color="bg-violet-300"
           url="/employee/get-projects/screening"
-          projects={[
-            {
-              title: "Illustration of onboarding",
-              desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
-              files: 3,
-              comments: 8,
-            },
-          ]}
-        ></ProjectStageContainer>
+        />
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
           url="/employee/get-projects/bussiness-idea-validation"
-          projects={[
-            {
-              title: "Information Architecture",
-              desc: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Rerum ratione fuga voluptatem repellendus neque doloremque molestias dignissimos soluta, rem autem, voluptas cumque nostrum nulla deserunt quia atque. Quo, quidem cumque.",
-              files: 7,
-              comments: 18,
-            },
-          ]}
-        ></ProjectStageContainer>
+        />
       </div>
     </div>
   );

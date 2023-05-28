@@ -1,30 +1,23 @@
 import { IconButton, Spinner } from "common";
-import { useApi } from "common/src/hooks/useApi";
 import { ThreeDotsIcon } from "common/src/icons";
+import { ProjectType, ResponseType } from "common/src/types";
 import React from "react";
-import { ProjectCard, ProjectCardProps } from "./ProjectCard";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
+import { ProjectCard } from "./ProjectCard";
 
 interface ProjectStageContainerProps extends React.PropsWithChildren {
   name: string;
   color: string;
   url: string;
-  projects: ProjectCardProps[];
 }
 
 export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
   name,
   color,
-  projects,
   url,
 }) => {
-  console.log(url);
-
-  const { data, error, isLoading } = useSWR(url);
-
-  //   // render data
-  //   return <div>hello {data.name}!</div>
-  // }
+  const { data: res, isLoading } =
+    useSWRImmutable<ResponseType<ProjectType[]>>(url);
 
   return (
     <div className="flex-1 p-6 bg-white rounded-md space-y-4">
@@ -41,7 +34,15 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
           <Spinner />
         </div>
       ) : (
-        projects.map((project, idx) => <ProjectCard key={idx} {...project} />)
+        (res &&
+          res.success &&
+          res.data.map((project, idx) => (
+            <ProjectCard key={idx} {...project} />
+          ))) || (
+          <div className="c h-20">
+            <p>Cannot load projects</p>
+          </div>
+        )
       )}
     </div>
   );
