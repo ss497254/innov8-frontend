@@ -1,10 +1,12 @@
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { Button, Textarea, FileInput, Input } from "common/src/ui";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useForm, FieldValues } from "react-hook-form";
 
 interface ProjectFormProps extends React.PropsWithChildren {}
+
+type FormSubmitType = "draft" | "submit";
 
 export const ProjectForm: React.FC<ProjectFormProps> = () => {
   const {
@@ -12,14 +14,16 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
   const { run, loading } = useApi("POST", "/employee/save-project");
 
   const onSubmitProvider = useCallback(
-    (type: string) => async (data: FieldValues) => {
+    (type: FormSubmitType) => async (data: FieldValues) => {
+      setSubmitType(type);
       const res = await run({ body: JSON.stringify({ data, type }) });
 
       if (res && res.success)
-        showToast("success", "Project submitted", res.message);
+        showToast("success", "Project submitted as " + type, res.message);
       else showToast("error", "Unable to submit project", res.error);
     },
     []
@@ -83,7 +87,7 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
       </div>
       <div className="f space-x-4">
         <Button
-          loading={loading}
+          loading={submitType === "draft" && loading}
           className="mx-auto w-full my-4"
           onClick={handleSubmit(onSubmitProvider("draft"))}
         >
@@ -91,9 +95,9 @@ export const ProjectForm: React.FC<ProjectFormProps> = () => {
         </Button>
         <Button
           btn="success"
-          loading={loading}
+          loading={submitType === "submit" && loading}
           className="mx-auto w-full my-4"
-          onClick={handleSubmit(onSubmitProvider("draft"))}
+          onClick={handleSubmit(onSubmitProvider("submit"))}
         >
           Submit
         </Button>
