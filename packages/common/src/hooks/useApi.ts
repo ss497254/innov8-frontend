@@ -35,12 +35,12 @@ export const useApi = <T>(
 
         if (res.ok) {
           setLoading(false);
+          console.warn(output);
           return output;
         }
 
         throw new Error(output.message || "Some error occured.");
       } catch (e) {
-        console.warn((e as Error).message);
         setLoading(false);
         return { error: (e as Error).message } as ResponseType<T>;
       }
