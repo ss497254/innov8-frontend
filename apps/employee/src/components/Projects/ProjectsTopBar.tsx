@@ -12,7 +12,7 @@ export const ProjectsTopBar: React.FC<ProjectsTopBarProps> = memo(
   ({ activeTab, setActiveTab, tabs }) => {
     return (
       <div>
-        <div className="my-4 md:mx-6 f ic space-x-3">
+        <div className="my-4 f ic space-x-3">
           <h3>Projects</h3>
           <div className="flex-1" />
           <Button btn="outline" className="hover:text-indigo-600">

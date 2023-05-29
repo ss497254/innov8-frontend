@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useId, useState } from "react";
 import { sizes } from "./Input";
 
 const EyeOpen = () => (
@@ -42,10 +42,12 @@ interface InputProps
 
 export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
   (
-    { label, id, size = "md", className, error, containerClassName, ...props },
+    { label, size = "md", className, error, containerClassName, ...props },
     ref
   ) => {
+    const id = useId();
     const [showPassword, setShowPassword] = useState(false);
+
     return (
       <div className={["", containerClassName].join(" ")}>
         <label
@@ -57,6 +59,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
         <div className="relative">
           <input
             id={id}
+            ref={ref}
             type={showPassword ? "text" : "password"}
             className={[
               "bg-white border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
@@ -65,7 +68,6 @@ export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
               className,
             ].join(" ")}
             {...props}
-            ref={ref}
           />
           <button
             className="absolute right-2 bottom-1 top-1 bg-gray-200 my-auto h-7 w-7 p-1 rounded text-gray-700"

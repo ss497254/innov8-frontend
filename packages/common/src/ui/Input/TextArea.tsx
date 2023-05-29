@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useId } from "react";
 import { sizes } from "./Input";
 
 interface TextareaProps
@@ -15,7 +15,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (
     {
       label,
-      id,
       size = "md",
       className,
       error,
@@ -26,6 +25,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     },
     ref
   ) => {
+    const id = useId();
+
     return (
       <div className={["", containerClassName].join(" ")}>
         <label

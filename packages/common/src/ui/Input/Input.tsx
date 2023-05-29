@@ -1,4 +1,4 @@
-import React, { forwardRef } from "react";
+import React, { forwardRef, useId } from "react";
 
 export const sizes = {
   sm: "py-1 px-2 text-sm placeholder:text-xs rounded",
@@ -14,13 +14,12 @@ interface InputProps
   error?: string;
   desc?: string;
   size?: keyof typeof sizes;
-  ref: any;
 }
+
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
     {
       label,
-      id,
       size = "md",
       className,
       error,
@@ -31,6 +30,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
+    const id = useId();
+
     return (
       <div className={["", containerClassName].join(" ")}>
         <label
@@ -45,6 +46,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         {desc && <p className="text-sm -mt-1 mb-1">{desc}</p>}
         <input
           id={id}
+          ref={ref}
           className={[
             "bg-gray-50 border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
             sizes[size],
@@ -52,7 +54,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             className,
           ].join(" ")}
           {...props}
-          ref={ref}
         />
         {error && <p className="text-xs text-red-500 ml-1 mt-1">{error}</p>}
       </div>

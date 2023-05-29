@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useId } from "react";
 import { sizes } from "./Input";
 
 interface FileInputProps
@@ -13,7 +13,6 @@ interface FileInputProps
 
 export const FileInput: React.FC<FileInputProps> = ({
   label,
-  id,
   size = "md",
   className,
   error,
@@ -22,6 +21,8 @@ export const FileInput: React.FC<FileInputProps> = ({
   labelClassName,
   ...props
 }) => {
+  const id = useId();
+
   return (
     <div className={["", containerClassName].join(" ")}>
       <label

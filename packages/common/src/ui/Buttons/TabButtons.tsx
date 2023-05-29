@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useId, useState } from "react";
 
 interface TabButtonsProps extends React.PropsWithChildren {
   tabs: string[];
@@ -13,6 +14,10 @@ export const TabButtons: React.FC<TabButtonsProps> = ({
   setActiveTab,
   className,
 }) => {
+  const [hoveringTab, setHoveringTab] = useState(activeTab);
+  const id1 = useId(),
+    id2 = useId();
+
   return (
     <div className="flex space-x-1">
       {tabs.map((tab) => (
@@ -21,8 +26,7 @@ export const TabButtons: React.FC<TabButtonsProps> = ({
           onClick={() => setActiveTab(tab)}
           className={[
             className,
-            activeTab === tab ? "" : "hover:text-indigo-600",
-            "relative text-center min-w-[80px] px-3 text-sm py-3 font-medium transition-all !ring-0",
+            "r text-sm py-2 font-medium transition-all !ring-0",
           ].join(" ")}
           style={{
             WebkitTapHighlightColor: "transparent",
@@ -30,14 +34,28 @@ export const TabButtons: React.FC<TabButtonsProps> = ({
         >
           {activeTab === tab && (
             <motion.span
-              layoutId="bubble"
+              layoutId={id1}
               className="absolute inset-0 z-10 border-b-2 py-4 border-indigo-600"
               transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
             />
           )}
-          <span className={activeTab === tab ? "text-indigo-600" : ""}>
+          {hoveringTab === tab && (
+            <motion.div
+              layoutId={id2}
+              className="absolute inset-y-2 inset-x-1 bg-indigo-500/10 rounded-md"
+              transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+            ></motion.div>
+          )}
+          <div
+            onMouseEnter={() => setHoveringTab(tab)}
+            onMouseLeave={() => setHoveringTab(activeTab)}
+            className={[
+              "min-w-[56px] md:min-w-[80px] r z-10 px-3 md:px-4 py-1.5",
+              activeTab === tab ? "text-indigo-600" : "hover:text-indigo-600",
+            ].join(" ")}
+          >
             {tab}
-          </span>
+          </div>
         </button>
       ))}
     </div>
