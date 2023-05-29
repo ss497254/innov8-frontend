@@ -1,11 +1,11 @@
 import { NextPageWithLayout } from "common";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { ProfileTopBar } from "common/src/components/Pages";
+import { PageTopBar } from "common/src/components";
 
 const Profile: NextPageWithLayout = () => {
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
-      <ProfileTopBar />
+      <PageTopBar heading="Profile" />
     </div>
   );
 };

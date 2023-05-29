@@ -1,4 +1,4 @@
-import { NextPageWithLayout } from "common";
+import { NextPageWithLayout, PageTopBar, TabButtons } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { DashboardTopBar } from "src/components/Dashboard/DashboardTopBar";

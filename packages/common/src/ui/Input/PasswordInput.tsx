@@ -62,7 +62,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             type={showPassword ? "text" : "password"}
             className={[
-              "bg-white border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
+              "bg-gray-50 border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
               sizes[size],
               error ? "!outline-red-500" : "",
               className,
