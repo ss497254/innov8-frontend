@@ -39,7 +39,7 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
           res.data.map((project, idx) => (
             <ProjectCard key={idx} {...project} />
           ))) || (
-          <div className="c h-20">
+          <div className="c h-28 !my-auto">
             <p>Cannot load projects</p>
           </div>
         )

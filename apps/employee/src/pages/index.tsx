@@ -20,17 +20,17 @@ const Home: NextPageWithLayout = () => {
         <ProjectStageContainer
           name="Idea generation"
           color="bg-emerald-300"
-          url="/employee/get-projects/drafts"
+          url="/employee/projects/drafts"
         />
         <ProjectStageContainer
           name="Idea screening"
           color="bg-violet-300"
-          url="/employee/get-projects/screening"
+          url="/employee/projects/screening"
         />
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
-          url="/employee/get-projects/bussiness-idea-validation"
+          url="/employee/projects/bussiness-idea-validation"
         />
       </div>
     </div>
