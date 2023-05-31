@@ -28,13 +28,6 @@ export const ProfileEditSection: React.FC<ProfileEditSectionProps> = () => {
         />
         <div className="f justify-end space-x-4 pt-2">
           <Button
-            btn="outline"
-            className="w-32 hover:bg-red-500/20 text-red-500"
-            onClick={reset}
-          >
-            Cancel
-          </Button>
-          <Button
             btn="success"
             loading={loading}
             className="w-32"

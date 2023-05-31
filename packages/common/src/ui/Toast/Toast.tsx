@@ -41,7 +41,7 @@ export const Toast = memo(
         <div className={["toast-inner", type].join(" ")}>
           <div className={["icon", type].join(" ")}>{icon}</div>
           <div className="toast-content">
-            <h4 className="text-ellipsis">{message}</h4>
+            <h4>{message}</h4>
             <p>{desc}</p>
           </div>
           <button

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useId, useState } from "react";
 
 interface TabButtonsProps extends React.PropsWithChildren {
-  tabs: string[];
+  tabs: string[] | readonly string[];
   activeTab: string;
   setActiveTab: (x: string) => void;
   className?: string;
