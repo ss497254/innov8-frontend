@@ -9,6 +9,7 @@
     "dev": "turbo run dev --no-daemon",
     "dev:employee": "turbo run dev --filter=employee --no-daemon",
     "dev:admin": "turbo run dev --filter=admin --no-daemon",
+    "dev:judge": "turbo run dev --filter=judge --no-daemon",
     "lint": "turbo run lint"
   },
   "devDependencies": {

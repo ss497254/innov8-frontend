@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { isServer } from "../lib";
 import { showToast } from "../lib/showToast";
 import { UserType } from "../types";
-import { Rfetch } from "../utils";
+import { Cfetch } from "../utils";
 
 const userKey = "User@HVEFX";
 
@@ -23,7 +23,7 @@ export const useUserStore = create<UserState>()((set, get) => ({
 
       if (user && user.role) {
         set({ user });
-        Rfetch<UserType>(`/${user.role}/me`)
+        Cfetch<UserType>(`/${user.role}/me`)
           .then((res) => {
             get().setUser(res.data);
           })
