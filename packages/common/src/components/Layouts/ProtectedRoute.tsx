@@ -4,17 +4,19 @@ import { useClientOnly } from "../../hooks";
 import { useUserStore } from "../../stores";
 import { Spinner } from "../../ui";
 
-interface ProtectedRouteProps extends React.PropsWithChildren {}
+interface ProtectedRouteProps extends React.PropsWithChildren {
+  role: "admin" | "employee" | "judge";
+}
 
 useUserStore.getState().loadUser();
 
-export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
+export const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children , role}) => {
   const server = useClientOnly();
   const { user } = useUserStore();
 
   if (server) return null;
 
-  if (user) return <>{children}</>;
+  if (user && user.role === role) return <>{children}</>;
 
   Router.replace("/login?next=" + window.location.pathname);
 
