@@ -85,7 +85,7 @@ const Star = ({ i, isHoveringWrapper, active }: any) => {
         initial={{ color: "#aaaaaa" }}
         animate={textControls}
       >
-        {i + 1}
+        {i}
       </motion.div>
     </>
   );
@@ -104,8 +104,8 @@ export const StarRating: React.FC<StarRatingProps> = ({
   const [isHovering, setIsHovering] = useState(0);
 
   return (
-    <div className={["f text-yellow-400 pb-6", className].join(" ")}>
-      {[0, 1, 2, 3, 4].map((i) => (
+    <div className={["f text-yellow-400 pb-6 w-fit", className].join(" ")}>
+      {[1, 2, 3, 4, 5].map((i) => (
         <motion.div
           className="r mx-3 w-10 cursor-pointer"
           onMouseOver={() => setIsHovering(i)}
