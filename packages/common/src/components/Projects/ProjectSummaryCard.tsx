@@ -1,5 +1,4 @@
-import { EditIcon } from "common/src/icons";
-import { Badge, IconButton, MultiUserAvatar } from "common/src/ui";
+import { Badge, MultiUserAvatar } from "common/src/ui";
 import Link from "next/link";
 import React from "react";
 import { ProjectType } from "../../types";
@@ -26,9 +25,6 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
               "https://xsgames.co/randomusers/assets/avatars/male/28.jpg",
             ]}
           />
-          {/* <IconButton className="!p-1">
-          <EditIcon size={22} />
-        </IconButton> */}
         </div>
         <p className="overflow-hidden text-ellipsis leading-5 text-sm">
           {elevatorPitch}

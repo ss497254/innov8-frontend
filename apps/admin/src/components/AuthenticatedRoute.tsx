@@ -2,7 +2,6 @@ import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
   DashboardIcon,
   EditIcon,
-  NotificationIcon,
   ProfileIcon,
   SettingsIcon,
 } from "common/src/icons";
@@ -18,17 +17,6 @@ export const items = [
         icon: <EditIcon size={24} />,
         title: "My Tasks",
       },
-      {
-        href: "/notifications",
-        icon: <NotificationIcon size={22} />,
-        title: "Notifications",
-      },
-    ],
-  },
-
-  {
-    heading: "Manage",
-    items: [
       { href: "/profile", icon: <ProfileIcon size={24} />, title: "Profile" },
       {
         href: "/settings",
