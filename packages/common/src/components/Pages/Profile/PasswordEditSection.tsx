@@ -4,15 +4,24 @@ import { useForm } from "react-hook-form";
 import { useUserStore } from "../../../stores";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "../../../lib/showToast";
+import * as yup from "yup";
+import { useValidation } from "../../../hooks/useValidation";
+
+const validationSchema = yup.object({
+  Password: yup.string().required("Required").min(8),
+  "New Password": yup.string().required("Required").min(8),
+  "Confirm New Password": yup.string().required("Required").min(8),
+});
 
 interface PasswordEditSectionProps extends React.PropsWithChildren {}
 
 export const PasswordEditSection: React.FC<PasswordEditSectionProps> = () => {
+  const resolver = useValidation(validationSchema);
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm();
+  } = useForm({ resolver });
   const { user } = useUserStore();
   const { run, loading } = useApi("PUT", `/${user?.role}/password`);
 
@@ -22,36 +31,18 @@ export const PasswordEditSection: React.FC<PasswordEditSectionProps> = () => {
       <div className="space-y-6 p-5 md:p-8 lg:w-[65%] bg-white rounded-md shadow-md">
         <PasswordInput
           label="Old Password"
-          error={errors.password?.type?.toString()}
-          {...register("password", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "Password should be of 8 characters",
-            },
-          })}
+          error={errors.Password?.message?.toString()}
+          {...register("Password")}
         />
         <PasswordInput
           label="New Password"
-          error={errors.newPassword?.type?.toString()}
-          {...register("newPassword", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "Password should be of 8 characters",
-            },
-          })}
+          error={errors["New Password"]?.message?.toString()}
+          {...register("New Password")}
         />
         <PasswordInput
           label="Confirm New Password"
-          error={errors.confirmNewPassword?.type?.toString()}
-          {...register("confirmNewPassword", {
-            required: true,
-            minLength: {
-              value: 8,
-              message: "Password should be of 8 characters",
-            },
-          })}
+          error={errors["Confirm New Password"]?.message?.toString()}
+          {...register("Confirm New Password")}
         />
         <div className="f justify-end space-x-4 pt-2">
           <Button
@@ -59,13 +50,24 @@ export const PasswordEditSection: React.FC<PasswordEditSectionProps> = () => {
             loading={loading}
             className="w-32"
             onClick={handleSubmit(async (data) => {
-              if (data.confirmNewPassword !== data.newPassword)
+              if (data["Confirm New Password"] !== data["New Password"])
                 return showToast(
                   "error",
-                  "New password and confirm password are not same."
+                  "New password and confirm New password are not same."
                 );
 
-              const res = await run({ body: JSON.stringify(data) });
+              if (data["Password"] !== data["New Password"])
+                return showToast(
+                  "error",
+                  "Old password and New password can't be same"
+                );
+
+              const res = await run({
+                body: JSON.stringify({
+                  password: data.Password,
+                  newPassword: data["New Password"],
+                }),
+              });
               if (res && res.success)
                 showToast(
                   "success",
