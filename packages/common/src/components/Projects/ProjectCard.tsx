@@ -1,27 +1,36 @@
 import { Button, IconButton } from "common/src/ui";
-import { EditIcon, CommentsIcon, PaperClipIcon } from "common/src/icons";
+import { EditIcon, CommentsIcon, PaperClipIcon, FullscreenIcon } from "common/src/icons";
 import React from "react";
 import { ProjectType } from "../../types";
 import Link from "next/link";
 
-export interface ProjectCardProps extends ProjectType {}
+export interface ProjectCardProps extends ProjectType {
+  edit?:boolean;
+}
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   id,
   name,
   elevatorPitch,
-  files,
-  teamMembers,
+  edit
 }) => {
   return (
     <div className="bg-white rounded-2xl p-4 space-y-4 shadow-md border">
       <div className="f jb ic">
-        <h4>{name}</h4>
+        <h4>{name}</h4>{
+          edit ?
         <Link href={`/projects/${id}/edit-project`}>
           <IconButton className="!p-1">
             <EditIcon size={22} />
           </IconButton>
         </Link>
+        : 
+        <Link href={`/projects/${id}`}>
+          <IconButton className="!p-2">
+            <FullscreenIcon size={14} />
+          </IconButton>
+        </Link>
+        }
       </div>
       <p className="h-20 overflow-hidden text-ellipsis leading-5 text-sm">
         {elevatorPitch}

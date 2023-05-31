@@ -9,12 +9,14 @@ interface ProjectStageContainerProps extends React.PropsWithChildren {
   name: string;
   color: string;
   url: string;
+  edit?: boolean;
 }
 
 export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
   name,
   color,
   url,
+  edit = false
 }) => {
   const { data: res, isLoading } =
     useSWRImmutable<ResponseType<ProjectType[]>>(url);
@@ -37,7 +39,7 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
         (res &&
           res.success &&
           res.data.map((project, idx) => (
-            <ProjectCard key={idx} {...project} />
+            <ProjectCard key={idx} {...project} edit={edit} />
           ))) || (
           <div className="c h-28 !my-auto">
             <p>Cannot load projects</p>

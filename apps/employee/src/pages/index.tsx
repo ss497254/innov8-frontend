@@ -18,6 +18,7 @@ const Home: NextPageWithLayout = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
         <ProjectStageContainer
+          edit
           name="Idea generation"
           color="bg-emerald-300"
           url="/employee/projects/drafts"
@@ -25,7 +26,7 @@ const Home: NextPageWithLayout = () => {
         <ProjectStageContainer
           name="Idea screening"
           color="bg-violet-300"
-          url="/employee/projects/screening"
+          url="/employee/projects"
         />
         <ProjectStageContainer
           name="Bussiness idea validation"

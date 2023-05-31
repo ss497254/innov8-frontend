@@ -15,7 +15,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
     formState: { errors },
   } = useForm();
   const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
-  const { run, loading } = useApi("POST", "/employee/save-project");
+  const { run, loading } = useApi("POST", "/employee/projects");
 
   const onSubmitProvider = useCallback(
     (type: FormSubmitType) => async (data: FieldValues) => {

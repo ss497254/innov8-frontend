@@ -1,34 +1,46 @@
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { ProjectType, ResponseType } from "common/src/types";
-import { Button, Textarea, FileInput, Input } from "common/src/ui";
+import { Button, FileInput, Input, Textarea } from "common/src/ui";
 import { useRouter } from "next/router";
-import React, { useCallback, useState } from "react";
-import { useForm, FieldValues } from "react-hook-form";
-import useSWRImmutable from "swr/immutable";
+import React, { useCallback, useEffect, useState } from "react";
+import { FieldValues, useForm } from "react-hook-form";
+import useSWR from "swr";
 
 interface EditProjectFormProps extends React.PropsWithChildren {}
 
 type FormSubmitType = "draft" | "submit";
 
 export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
+  const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
+
+  const { query } = useRouter();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
-  const { query } = useRouter();
-  const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
 
-  const { data: res, isLoading } = useSWRImmutable<ResponseType<ProjectType>>(
-    query.id && `/employee/projects/${query.id}`
+  const { data: res } = useSWR<ResponseType<ProjectType>>(
+    query.projectId && `/employee/projects/drafts/${query.projectId}`
   );
-  const { run, loading } = useApi("POST", "/employee/save-project");
+  const { run, loading } = useApi("PUT", "/employee/projects/");
+
+  useEffect(() => {
+    Object.keys(res?.data || {}).map((key) =>
+      //@ts-ignore
+      setValue(key, res?.data[key])
+    );
+  }, [res?.data]);
 
   const onSubmitProvider = useCallback(
     (type: FormSubmitType) => async (data: FieldValues) => {
       setSubmitType(type);
-      const res = await run({ body: JSON.stringify({ data, type }) });
+      const res = await run({
+        body: JSON.stringify({ data, type }),
+        parameter: query.projectId as string,
+      });
 
       if (res && res.success)
         showToast("success", "Project submitted as " + type, res.message);
@@ -44,30 +56,37 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
         <Input
           label="Project Name"
           labelClassName="!font-bold md:text-lg"
+          defaultValue={res?.data.name}
           error={errors.name?.type?.toString()}
-          {...register("name", { required: true })}
+          {...register("name", { required: true, value: res?.data.name })}
         />
         <Textarea
           label="Elevator pitch"
           labelClassName="!font-bold md:text-lg"
           desc="Not more than 30 words."
           rows={4}
+          defaultValue={res?.data.elevatorPitch}
           error={errors.elevatorPitch?.type?.toString()}
-          {...register("elevatorPitch", { required: true })}
+          {...register("elevatorPitch", {
+            required: true,
+            value: res?.data.elevatorPitch,
+          })}
         />
         <Textarea
           label="Summary"
           labelClassName="!font-bold md:text-lg"
           desc="Provide an executive summary of you idea."
           rows={3}
+          defaultValue={res?.data.summary}
           error={errors.summary?.type?.toString()}
-          {...register("summary", { required: true })}
+          {...register("summary", { required: true, value: res?.data.summary })}
         />
         <Textarea
           label="How will you capture value?"
           labelClassName="!font-bold md:text-lg"
           desc="Give an overview of your revenue model."
           rows={4}
+          defaultValue={res?.data.captureValue}
           error={errors.captureValue?.type?.toString()}
           {...register("captureValue", { required: true })}
         />
@@ -84,6 +103,7 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
           labelClassName="!font-bold md:text-lg"
           desc="www.slides.api"
           rows={4}
+          defaultValue={res?.data.teamOverview}
           error={errors.slideLink?.type?.toString()}
           {...register("slideLink", { required: true })}
         />
