@@ -19,7 +19,7 @@ const Projects: NextPageWithLayout = () => {
     useSWR<ResponseType<ProjectType[]>>("/judge/projects");
 
   return (
-    <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
+    <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
       <ProjectsTopBar
         tabs={tabs}
         activeTab={activeTab}

@@ -12,7 +12,7 @@ const tabs = ["General", "Security"] as const;
 const Profile: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState<(typeof tabs)[number]>(tabs[0]);
   return (
-    <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6 lg:p-8">
+    <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
       <PageTopBar heading="Profile">
         <TabButtons
           tabs={tabs}
