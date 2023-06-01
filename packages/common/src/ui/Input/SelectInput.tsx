@@ -24,7 +24,6 @@ export const SelectInput: React.FC<props> = ({
   labelClassName,
   size = "md",
   children,
-  // onChange,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
@@ -44,7 +43,7 @@ export const SelectInput: React.FC<props> = ({
       {desc && <p className="text-sm -mt-1 mb-1">{desc}</p>}
       <div
         onFocus={() => setOpen(true)}
-        onBlurCapture={() => setOpen(false)}
+        onBlur={() => setTimeout(setOpen, 500, false)}
         className={[
           "r bg-gray-50 border border-gray-300 text-gray-900 focus:outline-2 focus:outline-blue-500 w-full",
           sizes[size],
@@ -54,7 +53,7 @@ export const SelectInput: React.FC<props> = ({
       >
         {options.map((option, idx) => (
           <div
-            className="px-4 py-2 inline-block text-left rounded-full mr-1 mb-1 bg-gray-200"
+            className="px-1 py-2 inline-block text-left rounded-full mr-2 mb-2 bg-gray-200"
             key={idx}
           >
             {option}
@@ -62,18 +61,12 @@ export const SelectInput: React.FC<props> = ({
         ))}
         <input
           id={id}
-          className="outline-none bg-inherit w-full"
-          // onChange={(e) => {
-          //   if (e.target.value) {
-          //     setOpen(true);
-          //     onChange?.(e);
-          //   } else setOpen(false);
-          // }}
+          className="outline-none bg-inherit w-full p-1"
           {...props}
         />
         <CaretIcon
           size={22}
-          className="text-dark-600 absolute right-3 bottom-3"
+          className="text-dark-600 absolute right-4 bottom-3"
         />
       </div>
       <div
