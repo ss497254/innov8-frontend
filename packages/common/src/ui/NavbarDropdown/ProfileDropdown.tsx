@@ -61,17 +61,17 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
           <div className="px-4 py-3 rounded-t-md border-b">
             <div className="text-sm text-gray-400">Signed in as</div>
             <div className="-mb-1">
-              {user?.firstName + " " + user?.lastName}
+              {user?.firstName} {user?.lastName}
             </div>
           </div>
-          <div className="p-2">
-            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+          <div className="p-2 space-y-1">
+            <div className="f ic d5 px-4 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
               Profile
             </div>
-            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+            <div className="f ic d5 px-4 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
               Settings
             </div>
-            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+            <div className="f ic d5 px-4 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
               Support
             </div>
           </div>

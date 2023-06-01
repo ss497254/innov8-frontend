@@ -1,10 +1,13 @@
-export const debounced = (fn: () => void, delay: number) => {
+export const debounced = (fn: any, delay: number) => {
   let timer: NodeJS.Timeout;
 
-  return () => {
-    if (timer) clearTimeout(timer);
+  return (...args: any[]) => {
+    clearTimeout(timer);
 
-    timer = setTimeout(fn, delay);
+    timer = setTimeout(() => {
+      clearTimeout(timer);
+      fn.apply(this, args);
+    }, delay);
   };
 };
 

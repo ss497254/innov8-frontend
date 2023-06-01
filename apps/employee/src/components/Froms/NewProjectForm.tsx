@@ -1,4 +1,5 @@
 import { useApi } from "common/src/hooks/useApi";
+import { TeamMemberInput } from "common/src/components";
 import { showToast } from "common/src/lib/showToast";
 import { Button, Textarea, FileInput, Input } from "common/src/ui";
 import React, { useCallback, useState } from "react";
@@ -12,6 +13,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
   const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
@@ -78,6 +80,12 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
           rows={4}
           error={errors.slideLink?.type?.toString()}
           {...register("slideLink", { required: true })}
+        />
+        <TeamMemberInput
+          label="Team Members"
+          labelClassName="!font-bold md:text-lg"
+          desc="You can add upto 2 team members."
+          setValue={setValue}
         />
         <FileInput
           label="Attachments"

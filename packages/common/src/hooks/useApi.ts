@@ -10,7 +10,7 @@ export const useApi = <T>(
   const [loading, setLoading] = useState(false);
 
   const run = useCallback(
-    async ({ parameter = "", data = "", body = "" } = {}) => {
+    async ({ parameter = "", body = "" } = {}) => {
       setLoading(true);
 
       try {
@@ -22,9 +22,7 @@ export const useApi = <T>(
             "Content-Type": "application/json",
           },
           ...options,
-          body,
-          //@ts-ignore
-          data,
+          ...(body && { body }),
         });
 
         let output: ResponseType<T>;
