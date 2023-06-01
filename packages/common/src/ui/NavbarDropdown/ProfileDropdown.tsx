@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { LogoutIcon } from "../../icons";
-
+import { useUserStore } from "../../stores";
 import Transition from "../Transition";
 
 export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+  const { user } = useUserStore();
 
   useEffect(() => {
     const clickHandler = ({ target }: MouseEvent) => {
@@ -22,7 +23,6 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
     return () => document.removeEventListener("click", clickHandler);
   });
 
-  // close if the esc key is pressed
   useEffect(() => {
     const keyHandler = ({ keyCode }: KeyboardEvent) => {
       if (!dropdownOpen || keyCode !== 27) return;
@@ -43,7 +43,6 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
       >
         {children}
       </button>
-
       <Transition
         className="origin-top-right z-100 absolute top-full right-0 mr-1 bg-white border border-gray-300 rounded-xl drop-shadow-xl overflow-hidden mt-1"
         show={dropdownOpen}
@@ -56,25 +55,30 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
       >
         <div
           ref={dropdown}
-          className="flex flex-col w-60 whitespace-nowrap overflow-ellipsis p-2 gap-2"
+          className="flex flex-col w-60 whitespace-nowrap overflow-ellipsis"
           onClick={() => {}}
         >
-          <div className="f ic gap-3 px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white cursor-pointer">
-            <span>Settings</span>
+          <div className="px-4 py-3 rounded-t-md border-b">
+            <div className="text-sm text-gray-400">Signed in as</div>
+            <div className="-mb-1">
+              {user?.firstName + " " + user?.lastName}
+            </div>
           </div>
-          <div className="f ic gap-3 px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white cursor-pointer">
-            <span>Dark Mode</span>
+          <div className="p-2">
+            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+              Profile
+            </div>
+            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+              Settings
+            </div>
+            <div className="f ic d5 px-5 py-2 rounded-md hover:bg-indigo-100 hover:text-indigo-600 cursor-pointer">
+              Support
+            </div>
           </div>
-          <div className="f ic gap-3 px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white cursor-pointer">
-            <span>Report a bug</span>
-          </div>
-          <div className="f ic gap-3 px-4 py-2 rounded-md hover:bg-blue-500 hover:text-white cursor-pointer">
-            <span>Help</span>
-          </div>
-          <div className="f ic gap-3 px-4 py-2 rounded-md text-white bg-red-500 hover:bg-red-600 cursor-pointer">
+          <button className="f !ring-0 ic d5 space-x-3 py-3 px-6 rounded-b-md text-red-500 border-t hover:bg-red-500 hover:text-white">
             <LogoutIcon />
             <span>Logout</span>
-          </div>
+          </button>
         </div>
       </Transition>
     </div>

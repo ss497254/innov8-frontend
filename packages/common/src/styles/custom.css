@@ -61,6 +61,18 @@
   @apply border border-gray-200;
 }
 
+.d2 {
+  @apply duration-200;
+}
+
+.d5 {
+  @apply duration-500;
+}
+
+.d10 {
+  @apply duration-1000;
+}
+
 button:focus {
   @apply ring-2;
   outline: none;

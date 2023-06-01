@@ -1,6 +1,8 @@
-import { FilterIcon, SortIcon } from "common/src/icons";
+import { PageTopBar } from "common";
+import { PlusIcon } from "common/src/icons";
 import { Button, TabButtons } from "common/src/ui";
-import React, { memo } from "react";
+import Link from "next/link";
+import React from "react";
 
 interface ProjectsTopBarProps extends React.PropsWithChildren {
   activeTab: string;
@@ -8,28 +10,28 @@ interface ProjectsTopBarProps extends React.PropsWithChildren {
   tabs: string[];
 }
 
-export const ProjectsTopBar: React.FC<ProjectsTopBarProps> = memo(
-  ({ activeTab, setActiveTab, tabs }) => {
-    return (
-      <div>
-        <div className="my-4 f ic space-x-3">
-          <h3>Projects</h3>
-          <div className="flex-1" />
-          <Button btn="outline" className="hover:text-indigo-600">
-            <FilterIcon size={18} className="mr-3" /> Filter
+export const ProjectsTopBar: React.FC<ProjectsTopBarProps> = ({
+  activeTab,
+  tabs,
+  setActiveTab,
+}) => {
+  return (
+    <PageTopBar
+      heading="Projects"
+      rightChildren={
+        <Link href="/projects/new-project">
+          <Button btn="accent">
+            <PlusIcon size={14} className="mr-2" />
+            New project
           </Button>
-          <Button btn="outline" className="hover:text-indigo-600">
-            <SortIcon className="mr-3" /> Sort
-          </Button>
-        </div>
-        <div className="border-b border-dark-400">
-          <TabButtons
-            tabs={tabs}
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-        </div>
-      </div>
-    );
-  }
-);
+        </Link>
+      }
+    >
+      <TabButtons
+        tabs={tabs}
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
+    </PageTopBar>
+  );
+};

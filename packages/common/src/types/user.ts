@@ -1,6 +1,7 @@
 export interface UserType {
-  firstName: string;
-  lastName: string;
   id: string;
   role: string;
+  firstName: string;
+  lastName: string;
+  avatarUrl: string;
 }
