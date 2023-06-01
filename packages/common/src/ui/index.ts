@@ -14,3 +14,4 @@ export * from "./Sidebar";
 export * from "./Spinner";
 export * from "./StarRating";
 export * from "./Toast";
+export * from "./Project";

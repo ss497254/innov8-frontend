@@ -13,7 +13,7 @@ export const ProfileEditSection: React.FC<ProfileEditSectionProps> = () => {
   const { run, loading } = useApi("PUT", `/${user?.role}/profile`);
 
   return (
-    <div className="max-w-6xl mx-auto lg:flex py-5">
+    <div className="max-w-6xl mx-auto lg:flex py-4">
       <h4 className="lg:w-[35%] mb-6">Personal Information</h4>
       <div className="space-y-4 p-5 md:p-8 lg:w-[65%] bg-white rounded-md shadow-md">
         <Input
