@@ -13,16 +13,18 @@ export const ProfileEditSection: React.FC<ProfileEditSectionProps> = () => {
   const { run, loading } = useApi("PUT", `/${user?.role}/profile`);
 
   return (
-    <div className="max-w-6xl mx-auto lg:flex md:py-5">
+    <div className="max-w-6xl mx-auto lg:flex py-5">
       <h4 className="lg:w-[35%] mb-6">Personal Information</h4>
-      <div className="space-y-6 p-5 md:p-8 lg:w-[65%] bg-white rounded-md shadow-md">
+      <div className="space-y-4 p-5 md:p-8 lg:w-[65%] bg-white rounded-md shadow-md">
         <Input
           label="First name"
+          labelClassName="text-lg mb-2 font-semibold"
           defaultValue={user?.firstName}
           {...register("firstName")}
         />
         <Input
           label="Last name"
+          labelClassName="text-lg mb-2 font-semibold"
           defaultValue={user?.lastName}
           {...register("lastName")}
         />
