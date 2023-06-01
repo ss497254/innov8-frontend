@@ -1,11 +1,10 @@
 import React from "react";
-import { ProfileIcon } from "../../icons";
 import {
+  NavBar,
   NotificationDropdown,
   ProfileDropdown,
   SearchBar,
   Sidebar,
-  NavBar,
 } from "../../ui";
 
 interface AppLayoutProps extends React.PropsWithChildren {
@@ -25,9 +24,7 @@ export const AppLayout: React.FC<AppLayoutProps> = ({ children, items }) => {
       <NavBar className="space-x-3 md:space-x-4 md:pr-6">
         <SearchBar width="md:!w-96" />
         <NotificationDropdown />
-        <ProfileDropdown>
-          <ProfileIcon size={42} />
-        </ProfileDropdown>
+        <ProfileDropdown />
       </NavBar>
       {children}
       <Sidebar items={items} />

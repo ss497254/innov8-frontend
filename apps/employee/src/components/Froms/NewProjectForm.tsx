@@ -85,7 +85,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
           label="Team Members"
           labelClassName="!font-bold md:text-lg"
           desc="You can add upto 3 team members."
-          onChange={(e) => setValue("teamMember", e)}
+          onChange={(e) => setValue("teamMembers", e)}
         />
         <FileInput
           label="Attachments"

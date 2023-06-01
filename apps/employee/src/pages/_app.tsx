@@ -7,6 +7,7 @@ import { Cfetch } from "common";
 import { AppPropsWithLayout } from "common/src/types";
 import { ToastContainer } from "common/src/ui";
 import { SWRConfig } from "swr";
+import { showToast } from "common/src/lib/showToast";
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -15,6 +16,9 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     <SWRConfig
       value={{
         fetcher: Cfetch,
+        onError: (err, key) => {
+          showToast("error", err.message, key);
+        },
       }}
     >
       <ToastContainer />
