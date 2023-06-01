@@ -8,26 +8,26 @@ import { debounced } from "../../utils";
 type props = Parameters<typeof SelectInput>[0];
 
 interface TeamMemberInputProps
-  extends Omit<props, "options" | "children" | "onChange"> {
+  extends Omit<props, "options" | "children" | "onChange" | "value"> {
   onChange: (x: UserType[]) => void;
+  value?: UserType[];
 }
 
 export const TeamMemberInput: React.FC<TeamMemberInputProps> = ({
+  value = [],
   onChange,
   ...props
 }) => {
-  const { user: author } = useUserStore();
-
-  const users = useRef<UserType[]>([author!]);
+  const users = useRef<UserType[]>(value);
   const [options, setOptions] = useState<React.ReactNode[]>(() => {
-    onChange(users.current);
+    onChange(value);
 
-    return [
+    return value.map((user) => (
       <div className="f mr-2 ic">
-        <img src={author!.avatarUrl} className="h-7 w-7 mx-1 rounded-full" />
-        {author!.firstName} {author!.lastName}
-      </div>,
-    ];
+        <img src={user!.avatarUrl} className="h-7 w-7 mx-1 rounded-full" />
+        {user!.firstName} {user!.lastName}
+      </div>
+    ));
   });
 
   const [user, setUser] = useState<UserType>();

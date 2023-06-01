@@ -1,3 +1,5 @@
+import { UserType } from "common";
+
 export interface ProjectType {
   id: string;
   name: string;
@@ -5,7 +7,9 @@ export interface ProjectType {
   summary: string;
   captureValue: string;
   teamOverview: string;
-  teamMembers: string[];
+  teamMembers: UserType[];
+  leaderId: UserType["id"];
+  slideLink: string;
   files: string[];
   createdAt: string;
 }

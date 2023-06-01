@@ -1,3 +1,4 @@
+import { TeamMemberInput } from "common/src/components";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { ProjectType, ResponseType } from "common/src/types";
@@ -22,7 +23,7 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
     formState: { errors },
   } = useForm();
 
-  const { data: res } = useSWR<ResponseType<ProjectType>>(
+  const { data: res, isLoading } = useSWR<ResponseType<ProjectType>>(
     query.projectId && `/employee/projects/drafts/${query.projectId}`
   );
   const { run, loading } = useApi("PUT", "/employee/projects/");
@@ -56,7 +57,6 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
         <Input
           label="Project Name"
           labelClassName="!font-bold md:text-lg"
-          defaultValue={res?.data.name}
           error={errors.name?.type?.toString()}
           {...register("name", { required: true, value: res?.data.name })}
         />
@@ -65,7 +65,6 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
           labelClassName="!font-bold md:text-lg"
           desc="Not more than 30 words."
           rows={4}
-          defaultValue={res?.data.elevatorPitch}
           error={errors.elevatorPitch?.type?.toString()}
           {...register("elevatorPitch", {
             required: true,
@@ -77,7 +76,6 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
           labelClassName="!font-bold md:text-lg"
           desc="Provide an executive summary of you idea."
           rows={3}
-          defaultValue={res?.data.summary}
           error={errors.summary?.type?.toString()}
           {...register("summary", { required: true, value: res?.data.summary })}
         />
@@ -86,7 +84,6 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
           labelClassName="!font-bold md:text-lg"
           desc="Give an overview of your revenue model."
           rows={4}
-          defaultValue={res?.data.captureValue}
           error={errors.captureValue?.type?.toString()}
           {...register("captureValue", { required: true })}
         />
@@ -103,10 +100,18 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
           labelClassName="!font-bold md:text-lg"
           desc="www.slides.api"
           rows={4}
-          defaultValue={res?.data.teamOverview}
           error={errors.slideLink?.type?.toString()}
           {...register("slideLink", { required: true })}
         />
+        {!isLoading && (
+          <TeamMemberInput
+            value={res?.data.teamMembers}
+            label="Team Members"
+            labelClassName="!font-bold md:text-lg"
+            desc="You can add upto 3 team members."
+            onChange={(e) => setValue("teamMembers", e)}
+          />
+        )}
         <FileInput
           label="Attachments"
           labelClassName="!font-bold md:text-lg"

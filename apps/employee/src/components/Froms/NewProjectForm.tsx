@@ -4,18 +4,20 @@ import { showToast } from "common/src/lib/showToast";
 import { Button, Textarea, FileInput, Input } from "common/src/ui";
 import React, { useCallback, useState } from "react";
 import { useForm, FieldValues } from "react-hook-form";
+import { ProjectType, useUserStore } from "common";
 
 interface NewProjectFormProps extends React.PropsWithChildren {}
 
 type FormSubmitType = "draft" | "submit";
 
 export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
+  const { user } = useUserStore();
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm<ProjectType>({ values: { leaderId: user!.id } as any });
   const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
   const { run, loading } = useApi("POST", "/employee/projects");
 
@@ -82,6 +84,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
           {...register("slideLink", { required: true })}
         />
         <TeamMemberInput
+          value={[user!]}
           label="Team Members"
           labelClassName="!font-bold md:text-lg"
           desc="You can add upto 3 team members."
