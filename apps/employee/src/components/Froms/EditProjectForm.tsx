@@ -50,7 +50,7 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
   );
 
   return (
-    <div className="my-4">
+    <div className="my-4 md:bg-white md:rounded-md md:shadow-xl md:p-8">
       <h3>Edit project form</h3>
       <div className="mt-2 py-4 space-y-6">
         <Input

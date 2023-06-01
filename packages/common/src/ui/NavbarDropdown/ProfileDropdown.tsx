@@ -44,7 +44,7 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
         {children}
       </button>
       <Transition
-        className="origin-top-right z-100 absolute top-full right-0 mr-1 bg-white border border-gray-300 rounded-xl drop-shadow-xl overflow-hidden mt-1"
+        className="origin-top-right z-50 absolute top-full right-0 mr-1 bg-white border border-gray-300 rounded-xl drop-shadow-xl overflow-hidden mt-1"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"
         enterStart="opacity-0 -translate-y-2"

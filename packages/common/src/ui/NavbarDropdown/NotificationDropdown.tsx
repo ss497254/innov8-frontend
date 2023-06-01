@@ -50,7 +50,7 @@ export const NotificationDropdown: React.FC<
       </button>
 
       <Transition
-        className="origin-top-right z-100 absolute top-full mt-2 -right-16 md:right-0 bg-white mr-1 w-[360px] outline outline-[1px] outline-slate-400
+        className="origin-top-right z-50 absolute top-full mt-2 -right-16 md:right-0 bg-white mr-1 w-[360px] outline outline-[1px] outline-slate-400
                 rounded-lg shadow-xl overflow-hidden"
         show={dropdownOpen}
         enter="transition ease-out duration-200 transform"

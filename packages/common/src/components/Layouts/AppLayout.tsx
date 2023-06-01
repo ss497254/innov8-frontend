@@ -22,7 +22,7 @@ interface AppLayoutProps extends React.PropsWithChildren {
 export const AppLayout: React.FC<AppLayoutProps> = ({ children, items }) => {
   return (
     <main className="lg:pl-64 r h-full">
-      <NavBar className="space-x-3 md:space-x-4 md:pr-6 r z-10">
+      <NavBar className="space-x-3 md:space-x-4 md:pr-6">
         <SearchBar width="md:!w-96" />
         <NotificationDropdown />
         <ProfileDropdown>
