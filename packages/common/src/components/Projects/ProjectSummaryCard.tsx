@@ -9,6 +9,7 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   id,
   name,
   elevatorPitch,
+  teamMembers,
 }) => {
   return (
     <Link href={`/projects/${id}/review-project`}>
@@ -19,11 +20,7 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
           <MultiUserAvatar
             size={24}
             className="!ml-auto mr-3"
-            srcArray={[
-              "https://xsgames.co/randomusers/assets/avatars/male/26.jpg",
-              "https://xsgames.co/randomusers/assets/avatars/male/27.jpg",
-              "https://xsgames.co/randomusers/assets/avatars/male/28.jpg",
-            ]}
+            srcArray={teamMembers?.map((user) => user.avatarUrl) || []}
           />
         </div>
         <p className="overflow-hidden text-ellipsis leading-5 text-sm">
