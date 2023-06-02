@@ -13,7 +13,11 @@ export interface ProjectType {
   files: string[];
   createdAt: string;
   judge?: UserType;
-  status?: "admin-review" | "judge-review" | "rating-completed";
+  status?:
+    | "admin-review"
+    | "judge-review"
+    | "rating-completed"
+    | "coach-assign";
   overallRating?: number;
   rating?: Record<string, number>;
 }
