@@ -1,9 +1,18 @@
-import { Badge, MultiUserAvatar } from "common/src/ui";
+import { Badge, BadgeTypes, MultiUserAvatar } from "common/src/ui";
 import Link from "next/link";
 import React from "react";
 import { ProjectType } from "../../types";
 
 export interface ProjectSummaryCardProps extends ProjectType {}
+
+const StatusBadgeMap: Record<
+  Exclude<ProjectType["status"], undefined>,
+  keyof typeof BadgeTypes
+> = {
+  "admin-review": "blue",
+  "judge-review": "purple",
+  "rating-completed": "green",
+};
 
 export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   id,
@@ -17,7 +26,7 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
       <div className="bg-white rounded-lg p-6 my-2 space-y-4 shadow-md border">
         <div className="f jb ic space-x-4">
           <h4>{name}</h4>
-          <Badge type="blue">In progress</Badge>
+          {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
           <MultiUserAvatar
             size={24}
             className="!ml-auto mr-3"

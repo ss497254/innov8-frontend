@@ -9,14 +9,23 @@ import { Button, Input, StarRating, Textarea } from "common/src/ui";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import useSWRImmutable from "swr/immutable";
+import useSWR from "swr";
 
 const ReviewProject: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState<
+    Exclude<ProjectType["rating"], undefined>
+  >({});
+  const [overallRating, setOverallRating] = useState(1);
 
-  const { data: res, isLoading } = useSWRImmutable<ResponseType<ProjectType>>(
-    query.projectId && `/judge/projects/${query.projectId}`
+  const { data: res } = useSWR<ResponseType<ProjectType>>(
+    query.projectId && `/judge/projects/${query.projectId}`,
+    {
+      onSuccess: ({ data: { overallRating = 1, rating = {} } }) => {
+        setOverallRating(overallRating);
+        setRating(rating);
+      },
+    }
   );
   const { run, loading } = useApi(
     "POST",
@@ -40,12 +49,22 @@ const ReviewProject: NextPageWithLayout = () => {
           rows={4}
           defaultValue={res?.data.elevatorPitch}
         />
+        <StarRating
+          value={rating.elevatorPitch}
+          setValue={(x) => setRating({ ...rating, elevatorPitch: x })}
+          className="mx-auto scale-75 !mt-1"
+        />
         <Textarea
           disabled
           label="Summary"
           labelClassName="md:text-lg"
           rows={4}
           defaultValue={res?.data.summary}
+        />
+        <StarRating
+          value={rating.summary}
+          setValue={(x) => setRating({ ...rating, summary: x })}
+          className="mx-auto scale-75 !mt-1"
         />
         <Textarea
           disabled
@@ -54,6 +73,11 @@ const ReviewProject: NextPageWithLayout = () => {
           rows={4}
           defaultValue={res?.data.captureValue}
         />
+        <StarRating
+          value={rating.captureValue}
+          setValue={(x) => setRating({ ...rating, captureValue: x })}
+          className="mx-auto scale-75 !mt-1"
+        />
         <Textarea
           disabled
           label="Do you have the competencies within your team to build the MVP?"
@@ -61,23 +85,39 @@ const ReviewProject: NextPageWithLayout = () => {
           rows={4}
           defaultValue={res?.data.teamOverview}
         />
+        <StarRating
+          value={rating.teamOverview}
+          setValue={(x) => setRating({ ...rating, teamOverview: x })}
+          className="mx-auto scale-75 !mt-1"
+        />
         <Textarea
           disabled
           label="Please edit and finalize your pitch deck using the template"
           labelClassName="md:text-lg"
           rows={4}
-          defaultValue={res?.data.files}
+          defaultValue={res?.data.slideLink}
+        />
+        <StarRating
+          value={rating.slideLink}
+          setValue={(x) => setRating({ ...rating, slideLink: x })}
+          className="mx-auto scale-75 !mt-1"
         />
         <div className="border rounded-md p-5 space-y-4">
           <h4>Overall Rating</h4>
-          <StarRating value={rating} setValue={setRating} className="mx-auto" />
+          <StarRating
+            value={overallRating}
+            setValue={setOverallRating}
+            className="mx-auto"
+          />
           <div className="f space-x-4 justify-end">
             <Button
               btn="success"
               loading={loading}
               className="w-64 mx-auto"
               onClick={async () => {
-                const res = await run({ body: JSON.stringify({ rating }) });
+                const res = await run({
+                  body: JSON.stringify({ overallRating, rating }),
+                });
                 if (res && res.success)
                   showToast(
                     "success",

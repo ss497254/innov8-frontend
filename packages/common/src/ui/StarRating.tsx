@@ -92,12 +92,12 @@ const Star = ({ i, isHoveringWrapper, active }: any) => {
 };
 
 interface StarRatingProps extends React.HTMLAttributes<HTMLDivElement> {
-  value: number;
-  setValue: (x: number) => void;
+  value?: number;
+  setValue?: (x: number) => void;
 }
 
 export const StarRating: React.FC<StarRatingProps> = ({
-  value,
+  value = 1,
   setValue,
   className,
 }) => {
@@ -110,7 +110,7 @@ export const StarRating: React.FC<StarRatingProps> = ({
           className="r mx-3 w-10 cursor-pointer"
           onMouseOver={() => setIsHovering(i)}
           onMouseLeave={() => setIsHovering(value)}
-          onClick={() => setValue(i)}
+          onClick={() => setValue?.(i)}
           key={i}
         >
           <Star i={i} isHoveringWrapper={isHovering >= i} active={value >= i} />

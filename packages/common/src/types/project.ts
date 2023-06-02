@@ -14,4 +14,6 @@ export interface ProjectType {
   createdAt: string;
   judge?: UserType;
   status?: "admin-review" | "judge-review" | "rating-completed";
+  overallRating?: number;
+  rating?: Record<string, number>;
 }
