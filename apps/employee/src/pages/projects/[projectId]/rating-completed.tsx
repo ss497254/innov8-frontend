@@ -3,16 +3,15 @@ import {
   ProjectType,
   ResponseType,
 } from "common/src/types";
-import { ProjectField } from "common/src/ui";
-import { Avatar } from "common/src/ui/User";
+import { ProjectField, StarRating } from "common/src/ui";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
 
-const JudgeReview: NextPageWithLayout = () => {
+const RatingCompleted: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/admin/projects/${query.projectId}`
+    query.projectId && `/employee/projects/${query.projectId}`
   );
 
   return (
@@ -25,46 +24,58 @@ const JudgeReview: NextPageWithLayout = () => {
         <ProjectField heading="Elevator pitch" headingClassName="md:text-lg">
           {res?.data.elevatorPitch}
         </ProjectField>
-
+        <StarRating
+          value={res?.data.rating?.elevatorPitch}
+          className="mx-auto scale-75 !mt-1"
+        />
         <ProjectField heading="Summary" headingClassName="md:text-lg">
           {res?.data.summary}
         </ProjectField>
+        <StarRating
+          value={res?.data.rating?.summary}
+          className="mx-auto scale-75 !mt-1"
+        />
         <ProjectField
           heading="How will you capture value?"
           headingClassName="md:text-lg"
         >
           {res?.data.captureValue}
         </ProjectField>
+        <StarRating
+          value={res?.data.rating?.captureValue}
+          className="mx-auto scale-75 !mt-1"
+        />
         <ProjectField
           heading="Do you have the competencies within your team to build the MVP?"
           headingClassName="md:text-lg"
         >
           {res?.data.teamOverview}
         </ProjectField>
+        <StarRating
+          value={res?.data.rating?.teamOverview}
+          className="mx-auto scale-75 !mt-1"
+        />
         <ProjectField
           heading="Please edit and finalize your pitch deck using the template"
           headingClassName="md:text-lg"
         >
           {res?.data.slideLink}
         </ProjectField>
+        <StarRating
+          value={res?.data.rating?.slideLink}
+          className="mx-auto scale-75 !mt-1"
+        />
         <div className="border rounded-md p-5 space-y-4">
-          <h4>Judge assigned</h4>
-          <h3 className="f ic">
-            <Avatar
-              size={50}
-              src={res?.data.judge?.avatarUrl}
-              className="mr-4"
-            />
-            {res?.data.judge?.firstName + " " + res?.data.judge?.lastName}
-          </h3>
+          <h4>Overall Rating</h4>
+          <StarRating value={res?.data.overallRating} className="mx-auto" />
         </div>
       </div>
     </div>
   );
 };
 
-JudgeReview.getLayout = (page) => (
+RatingCompleted.getLayout = (page) => (
   <AuthenticatedRoute>{page}</AuthenticatedRoute>
 );
 
-export default JudgeReview;
+export default RatingCompleted;

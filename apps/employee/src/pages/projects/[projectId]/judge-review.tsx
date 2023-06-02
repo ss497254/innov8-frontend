@@ -12,7 +12,7 @@ import useSWR from "swr";
 const JudgeReview: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/admin/projects/${query.projectId}`
+    query.projectId && `/employee/projects/${query.projectId}`
   );
 
   return (

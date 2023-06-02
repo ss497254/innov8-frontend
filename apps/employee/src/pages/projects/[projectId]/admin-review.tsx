@@ -10,7 +10,7 @@ import useSWRImmutable from "swr/immutable";
 
 const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const { data: res, isLoading } = useSWRImmutable<ResponseType<ProjectType>>(
+  const { data: res } = useSWRImmutable<ResponseType<ProjectType>>(
     query.projectId && `/employee/projects/${query.projectId}`
   );
 
@@ -43,7 +43,7 @@ const ProjectView: NextPageWithLayout = () => {
           heading="Please edit and finalize your pitch deck using the template"
           headingClassName="md:text-lg"
         >
-          {res?.data.files}
+          {res?.data.slideLink}
         </ProjectField>
       </div>
     </div>
