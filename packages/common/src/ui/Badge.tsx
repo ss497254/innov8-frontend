@@ -17,14 +17,14 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 export const Badge: React.FC<BadgeProps> = ({ children, className, type }) => {
   return (
-    <span
+    <div
       className={[
         className,
         BadgeTypes[type],
-        "text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full",
+        "text-sm uppercase font-medium inline-block mr-2 px-2.5 py-0.5 rounded-full",
       ].join(" ")}
     >
       {children}
-    </span>
+    </div>
   );
 };

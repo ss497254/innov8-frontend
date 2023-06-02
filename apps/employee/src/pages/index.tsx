@@ -16,7 +16,7 @@ const Home: NextPageWithLayout = () => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
         <ProjectStageContainer
           edit
           name="Idea generation"
@@ -27,11 +27,13 @@ const Home: NextPageWithLayout = () => {
           name="Idea screening"
           color="bg-violet-300"
           url="/employee/projects"
+          filter={(x) => x.status !== "rating-completed"}
         />
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
-          url="/employee/projects/bussiness-idea-validation"
+          url="/employee/projects"
+          filter={(x) => x.status === "rating-completed"}
         />
       </div>
     </div>

@@ -10,13 +10,15 @@ interface ProjectStageContainerProps extends React.PropsWithChildren {
   color: string;
   url: string;
   edit?: boolean;
+  filter?: (x: ProjectType) => boolean;
 }
 
 export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
   name,
   color,
   url,
-  edit = false
+  edit = false,
+  filter,
 }) => {
   const { data: res, isLoading } =
     useSWRImmutable<ResponseType<ProjectType[]>>(url);
@@ -38,7 +40,7 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
       ) : (
         (res &&
           res.success &&
-          res.data.map((project, idx) => (
+          (filter ? res.data.filter(filter) : res.data).map((project, idx) => (
             <ProjectCard key={idx} {...project} edit={edit} />
           ))) || (
           <div className="c h-28 !my-auto">

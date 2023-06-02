@@ -1,18 +1,10 @@
-import { Badge, BadgeTypes, MultiUserAvatar } from "common/src/ui";
+import { Badge, MultiUserAvatar } from "common/src/ui";
 import Link from "next/link";
 import React from "react";
 import { ProjectType } from "../../types";
+import { StatusBadgeMap } from "./StatusBadgeType";
 
 export interface ProjectSummaryCardProps extends ProjectType {}
-
-const StatusBadgeMap: Record<
-  Exclude<ProjectType["status"], undefined>,
-  keyof typeof BadgeTypes
-> = {
-  "admin-review": "blue",
-  "judge-review": "purple",
-  "rating-completed": "green",
-};
 
 export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   id,

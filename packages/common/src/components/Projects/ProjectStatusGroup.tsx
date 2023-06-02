@@ -2,7 +2,7 @@ import { ThreeDotsIcon } from "common/src/icons";
 import { ProjectType, ResponseType } from "common/src/types";
 import { Badge, IconButton, Spinner } from "common/src/ui";
 import React from "react";
-import useSWRImmutable from "swr/immutable";
+import useSWR from "swr";
 import { ProjectSummaryCard } from "./ProjectSummaryCard";
 
 interface ProjectStatusGroupProps extends React.PropsWithChildren {
@@ -16,8 +16,7 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
   url,
   filter,
 }) => {
-  const { data: res, isLoading } =
-    useSWRImmutable<ResponseType<ProjectType[]>>(url);
+  const { data: res, isLoading } = useSWR<ResponseType<ProjectType[]>>(url);
 
   return (
     <div className="p-6 my-6 space-y-4 bg-white rounded-lg">
