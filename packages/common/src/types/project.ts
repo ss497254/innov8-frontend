@@ -14,7 +14,7 @@ export interface ProjectType {
   createdAt: string;
   judge?: UserType;
   status?:
-    | "admin-review"
+    | "judge-assign"
     | "judge-review"
     | "rating-completed"
     | "coach-assign"

@@ -18,7 +18,7 @@ const Home: NextPageWithLayout = () => {
       />
       <ProjectStatusGroup
         name={tabs[1]}
-        filter={(x) => x.status === "admin-review"}
+        filter={(x) => x.status === "judge-assign"}
         url="/admin/projects"
       />
       <ProjectStatusGroup
