@@ -16,8 +16,16 @@ const Home: NextPageWithLayout = () => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <ProjectStatusGroup name={tabs[1]} url="/admin/projects" />
-      <ProjectStatusGroup name={tabs[2]} isCompleted url="/admin/projects" />
+      <ProjectStatusGroup
+        name={tabs[1]}
+        filter={(x) => x.status === "admin-review"}
+        url="/admin/projects"
+      />
+      <ProjectStatusGroup
+        name={tabs[2]}
+        filter={(x) => x.status === "judge-review"}
+        url="/admin/projects"
+      />
     </div>
   );
 };

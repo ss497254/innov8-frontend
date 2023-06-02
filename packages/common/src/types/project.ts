@@ -13,5 +13,5 @@ export interface ProjectType {
   files: string[];
   createdAt: string;
   judge?: UserType;
-  status?: "judge-review" | "rating-completed";
+  status?: "admin-review" | "judge-review" | "rating-completed";
 }

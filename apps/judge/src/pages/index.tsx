@@ -4,7 +4,7 @@ import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { DashboardTopBar } from "src/components/Dashboard/DashboardTopBar";
 import { ProjectStatusGroup } from "common/src/components";
 
-let tabs = ["Overview", "New", "Working", "Completed", "More"];
+let tabs = ["Overview", "New", "Completed", "More"];
 
 const Home: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -16,9 +16,16 @@ const Home: NextPageWithLayout = () => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <ProjectStatusGroup name={tabs[1]} url="/judge/projects" />
-      <ProjectStatusGroup name={tabs[2]} url="/judge/projects" />
-      <ProjectStatusGroup name={tabs[3]} url="/judge/projects" />
+      <ProjectStatusGroup
+        name={tabs[1]}
+        filter={(x) => x.status === "judge-review"}
+        url="/judge/projects"
+      />
+      <ProjectStatusGroup
+        name={tabs[2]}
+        filter={(x) => x.status === "rating-completed"}
+        url="/judge/projects"
+      />
     </div>
   );
 };

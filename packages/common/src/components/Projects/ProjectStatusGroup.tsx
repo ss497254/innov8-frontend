@@ -8,19 +8,13 @@ import { ProjectSummaryCard } from "./ProjectSummaryCard";
 interface ProjectStatusGroupProps extends React.PropsWithChildren {
   name: string;
   url: string;
-  isCompleted?: boolean;
+  filter: (x: ProjectType) => boolean;
 }
-
-const projectFilter = (isCompleted: boolean) => (project: ProjectType) => {
-  if (isCompleted) return !!project.status;
-
-  return !project.status;
-};
 
 export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
   name,
   url,
-  isCompleted = false,
+  filter,
 }) => {
   const { data: res, isLoading } =
     useSWRImmutable<ResponseType<ProjectType[]>>(url);
@@ -44,7 +38,7 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
         (res &&
           res.success &&
           res.data
-            .filter(projectFilter(isCompleted))
+            .filter(filter)
             .map((project, idx) => (
               <ProjectSummaryCard key={idx} {...project} />
             ))) || (
