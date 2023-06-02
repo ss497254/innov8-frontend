@@ -32,7 +32,7 @@ export const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
   children,
 }) => {
   return (
-    <ProtectedRoute role="judge">
+    <ProtectedRoute role="coach">
       <AppLayout items={items}>{children}</AppLayout>
     </ProtectedRoute>
   );

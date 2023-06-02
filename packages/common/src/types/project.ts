@@ -17,7 +17,8 @@ export interface ProjectType {
     | "admin-review"
     | "judge-review"
     | "rating-completed"
-    | "coach-assign";
+    | "coach-assign"
+    | "coach-review";
   overallRating?: number;
   rating?: Record<string, number>;
 }

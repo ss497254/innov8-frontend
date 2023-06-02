@@ -7,8 +7,9 @@
   "scripts": {
     "build": "turbo run build --no-daemon",
     "dev": "turbo run dev --no-daemon",
-    "dev:employee": "turbo run dev --filter=employee --no-daemon",
     "dev:admin": "turbo run dev --filter=admin --no-daemon",
+    "dev:coach": "turbo run dev --filter=coach --no-daemon",
+    "dev:employee": "turbo run dev --filter=employee --no-daemon",
     "dev:judge": "turbo run dev --filter=judge --no-daemon",
     "lint": "turbo run lint"
   },

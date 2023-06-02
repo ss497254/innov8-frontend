@@ -5,7 +5,7 @@ import { useUserStore } from "../../stores";
 import { Spinner } from "../../ui";
 
 interface ProtectedRouteProps extends React.PropsWithChildren {
-  role: "admin" | "employee" | "judge";
+  role: "admin" | "employee" | "judge" | "coach";
 }
 
 useUserStore.getState().loadUser();
