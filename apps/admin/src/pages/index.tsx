@@ -4,7 +4,7 @@ import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { DashboardTopBar } from "src/components/Dashboard/DashboardTopBar";
 import { ProjectStatusGroup } from "common/src/components";
 
-let tabs = ["Overview", "New", "Working", "Completed", "More"];
+let tabs = ["Overview", "New", "Completed", "More"];
 
 const Home: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -17,8 +17,7 @@ const Home: NextPageWithLayout = () => {
         setActiveTab={setActiveTab}
       />
       <ProjectStatusGroup name={tabs[1]} url="/admin/projects" />
-      <ProjectStatusGroup name={tabs[2]} url="/admin/projects" />
-      <ProjectStatusGroup name={tabs[3]} url="/admin/projects" />
+      <ProjectStatusGroup name={tabs[2]} isCompleted url="/admin/projects" />
     </div>
   );
 };

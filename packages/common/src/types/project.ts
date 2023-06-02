@@ -12,4 +12,6 @@ export interface ProjectType {
   slideLink: string;
   files: string[];
   createdAt: string;
+  judge?: UserType;
+  status?: "judge-review" | "rating-completed";
 }
