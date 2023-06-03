@@ -6,12 +6,10 @@ import { HypothesisQuestion } from "./HypothesisQuestion";
 interface props {
   id: number;
   hMap: Map<string, string>;
-  onDelete: () => void;
 }
 
-export const HypothesisInput: React.FC<props> = ({ id, hMap, onDelete }) => {
+export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
   const [questions, setQuestions] = useState([1]);
-  const first = id === 1;
 
   return (
     <div className="p-4 space-y-5 border border-gray-300 rounded-md">
@@ -28,10 +26,6 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap, onDelete }) => {
           onChange={(rule) => {
             hMap.set("question-" + id, rule);
           }}
-          onDelete={() => {
-            hMap.delete("question-" + id);
-            setQuestions(questions.filter((x) => x != id));
-          }}
         />
       ))}
       <div className="md:flex space-y-2 md:space-y-0 jb">
@@ -43,9 +37,17 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap, onDelete }) => {
         >
           + Add Question
         </Button>
-        {!first && (
-          <Button onClick={onDelete} btn="danger">
-            <TrashIcon className="mr-2" /> Delete Hypothesis
+        {questions.length > 1 && (
+          <Button
+            btn="outline"
+            className="text-red-500 bg-gray-100 hover:bg-red-100"
+            onClick={() => {
+              const last = questions.length;
+              hMap.delete("question-" + last);
+              setQuestions(questions.filter((x) => x != last));
+            }}
+          >
+            <TrashIcon className="mr-2" /> Delete Question
           </Button>
         )}
       </div>
