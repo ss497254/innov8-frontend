@@ -21,23 +21,17 @@ const Home: NextPageWithLayout = () => {
           edit
           name="Idea generation"
           color="bg-emerald-300"
-          url="/employee/projects/drafts"
+          url="/employee/projects/idea-generation"
         />
         <ProjectStageContainer
           name="Idea screening"
           color="bg-violet-300"
           url="/employee/projects"
-          filter={(x) =>
-            x.status !== "coach-assign" && x.status !== "coach-review"
-          }
         />
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
-          url="/employee/projects"
-          filter={(x) =>
-            x.status === "coach-assign" || x.status === "coach-review"
-          }
+          url="/employee/projects/idea-validation"
         />
       </div>
     </div>

@@ -16,10 +16,7 @@ const RatingCompleted: NextPageWithLayout = () => {
     query.projectId && `/employee/projects/${query.projectId}`
   );
 
-  const { run, loading } = useApi(
-    "POST",
-    "/employee/projects/business-idea-validation"
-  );
+  const { run, loading } = useApi("POST", "/employee/projects/idea-validation");
 
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
