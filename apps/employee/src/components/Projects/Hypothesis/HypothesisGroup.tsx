@@ -3,14 +3,15 @@ import { Button } from "common/src/ui";
 import { HypothesisInput } from "./HypothesisInput";
 import { useApi } from "common/src/hooks/useApi";
 import { TrashIcon } from "common/src/icons";
+import { showToast } from "common/src/lib/showToast";
 
 interface props {
   projectId: string;
 }
 
-export const HypothesisGroup: React.FC<props> = () => {
+export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
   const [hypotheses, setHypotheses] = useState([1]);
-  const { loading, run } = useApi("POST", "/employee/hypothesis");
+  const { loading, run } = useApi("POST", "/employee/hypothesis/" + projectId);
   const mp = useRef(new Map<number, Map<string, string>>().set(1, new Map()));
 
   return (
@@ -49,19 +50,21 @@ export const HypothesisGroup: React.FC<props> = () => {
         className="w-full !mt-8"
         loading={loading}
         onClick={async () => {
-          const data = [...mp.current.values()].map((x) => {
-            if (!x.get("hypothesis")) return;
+          const hypotheses = [...mp.current.values()]
+            .filter((x) => x.get("hypothesis"))
+            .map((x) => {
+              const h: Record<string, string> = {};
 
-            const h: Record<string, string> = {};
-            for (let [key, value] of x) {
-              if (value) h[key] = value;
-            }
-            return h;
-          });
+              for (let [key, value] of x) {
+                if (value) h[key] = value;
+              }
+              return h;
+            });
 
-          console.log(data);
-
-          const res = await run();
+          const res = await run({ body: JSON.stringify({ hypotheses }) });
+          if (res && res.success)
+            showToast("success", "Hypothesis added successfully", res.message);
+          else showToast("error", "Unable to add Hypothesis", res.error);
         }}
       >
         Submit

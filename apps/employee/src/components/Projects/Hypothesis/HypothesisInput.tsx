@@ -24,7 +24,7 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
           key={id}
           id={id}
           onChange={(rule) => {
-            hMap.set("question-" + id, rule);
+            hMap.set("question_" + id, rule);
           }}
         />
       ))}
@@ -43,7 +43,7 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
             className="text-red-500 bg-gray-100 hover:bg-red-100"
             onClick={() => {
               const last = questions.length;
-              hMap.delete("question-" + last);
+              hMap.delete("question_" + last);
               setQuestions(questions.filter((x) => x != last));
             }}
           >

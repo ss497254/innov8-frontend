@@ -1,5 +1,4 @@
-import { IconButton, Input } from "common";
-import { TrashIcon } from "common/src/icons";
+import { Input } from "common";
 import React from "react";
 
 interface props {
