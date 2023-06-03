@@ -5,7 +5,7 @@ export const StatusBadgeMap: Record<
   Exclude<ProjectType["status"], undefined>,
   keyof typeof BadgeTypes
 > = {
-  "idea-generation": "gray",
+  draft: "gray",
   "judge-assign": "blue",
   "judge-review": "purple",
   "rating-completed": "green",

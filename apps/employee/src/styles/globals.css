@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.custom-top-bar::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 40px;
+  background-color: #ccc;
+  height: 20px;
+  width: 1px;
+}

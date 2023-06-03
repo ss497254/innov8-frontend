@@ -12,8 +12,9 @@ export interface ProjectType {
   files: string[];
   updateAt: number;
   judge?: UserType;
+  coach?: UserType;
   status?:
-    | "idea-generation"
+    | "draft"
     | "judge-assign"
     | "judge-review"
     | "rating-completed"
