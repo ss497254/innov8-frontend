@@ -18,13 +18,21 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
 }) => {
   const { data: res, isLoading } = useSWR<ResponseType<ProjectType[]>>(url);
 
+  let projects: ProjectType[] = [];
+
+  if (res?.success && res?.data)
+    if (filter) projects = res.data.filter(filter);
+    else projects = res.data;
+
   return (
     <div className="p-6 my-6 space-y-4 bg-white rounded-lg">
       <h4 className="text-2xl f ic">
         {name}
-        <Badge type="green" className="mx-2">
-          {res?.data.length}
-        </Badge>
+        {projects.length > 0 && (
+          <Badge type="green" className="mx-2">
+            {projects.length}
+          </Badge>
+        )}
         <IconButton className="ml-auto">
           <ThreeDotsIcon />
         </IconButton>
@@ -33,18 +41,14 @@ export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({
         <div className="c">
           <Spinner />
         </div>
+      ) : projects.length ? (
+        projects.map((project, idx) => (
+          <ProjectSummaryCard key={idx} {...project} />
+        ))
       ) : (
-        (res &&
-          res.success &&
-          res.data
-            .filter(filter)
-            .map((project, idx) => (
-              <ProjectSummaryCard key={idx} {...project} />
-            ))) || (
-          <div className="c h-20">
-            <p>Cannot load projects</p>
-          </div>
-        )
+        <div className="c h-20">
+          <p>No projects</p>
+        </div>
       )}
     </div>
   );

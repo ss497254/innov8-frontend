@@ -40,7 +40,7 @@ export const Sidebar: React.FC<props> = ({ items }) => {
     <Drawer
       {...value}
       className="pb-10 overflow-y-scroll hide-scroll bg-white"
-      permanent={width > 1024}
+      permanent={width >= 1024}
     >
       <div className="h-16 mb-6 border-b f ic">
         <LogoIcon className="text-indigo-600" size={24} />

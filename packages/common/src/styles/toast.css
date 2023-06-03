@@ -97,7 +97,7 @@
 }
 
 .toast-content {
-  @apply flex justify-center h-full flex-col py-2 mr-5 ml-16;
+  @apply flex justify-center h-full flex-col py-4 mr-5 ml-16;
 }
 
 .toast-content p {

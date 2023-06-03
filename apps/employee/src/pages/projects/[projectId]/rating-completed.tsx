@@ -1,9 +1,11 @@
+import { useApi } from "common/src/hooks/useApi";
+import { showToast } from "common/src/lib/showToast";
 import {
   NextPageWithLayout,
   ProjectType,
   ResponseType,
 } from "common/src/types";
-import { ProjectField, StarRating } from "common/src/ui";
+import { Button, ProjectField, StarRating } from "common/src/ui";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
@@ -12,6 +14,11 @@ const RatingCompleted: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { data: res } = useSWR<ResponseType<ProjectType>>(
     query.projectId && `/employee/projects/${query.projectId}`
+  );
+
+  const { run, loading } = useApi(
+    "POST",
+    "/employee/projects/business-idea-validation"
   );
 
   return (
@@ -68,6 +75,29 @@ const RatingCompleted: NextPageWithLayout = () => {
         <div className="border rounded-md p-5 space-y-4">
           <h4>Overall Rating</h4>
           <StarRating value={res?.data.overallRating} className="mx-auto" />
+          <Button
+            className="w-full"
+            loading={loading}
+            onClick={async () => {
+              const res = await run({
+                body: JSON.stringify({ projectId: query.projectId }),
+              });
+              if (res && res.success)
+                showToast(
+                  "success",
+                  "Your project has qualified for the Business Idea Validation",
+                  res.message
+                );
+              else
+                showToast(
+                  "error",
+                  "Sorry your project doesn't qualify for Business Idea Validation",
+                  res.error
+                );
+            }}
+          >
+            Business Idea Validation
+          </Button>
         </div>
       </div>
     </div>

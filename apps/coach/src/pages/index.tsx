@@ -18,7 +18,7 @@ const Home: NextPageWithLayout = () => {
       />
       <ProjectStatusGroup
         name={tabs[1]}
-        filter={(x) => x.status === "coach-assign"}
+        filter={(x) => x.status === "coach-review"}
         url="/coach/projects"
       />
     </div>
