@@ -1,5 +1,5 @@
 import { IconButton, Input } from "common";
-import { EditIcon } from "common/src/icons";
+import { TrashIcon } from "common/src/icons";
 import React from "react";
 
 interface props {
@@ -30,9 +30,9 @@ export const HypothesisQuestion: React.FC<props> = ({
       ) : (
         <IconButton
           onClick={onDelete}
-          className="!p-2.5 ml-2.5 hover:bg-red-200 text-red-500"
+          className="!p-[11px] ml-2.5 hover:bg-red-200 text-red-500"
         >
-          <EditIcon size={22} />
+          <TrashIcon size={20} />
         </IconButton>
       )}
     </div>
