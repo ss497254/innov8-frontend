@@ -14,7 +14,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   name,
   elevatorPitch,
   edit,
-  updateAt,
+  updatedAt,
   status,
 }) => {
   return (
@@ -41,7 +41,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="f space-x-2">
         {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
         <div className="flex-1 text-right">
-          {new Date(updateAt * 1000).toDateString()}
+          {new Date(updatedAt).toDateString()}
         </div>
       </div>
     </div>

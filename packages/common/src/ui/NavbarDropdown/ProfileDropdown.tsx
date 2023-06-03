@@ -59,12 +59,12 @@ export const ProfileDropdown = ({ children }: React.PropsWithChildren) => {
           className="flex flex-col w-60 whitespace-nowrap overflow-ellipsis"
           onClick={() => {}}
         >
-          <div className="px-4 py-3 rounded-t-md border-b">
-            <div className="text-sm text-gray-400 font-normal">
-              Signed in as
-            </div>
-            <div className="-mb-1">
+          <div className="p-4 rounded-t-md border-b">
+            <h4>
               {user!.firstName} {user!.lastName}
+            </h4>
+            <div className="text-sm text-gray-600 uppercase font-normal">
+              {user?.role}
             </div>
           </div>
           <div className="p-2 space-y-1">

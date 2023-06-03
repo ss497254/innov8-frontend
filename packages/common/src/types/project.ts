@@ -10,7 +10,7 @@ export interface ProjectType {
   teamMembers: UserType[];
   slideLink: string;
   files: string[];
-  updateAt: number;
+  updatedAt: number;
   judge?: UserType;
   coach?: UserType;
   status?:

@@ -12,13 +12,13 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   elevatorPitch,
   teamMembers,
   status,
+  updatedAt,
 }) => {
   return (
     <Link href={`/projects/${id}/${status}`}>
       <div className="bg-white rounded-lg p-6 my-2 space-y-4 shadow-md border">
         <div className="f jb ic space-x-4">
           <h4>{name}</h4>
-          {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
           <MultiUserAvatar
             size={24}
             className="!ml-auto mr-3"
@@ -28,6 +28,12 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
         <p className="overflow-hidden text-ellipsis leading-5 text-sm">
           {elevatorPitch}
         </p>
+        <div className="f space-x-2">
+          {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
+          <div className="flex-1 text-right">
+            {new Date(updatedAt).toDateString()}
+          </div>
+        </div>
       </div>
     </Link>
   );
