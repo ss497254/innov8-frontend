@@ -39,20 +39,20 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
         </IconButton>
       </h3>
       {isLoading ? (
-        <div className="c">
-          <Spinner />
+        <div className="c min-h-[200px] h-full">
+          <Spinner size={28} className="-mt-14" />
         </div>
       ) : projects.length ? (
         projects.map((project, idx) => (
           <ProjectCard key={idx} {...project} edit={edit} />
         )) || (
-          <div className="c h-28 !my-auto">
-            <p>Cannot load projects</p>
+          <div className="c min-h-[200px] h-full">
+            <p className="-mt-14">Cannot load projects</p>
           </div>
         )
       ) : (
-        <div className="c h-28 !my-auto">
-          <p>No projects</p>
+        <div className="c min-h-[200px] h-full">
+          <p className="-mt-14">No projects</p>
         </div>
       )}
     </div>

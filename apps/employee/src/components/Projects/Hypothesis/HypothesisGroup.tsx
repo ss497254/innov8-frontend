@@ -16,7 +16,15 @@ export const HypothesisGroup: React.FC<props> = () => {
     <div className="space-y-5 py-4">
       <h2>Hypothesis</h2>
       {hypotheses.map((id) => (
-        <HypothesisInput key={id} id={id} hMap={mp.current.get(id)!} />
+        <HypothesisInput
+          key={id}
+          id={id}
+          hMap={mp.current.get(id)!}
+          onDelete={() => {
+            mp.current.delete(id);
+            setHypotheses(hypotheses.filter((x) => x != id));
+          }}
+        />
       ))}
       <Button
         title=""
@@ -36,9 +44,11 @@ export const HypothesisGroup: React.FC<props> = () => {
         loading={loading}
         onClick={async () => {
           const data = [...mp.current.values()].map((x) => {
+            if (!x.get("hypothesis")) return;
+
             const h: Record<string, string> = {};
             for (let [key, value] of x) {
-              h[key] = value;
+              if (value) h[key] = value;
             }
             return h;
           });

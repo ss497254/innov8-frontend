@@ -27,13 +27,17 @@ const Home: NextPageWithLayout = () => {
           name="Idea screening"
           color="bg-violet-300"
           url="/employee/projects"
-          filter={(x) => x.status !== "rating-completed"}
+          filter={(x) =>
+            x.status !== "coach-assign" && x.status !== "coach-review"
+          }
         />
         <ProjectStageContainer
           name="Bussiness idea validation"
           color="bg-orange-300"
           url="/employee/projects"
-          filter={(x) => x.status === "rating-completed"}
+          filter={(x) =>
+            x.status === "coach-assign" || x.status === "coach-review"
+          }
         />
       </div>
     </div>
