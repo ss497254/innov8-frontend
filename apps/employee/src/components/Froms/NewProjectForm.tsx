@@ -17,7 +17,7 @@ export const NewProjectForm: React.FC<NewProjectFormProps> = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<ProjectType>({ values: { leaderId: user!.id } as any });
+  } = useForm<ProjectType>();
   const [submitType, setSubmitType] = useState<"draft" | "submit" | "">("");
   const { run, loading } = useApi("POST", "/employee/projects");
 

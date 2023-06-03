@@ -8,12 +8,12 @@ export interface ProjectType {
   captureValue: string;
   teamOverview: string;
   teamMembers: UserType[];
-  leaderId: UserType["id"];
   slideLink: string;
   files: string[];
-  createdAt: string;
+  updateAt: number;
   judge?: UserType;
   status?:
+    | "idea-generation"
     | "judge-assign"
     | "judge-review"
     | "rating-completed"

@@ -1,13 +1,8 @@
-import { Badge, Button, IconButton } from "common/src/ui";
-import {
-  EditIcon,
-  CommentsIcon,
-  PaperClipIcon,
-  FullscreenIcon,
-} from "common/src/icons";
+import { EditIcon, FullscreenIcon } from "common/src/icons";
+import { Badge, IconButton } from "common/src/ui";
+import Link from "next/link";
 import React from "react";
 import { ProjectType } from "../../types";
-import Link from "next/link";
 import { StatusBadgeMap } from "./StatusBadgeType";
 
 export interface ProjectCardProps extends ProjectType {
@@ -19,6 +14,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   name,
   elevatorPitch,
   edit,
+  updateAt,
   status,
 }) => {
   return (
@@ -39,27 +35,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           </Link>
         )}
       </div>
-      {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
       <p className="h-20 overflow-hidden text-ellipsis leading-5 text-sm">
         {elevatorPitch}
       </p>
       <div className="f space-x-2">
-        <Button
-          size="sm"
-          btn="none"
-          className="!rounded-full hover:bg-dark-200"
-        >
-          <PaperClipIcon className="mr-2" />
-          {Math.floor(Math.random() * 10)} files
-        </Button>
-        <Button
-          size="sm"
-          btn="none"
-          className="!rounded-full hover:bg-dark-200"
-        >
-          <CommentsIcon className="mr-2" />
-          {Math.floor(Math.random() * 10)} comments
-        </Button>
+        {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
+        <div className="flex-1 text-right">
+          {new Date(updateAt * 1000).toDateString()}
+        </div>
       </div>
     </div>
   );

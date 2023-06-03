@@ -2,7 +2,7 @@ import { IconButton, Spinner } from "common";
 import { ThreeDotsIcon } from "common/src/icons";
 import { ProjectType, ResponseType } from "common/src/types";
 import React from "react";
-import useSWRImmutable from "swr/immutable";
+import useSWR from "swr";
 import { ProjectCard } from "./ProjectCard";
 
 interface ProjectStageContainerProps extends React.PropsWithChildren {
@@ -20,8 +20,13 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
   edit = false,
   filter,
 }) => {
-  const { data: res, isLoading } =
-    useSWRImmutable<ResponseType<ProjectType[]>>(url);
+  const { data: res, isLoading } = useSWR<ResponseType<ProjectType[]>>(url);
+
+  let projects: ProjectType[] = [];
+
+  if (res?.success && res?.data)
+    if (filter) projects = res.data.filter(filter);
+    else projects = res.data;
 
   return (
     <div className="flex-1 p-6 bg-white rounded-md space-y-4">
@@ -37,16 +42,18 @@ export const ProjectStageContainer: React.FC<ProjectStageContainerProps> = ({
         <div className="c">
           <Spinner />
         </div>
-      ) : (
-        (res &&
-          res.success &&
-          (filter ? res.data.filter(filter) : res.data).map((project, idx) => (
-            <ProjectCard key={idx} {...project} edit={edit} />
-          ))) || (
+      ) : projects.length ? (
+        projects.map((project, idx) => (
+          <ProjectCard key={idx} {...project} edit={edit} />
+        )) || (
           <div className="c h-28 !my-auto">
             <p>Cannot load projects</p>
           </div>
         )
+      ) : (
+        <div className="c h-28 !my-auto">
+          <p>No projects</p>
+        </div>
       )}
     </div>
   );
