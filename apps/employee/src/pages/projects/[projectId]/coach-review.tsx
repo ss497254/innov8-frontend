@@ -14,7 +14,7 @@ import useSWR from "swr";
 const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/employee/projects/${query.projectId}`
+    query.projectId && `/employee/projects/idea-validation/${query.projectId}`
   );
 
   return (
@@ -48,6 +48,23 @@ const ProjectView: NextPageWithLayout = () => {
         >
           {res?.data.slideLink}
         </ProjectField>
+        <div className="!-mb-6 font-semibold">Team Members</div>
+        <div className="f jb items-end">
+          <div className="f">
+            {res?.data.teamMembers?.map((member, idx) => (
+              <Avatar
+                size={40}
+                key={idx}
+                className="mt-2"
+                src={member.avatarUrl}
+              />
+            ))}
+          </div>
+          <h4 className="text-lg">
+            {res?.data.updatedAt &&
+              new Date(res?.data.updatedAt).toDateString()}
+          </h4>
+        </div>
         <div className="border border-gray-300 rounded-md p-5 space-y-4">
           <h4>Coach assigned</h4>
           <h3 className="f ic">

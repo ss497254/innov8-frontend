@@ -6,6 +6,7 @@ import {
   ResponseType,
 } from "common/src/types";
 import { Button, ProjectField, StarRating } from "common/src/ui";
+import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
@@ -95,6 +96,23 @@ const RatingCompleted: NextPageWithLayout = () => {
           >
             Business Idea Validation
           </Button>
+        </div>
+        <div className="!-mb-6 font-semibold">Team Members</div>
+        <div className="f jb items-end">
+          <div className="f">
+            {res?.data.teamMembers?.map((member, idx) => (
+              <Avatar
+                size={40}
+                key={idx}
+                className="mt-2"
+                src={member.avatarUrl}
+              />
+            ))}
+          </div>
+          <h4 className="text-lg">
+            {res?.data.updatedAt &&
+              new Date(res?.data.updatedAt).toDateString()}
+          </h4>
         </div>
       </div>
     </div>
