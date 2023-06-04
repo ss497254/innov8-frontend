@@ -1,40 +1,24 @@
-import { useApi } from "common/src/hooks/useApi";
-import { showToast } from "common/src/lib/showToast";
 import {
   NextPageWithLayout,
   ProjectType,
   ResponseType,
-  UserType,
 } from "common/src/types";
-import { Button, ProjectField } from "common/src/ui";
+import { ProjectField } from "common/src/ui";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { AssignCoach } from "src/components/Projects/AssignCoach";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
-const ReviewProject: NextPageWithLayout = () => {
+const CoachAssign: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [coach, setCoach] = useState<UserType>();
-
-  const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/admin/projects/idea-validation/${query.projectId}`,
-    {
-      onSuccess: (res) => {
-        //@ts-ignore
-        setCoach(res?.data.coach);
-      },
-    }
-  );
-  const { run, loading } = useApi(
-    "POST",
-    `/admin/projects/idea-validation/${query.projectId}/add-coach`
+  const { data: res } = useSWRImmutable<ResponseType<ProjectType>>(
+    query.projectId && `/employee/projects/idea-validation/${query.projectId}`
   );
 
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
-        <h3>Project Review</h3>
+        <h3>Coach Assign</h3>
+        <div className="!mt-0 text-lg">Admin will assign coach</div>
         <ProjectField heading="Project Name" headingClassName="md:text-lg">
           {res?.data.name}
         </ProjectField>
@@ -62,29 +46,13 @@ const ReviewProject: NextPageWithLayout = () => {
         >
           {res?.data.slideLink}
         </ProjectField>
-        <AssignCoach value={coach} onChange={setCoach} />
-        <div className="f space-x-4 justify-end">
-          <Button
-            btn="success"
-            loading={loading}
-            className="w-full"
-            onClick={async () => {
-              const res = await run({ body: JSON.stringify({ coach }) });
-              if (res && res.success)
-                showToast("success", "Email added successfully", res.message);
-              else showToast("error", "Unable to add email", res.error);
-            }}
-          >
-            Save
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
 
-ReviewProject.getLayout = (page) => (
+CoachAssign.getLayout = (page) => (
   <AuthenticatedRoute>{page}</AuthenticatedRoute>
 );
 
-export default ReviewProject;
+export default CoachAssign;

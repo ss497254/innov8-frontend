@@ -8,7 +8,7 @@ import { ProjectSummaryCard } from "./ProjectSummaryCard";
 interface ProjectStatusGroupProps extends React.PropsWithChildren {
   name: string;
   url: string;
-  filter: (x: ProjectType) => boolean;
+  filter?: (x: ProjectType) => boolean;
 }
 
 export const ProjectStatusGroup: React.FC<ProjectStatusGroupProps> = ({

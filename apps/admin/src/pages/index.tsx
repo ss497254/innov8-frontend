@@ -23,15 +23,12 @@ const Home: NextPageWithLayout = () => {
       />
       <ProjectStatusGroup
         name={tabs[2]}
-        filter={(x) =>
-          x.status !== "coach-review" && x.status !== "judge-assign"
-        }
         url="/admin/projects"
+        filter={(x) => x.status !== "judge-assign"}
       />
       <ProjectStatusGroup
         name={tabs[3]}
-        filter={(x) => x.status === "coach-review"}
-        url="/admin/projects"
+        url="/admin/projects/idea-validation"
       />
     </div>
   );
