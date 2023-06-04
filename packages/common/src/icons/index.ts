@@ -21,6 +21,7 @@ export * from "./LogoutIcon";
 export * from "./MessagesIcon";
 export * from "./NewIcon";
 export * from "./NotificationIcon";
+export * from "./OfficeIcon";
 export * from "./PaperClipIcon";
 export * from "./PlusIcon";
 export * from "./ProfileIcon";
