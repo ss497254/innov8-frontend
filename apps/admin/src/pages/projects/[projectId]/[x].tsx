@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
 
-const JudgeReview: NextPageWithLayout = () => {
+const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { data: res } = useSWR<ResponseType<ProjectType>>(
     query.projectId && `/admin/projects/${query.projectId}`
@@ -58,13 +58,30 @@ const JudgeReview: NextPageWithLayout = () => {
             {res?.data.judge?.firstName + " " + res?.data.judge?.lastName}
           </h3>
         </div>
+        <div className="!-mb-6 font-semibold">Team Members</div>
+        <div className="f jb items-end">
+          <div className="f">
+            {res?.data.teamMembers?.map((member, idx) => (
+              <Avatar
+                size={40}
+                key={idx}
+                className="mt-2"
+                src={member.avatarUrl}
+              />
+            ))}
+          </div>
+          <h4 className="text-lg">
+            {res?.data.updatedAt &&
+              new Date(res?.data.updatedAt).toDateString()}
+          </h4>
+        </div>
       </div>
     </div>
   );
 };
 
-JudgeReview.getLayout = (page) => (
+ProjectView.getLayout = (page) => (
   <AuthenticatedRoute>{page}</AuthenticatedRoute>
 );
 
-export default JudgeReview;
+export default ProjectView;

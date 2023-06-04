@@ -1,35 +1,18 @@
-import { useApi } from "common/src/hooks/useApi";
-import { showToast } from "common/src/lib/showToast";
 import {
   NextPageWithLayout,
   ProjectType,
   ResponseType,
-  UserType,
 } from "common/src/types";
-import { Button, ProjectField } from "common/src/ui";
+import { ProjectField } from "common/src/ui";
 import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { AssignCoach } from "src/components/Projects/AssignCoach";
 import useSWR from "swr";
 
-const ReviewProject: NextPageWithLayout = () => {
+const CoachReview: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [coach, setCoach] = useState<UserType>();
-
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/admin/projects/idea-validation/${query.projectId}`,
-    {
-      onSuccess: (res) => {
-        //@ts-ignore
-        setCoach(res?.data.coach);
-      },
-    }
-  );
-  const { run, loading } = useApi(
-    "POST",
-    `/admin/projects/idea-validation/${query.projectId}/add-coach`
+    query.projectId && `/admin/projects/idea-validation/${query.projectId}`
   );
 
   return (
@@ -63,6 +46,17 @@ const ReviewProject: NextPageWithLayout = () => {
         >
           {res?.data.slideLink}
         </ProjectField>
+        <div className="border rounded-md p-5 space-y-4">
+          <h4>Judge assigned</h4>
+          <h3 className="f ic">
+            <Avatar
+              size={50}
+              src={res?.data.judge?.avatarUrl}
+              className="mr-4"
+            />
+            {res?.data.judge?.firstName + " " + res?.data.judge?.lastName}
+          </h3>
+        </div>
         <div className="!-mb-6 font-semibold">Team Members</div>
         <div className="f jb items-end">
           <div className="f">
@@ -80,29 +74,13 @@ const ReviewProject: NextPageWithLayout = () => {
               new Date(res?.data.updatedAt).toDateString()}
           </h4>
         </div>
-        <AssignCoach value={coach} onChange={setCoach} />
-        <div className="f space-x-4 justify-end">
-          <Button
-            btn="success"
-            loading={loading}
-            className="w-full"
-            onClick={async () => {
-              const res = await run({ body: JSON.stringify({ coach }) });
-              if (res && res.success)
-                showToast("success", "Email added successfully", res.message);
-              else showToast("error", "Unable to add email", res.error);
-            }}
-          >
-            Save
-          </Button>
-        </div>
       </div>
     </div>
   );
 };
 
-ReviewProject.getLayout = (page) => (
+CoachReview.getLayout = (page) => (
   <AuthenticatedRoute>{page}</AuthenticatedRoute>
 );
 
-export default ReviewProject;
+export default CoachReview;

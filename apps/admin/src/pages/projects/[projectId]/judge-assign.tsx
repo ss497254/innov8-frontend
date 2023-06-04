@@ -7,6 +7,7 @@ import {
   UserType,
 } from "common/src/types";
 import { Button, ProjectField } from "common/src/ui";
+import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
@@ -64,6 +65,23 @@ const ReviewProject: NextPageWithLayout = () => {
         >
           {res?.data.slideLink}
         </ProjectField>
+        <div className="!-mb-6 font-semibold">Team Members</div>
+        <div className="f jb items-end">
+          <div className="f">
+            {res?.data.teamMembers?.map((member, idx) => (
+              <Avatar
+                size={40}
+                key={idx}
+                className="mt-2"
+                src={member.avatarUrl}
+              />
+            ))}
+          </div>
+          <h4 className="text-lg">
+            {res?.data.updatedAt &&
+              new Date(res?.data.updatedAt).toDateString()}
+          </h4>
+        </div>
         <AssignJudge value={judge} onChange={setJudge} />
         <div className="f space-x-4 justify-end">
           <Button
