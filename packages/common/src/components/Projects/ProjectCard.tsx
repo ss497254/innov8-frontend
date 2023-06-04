@@ -20,7 +20,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   return (
     <div className="bg-white rounded-2xl p-4 space-y-4 shadow-md border">
       <div className="f jb ic">
-        <h4>{name}</h4>
+        <p className="text-lg leading-6 font-semibold">{name}</p>
         {edit ? (
           <Link href={`/projects/${id}/edit-project`}>
             <IconButton className="!p-1">
@@ -40,7 +40,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       </p>
       <div className="f space-x-2">
         {status && <Badge type={StatusBadgeMap[status]}>{status}</Badge>}
-        <div className="flex-1 text-right">
+        <div className="flex-1 text-sm font-medium text-right">
           {new Date(updatedAt).toDateString()}
         </div>
       </div>

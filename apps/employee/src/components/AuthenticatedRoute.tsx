@@ -2,6 +2,7 @@ import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
   DashboardIcon,
   EditIcon,
+  MessagesIcon,
   OfficeIcon,
   ProfileIcon,
   ProjectIcon,
@@ -20,14 +21,14 @@ export const items = [
         title: "Projects",
       },
       {
-        href: "/my-tasks",
-        icon: <EditIcon size={26} />,
-        title: "My Tasks",
+        href: "/interview",
+        icon: <OfficeIcon size={28} className="py-0.5" />,
+        title: "Interviews",
       },
       {
-        href: "/interview",
-        icon: <OfficeIcon size={26} className="py-0.5" />,
-        title: "Interviews",
+        href: "/messages",
+        icon: <MessagesIcon size={26} />,
+        title: "Messages",
       },
     ],
   },

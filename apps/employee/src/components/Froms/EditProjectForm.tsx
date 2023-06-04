@@ -24,9 +24,12 @@ export const EditProjectForm: React.FC<EditProjectFormProps> = () => {
   } = useForm();
 
   const { data: res, isLoading } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/employee/projects/drafts/${query.projectId}`
+    query.projectId && `/employee/projects/idea-generation/${query.projectId}`
   );
-  const { run, loading } = useApi("PUT", "/employee/projects/");
+  const { run, loading } = useApi(
+    "PUT",
+    "/employee/projects/" + query.projectId
+  );
 
   useEffect(() => {
     Object.keys(res?.data || {}).map((key) =>

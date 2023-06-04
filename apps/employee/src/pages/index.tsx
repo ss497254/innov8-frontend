@@ -16,7 +16,7 @@ const Home: NextPageWithLayout = () => {
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-8 max-w-7xl mx-auto gap-6 flex-wrap">
         <ProjectStageContainer
           edit
           name="Idea generation"

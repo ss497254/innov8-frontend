@@ -21,7 +21,7 @@ export const Badge: React.FC<BadgeProps> = ({ children, className, type }) => {
       className={[
         className,
         BadgeTypes[type],
-        "text-sm uppercase font-medium inline-block mr-2 px-2.5 py-0.5 rounded-full",
+        "text-sm uppercase font-medium h-fit w-fit mr-2 px-2.5 py-0.5 rounded-full",
       ].join(" ")}
     >
       {children}
