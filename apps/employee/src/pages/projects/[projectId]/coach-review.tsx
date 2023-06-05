@@ -76,7 +76,10 @@ const ProjectView: NextPageWithLayout = () => {
             {res?.data.coach?.firstName + " " + res?.data.coach?.lastName}
           </h3>
         </div>
-        <HypothesisGroup projectId={query.projectId as string} />
+        <HypothesisGroup
+          projectId={query.projectId as string}
+          projectName={res?.data.name!}
+        />
       </div>
     </div>
   );

@@ -7,11 +7,15 @@ import { showToast } from "common/src/lib/showToast";
 
 interface props {
   projectId: string;
+  projectName: string;
 }
 
-export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
+export const HypothesisGroup: React.FC<props> = ({
+  projectId,
+  projectName,
+}) => {
   const [hypotheses, setHypotheses] = useState([1]);
-  const { loading, run } = useApi("POST", "/employee/hypothesis/" + projectId);
+  const { loading, run } = useApi("POST", "/employee/hypotheses/" + projectId);
   const mp = useRef(new Map<number, Map<string, string>>().set(1, new Map()));
 
   return (
@@ -61,7 +65,9 @@ export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
               return h;
             });
 
-          const res = await run({ body: JSON.stringify({ hypotheses }) });
+          const res = await run({
+            body: JSON.stringify({ hypotheses, projectName }),
+          });
           if (res && res.success)
             showToast("success", "Hypothesis added successfully", res.message);
           else showToast("error", "Unable to add Hypothesis", res.error);
