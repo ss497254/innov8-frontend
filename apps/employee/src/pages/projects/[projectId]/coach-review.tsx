@@ -1,4 +1,3 @@
-import { useApi } from "common/src/hooks/useApi";
 import {
   NextPageWithLayout,
   ProjectType,
@@ -8,13 +7,18 @@ import { ProjectField } from "common/src/ui";
 import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { HypothesisGroup } from "src/components/Projects/Hypothesis";
+import {
+  HypothesisGroup,
+  HypothesisTable,
+} from "src/components/Projects/Hypothesis";
 import useSWR from "swr";
 
 const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const projectId = query.projectId as string;
+
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/employee/projects/idea-validation/${query.projectId}`
+    projectId && `/employee/projects/idea-validation/${projectId}`
   );
 
   return (
@@ -76,7 +80,11 @@ const ProjectView: NextPageWithLayout = () => {
             {res?.data.coach?.firstName + " " + res?.data.coach?.lastName}
           </h3>
         </div>
-        <HypothesisGroup projectId={query.projectId as string} />
+        {res?.data.hasHypotheses ? (
+          <HypothesisTable projectId={projectId} />
+        ) : (
+          <HypothesisGroup projectId={projectId} />
+        )}
       </div>
     </div>
   );

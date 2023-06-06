@@ -13,6 +13,7 @@ export interface ProjectType {
   updatedAt: number;
   judge?: UserType;
   coach?: UserType;
+  hasHypotheses?: boolean;
   status?:
     | "draft"
     | "judge-assign"
