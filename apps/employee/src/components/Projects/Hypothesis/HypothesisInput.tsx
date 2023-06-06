@@ -5,7 +5,7 @@ import { HypothesisQuestion } from "./HypothesisQuestion";
 
 interface props {
   id: number;
-  hMap: Map<string, string>;
+  hMap: Map<number | string, string>;
 }
 
 export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
@@ -24,7 +24,7 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
           key={id}
           id={id}
           onChange={(rule) => {
-            hMap.set("question_" + id, rule);
+            hMap.set(id, rule);
           }}
         />
       ))}
@@ -43,7 +43,7 @@ export const HypothesisInput: React.FC<props> = ({ id, hMap }) => {
             className="text-red-500 bg-gray-100 hover:bg-red-100"
             onClick={() => {
               const last = questions.length;
-              hMap.delete("question_" + last);
+              hMap.delete(last);
               setQuestions(questions.filter((x) => x != last));
             }}
           >

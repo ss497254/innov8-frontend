@@ -12,7 +12,9 @@ interface props {
 export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
   const [hypotheses, setHypotheses] = useState([1]);
   const { loading, run } = useApi("POST", "/employee/hypotheses/" + projectId);
-  const mp = useRef(new Map<number, Map<string, string>>().set(1, new Map()));
+  const mp = useRef(
+    new Map<number, Map<number | string, string>>().set(1, new Map())
+  );
 
   const addHypothesis = useCallback(() => {
     setHypotheses((x) => {
@@ -57,12 +59,12 @@ export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
           const hypotheses = [...mp.current.values()]
             .filter((x) => x.get("hypothesis"))
             .map((x) => {
-              const h: Record<string, string> = {};
+              const questions: string[] = [];
 
               for (let [key, value] of x) {
-                if (value) h[key] = value;
+                if (key !== "hypothesis" && value) questions.push(value);
               }
-              return h;
+              return { questions, hypothesis: x.get("hypothesis") };
             });
 
           const res = await run({
