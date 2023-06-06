@@ -42,8 +42,8 @@ export const HypothesisTable: React.FC<props> = ({
           <div
             key={idx}
             className={[
-              "border p-5 rounded-md r cursor-pointer border-gray-300",
-              active ? "bg-blue-100 border border-blue-500" : "",
+              "border p-5 rounded-md r cursor-pointer",
+              active ? "bg-blue-100 border-blue-500" : "border-gray-300",
             ].join(" ")}
             onClick={() => {
               if (active)
@@ -55,7 +55,6 @@ export const HypothesisTable: React.FC<props> = ({
             }}
           >
             <h4>{h.hypothesis}</h4>
-
             <div className="font-medium space-y-2 mt-5">
               {h.questions.map((q: string, idx: number) => (
                 <p key={idx}>

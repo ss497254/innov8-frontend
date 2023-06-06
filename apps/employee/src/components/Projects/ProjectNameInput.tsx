@@ -56,7 +56,7 @@ export const ProjectNameInput: React.FC<ProjectNameInputProps> = ({
           </div>
         ) : error ? (
           <div className="c min-h-[200px] h-full">
-            <p className="-mt-14">Cannot load projects</p>
+            <p>Cannot load projects</p>
           </div>
         ) : res?.data.length ? (
           res?.data.map((project, idx) => (

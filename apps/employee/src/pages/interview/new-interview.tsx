@@ -2,31 +2,21 @@ import { Button, NextPageWithLayout, ProjectType } from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { Avatar } from "common/src/ui/User";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { ProjectNameInput } from "src/components/Projects/ProjectNameInput";
 import { HypothesisTable } from "src/components/Projects/Hypotheses";
+import { ProjectNameInput } from "src/components/Projects/ProjectNameInput";
 
 const Interview: NextPageWithLayout = () => {
-  const [hypothesis, setHypothesis] = useState([]);
+  const [hypotheses, setHypotheses] = useState([]);
 
   const [project, setProject] = useState<ProjectType>();
-  const { run, loading } = useApi("POST", "/employee/interview");
-
-  const onSubmitProvider = useCallback(async () => {
-    const res = await run({
-      body: JSON.stringify({ hypothesis, id: project?.id, ...project }),
-    });
-
-    if (res && res.success)
-      showToast("success", "Project submitted as", res.message);
-    else showToast("error", "Unable to submit project", res.error);
-  }, []);
+  const { run, loading } = useApi("POST", "/employee/interviews/");
 
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
       <div className="my-4 md:bg-white md:rounded-md md:shadow-xl md:p-8">
-        <h1>New project form</h1>
+        <h1>New interview</h1>
         <div className="mt-2 py-4 space-y-6">
           <ProjectNameInput onChange={setProject} value={project} />
           {project && (
@@ -59,8 +49,8 @@ const Interview: NextPageWithLayout = () => {
               </div>
               <HypothesisTable
                 projectId={project.id}
-                value={hypothesis}
-                onChange={setHypothesis}
+                value={hypotheses}
+                onChange={setHypotheses}
                 desc="Click on Hypothesis to select"
               />
             </>
@@ -72,7 +62,16 @@ const Interview: NextPageWithLayout = () => {
               btn="success"
               loading={loading}
               className="mx-auto w-full my-4"
-              onClick={onSubmitProvider}
+              onClick={async () => {
+                const res = await run({
+                  body: JSON.stringify({ hypotheses, ...project }),
+                  parameter: project?.id,
+                });
+
+                if (res && res.success)
+                  showToast("success", "Project submitted as", res.message);
+                else showToast("error", "Unable to submit project", res.error);
+              }}
             >
               Submit
             </Button>
