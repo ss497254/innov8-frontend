@@ -4,7 +4,7 @@ import { PageTopBar, InterviewsTable } from "common/src/components";
 import Link from "next/link";
 import { useState } from "react";
 
-const tabs = ["Overview", "Past", "New"];
+const tabs = ["Overview", "New", "Past"];
 
 const Interview: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -12,9 +12,9 @@ const Interview: NextPageWithLayout = () => {
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
       <PageTopBar
-        heading="Interview"
+        heading="Interviews"
         rightChildren={
-          <Link href="/interview/new-interview">
+          <Link href="/interviews/new-interview">
             <Button btn="accent">New interview</Button>
           </Link>
         }

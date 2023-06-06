@@ -21,7 +21,7 @@ export const items = [
         title: "Projects",
       },
       {
-        href: "/interview",
+        href: "/interviews",
         icon: <OfficeIcon size={28} className="py-0.5" />,
         title: "Interviews",
       },

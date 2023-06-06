@@ -69,8 +69,9 @@ const Interview: NextPageWithLayout = () => {
                 });
 
                 if (res && res.success)
-                  showToast("success", "Project submitted as", res.message);
-                else showToast("error", "Unable to submit project", res.error);
+                  showToast("success", "Interview submitted", res.message);
+                else
+                  showToast("error", "Unable to submit interview", res.error);
               }}
             >
               Submit
