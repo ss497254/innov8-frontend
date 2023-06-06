@@ -1,3 +1,4 @@
+import { HypothesisTable } from "common/src/components";
 import {
   NextPageWithLayout,
   ProjectType,
@@ -75,6 +76,11 @@ const ProjectView: NextPageWithLayout = () => {
               new Date(res?.data.updatedAt).toDateString()}
           </h4>
         </div>
+        {res?.data.hasHypotheses ? (
+          <HypothesisTable projectId={query.projectId as string} />
+        ) : (
+          <h4>Project don't have hypotheses</h4>
+        )}
       </div>
     </div>
   );

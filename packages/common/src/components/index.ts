@@ -4,3 +4,4 @@ export * from "./Projects";
 export * from "./GoogleAuthButton";
 export * from "./Forms";
 export * from "./PageTopBar";
+export * from "./Hypotheses";
