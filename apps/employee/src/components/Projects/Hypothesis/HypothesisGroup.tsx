@@ -7,16 +7,21 @@ import { showToast } from "common/src/lib/showToast";
 
 interface props {
   projectId: string;
-  projectName: string;
 }
 
-export const HypothesisGroup: React.FC<props> = ({
-  projectId,
-  projectName,
-}) => {
+export const HypothesisGroup: React.FC<props> = ({ projectId }) => {
   const [hypotheses, setHypotheses] = useState([1]);
   const { loading, run } = useApi("POST", "/employee/hypotheses/" + projectId);
   const mp = useRef(new Map<number, Map<string, string>>().set(1, new Map()));
+
+  const addHypothesis = useCallback(() => {
+    setHypotheses((x) => {
+      mp.current.set(x.length + 1, new Map());
+      return [...x, x.length + 1];
+    });
+  }, []);
+
+  if (!projectId) return null;
 
   return (
     <div className="space-y-5 py-4">
@@ -27,12 +32,7 @@ export const HypothesisGroup: React.FC<props> = ({
       <div className="md:flex space-y-2 md:space-y-0 jb">
         <Button
           className="!px-4 !rounded-md relative custom-top-bar"
-          onClick={useCallback(() => {
-            setHypotheses((x) => {
-              mp.current.set(x.length + 1, new Map());
-              return [...x, x.length + 1];
-            });
-          }, [])}
+          onClick={addHypothesis}
         >
           + Add Hypothesis
         </Button>
@@ -66,7 +66,7 @@ export const HypothesisGroup: React.FC<props> = ({
             });
 
           const res = await run({
-            body: JSON.stringify({ hypotheses, projectName }),
+            body: JSON.stringify({ hypotheses }),
           });
           if (res && res.success)
             showToast("success", "Hypothesis added successfully", res.message);

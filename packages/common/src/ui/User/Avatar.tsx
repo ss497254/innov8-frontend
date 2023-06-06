@@ -11,9 +11,9 @@ export const Avatar: React.FC<AvatarProps> = ({
   className,
   ...props
 }) => {
-  const [imageError, setImageError] = useState(!src);
+  const [imageError, setImageError] = useState(false);
 
-  if (imageError) return <ProfileIcon size={size} className={className} />;
+  if (imageError || !src) return <ProfileIcon size={size} className={className} />;
 
   return (
     <img
