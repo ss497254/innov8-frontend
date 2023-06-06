@@ -1,4 +1,4 @@
-import { HypothesisTable } from "common/src/components";
+import { HypothesisTable } from "src/components/Projects/HypothesisTable";
 import {
   NextPageWithLayout,
   ProjectType,

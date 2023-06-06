@@ -7,7 +7,10 @@ import { ProjectField } from "common/src/ui";
 import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { HypothesisGroup, HypothesisTable } from "common/src/components";
+import {
+  HypothesisGroup,
+  HypothesisTable,
+} from "src/components/Projects/Hypotheses";
 import useSWR from "swr";
 
 const ProjectView: NextPageWithLayout = () => {

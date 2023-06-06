@@ -1,3 +1,4 @@
+import { TickIcon } from "common/src/icons";
 import { ResponseType } from "common/src/types";
 import { Spinner } from "common/src/ui";
 import React from "react";
@@ -5,9 +6,17 @@ import useSWR from "swr/immutable";
 
 interface props {
   projectId: string;
+  value?: any[];
+  onChange?: any;
+  desc?: string;
 }
 
-export const HypothesisTable: React.FC<props> = ({ projectId }) => {
+export const HypothesisTable: React.FC<props> = ({
+  projectId,
+  value,
+  onChange,
+  desc,
+}) => {
   const {
     data: res,
     isLoading,
@@ -18,7 +27,8 @@ export const HypothesisTable: React.FC<props> = ({ projectId }) => {
 
   return (
     <div className="space-y-5 py-4">
-      <h2>Hypothesis</h2>
+      <h2>Hypotheses</h2>
+      {desc && <p className="!mt-1 text-lg">{desc}</p>}
       {isLoading ? (
         <div className="c min-h-[200px] h-full">
           <Spinner size={28} className="-mt-14" />
@@ -28,8 +38,22 @@ export const HypothesisTable: React.FC<props> = ({ projectId }) => {
           <p className="-mt-14">Cannot load hypotheses</p>
         </div>
       ) : res?.data.hypotheses.length ? (
-        res?.data.hypotheses.map((h, idx) => (
-          <div key={idx} className="border p-5 rounded border-gray-300">
+        res?.data.hypotheses.map((h, idx, _, active = value?.includes(h)) => (
+          <div
+            key={idx}
+            className={[
+              "border p-5 rounded-md r cursor-pointer border-gray-300",
+              active ? "bg-blue-100 border border-blue-500" : "",
+            ].join(" ")}
+            onClick={() => {
+              if (active)
+                onChange?.(
+                  value?.filter((x) => x.hypothesis != h.hypothesis) || []
+                );
+              else if (value?.length) onChange?.([...value, h]);
+              else onChange?.([h]);
+            }}
+          >
             <h4>{h.hypothesis}</h4>
 
             <div className="font-medium space-y-2 mt-5">
@@ -39,6 +63,12 @@ export const HypothesisTable: React.FC<props> = ({ projectId }) => {
                 </p>
               ))}
             </div>
+            {active && (
+              <TickIcon
+                className="absolute bottom-2 right-2 text-blue-500"
+                size={24}
+              />
+            )}
           </div>
         ))
       ) : (
