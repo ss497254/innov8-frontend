@@ -15,9 +15,8 @@ const tabs = ["All", "Drafts", "In progress", "Completed"];
 const Projects: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
-  const { data: res, isLoading } = useSWR<ResponseType<ProjectType[]>>(
-    "/employee/projects/screening"
-  );
+  const { data: res, isLoading } =
+    useSWR<ResponseType<ProjectType[]>>("/employee/projects");
 
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">

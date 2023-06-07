@@ -37,7 +37,7 @@ const InterviewForm: NextPageWithLayout = () => {
   );
   const { run, loading } = useApi(
     "POST",
-    `/coach/project-score/${res?.data.projectId}`
+    `/coach/project-score/${interviewId}`
   );
 
   return (
@@ -74,6 +74,8 @@ const InterviewForm: NextPageWithLayout = () => {
                         className="ml-auto scale-[65%]"
                         value={score.current[idx]?.hypothesis[qIdx]}
                         setValue={(x) => {
+                          if (!score.current[idx]) return;
+
                           score.current[idx].hypothesis[qIdx] = x;
                           render(-1 * trigger);
                         }}
