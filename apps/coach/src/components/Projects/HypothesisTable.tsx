@@ -21,11 +21,11 @@ export const HypothesisTable: React.FC<props> = ({ projectId }) => {
       <h2>Hypothesis</h2>
       {isLoading ? (
         <div className="c min-h-[200px] h-full">
-          <Spinner size={28} className="-mt-14" />
+          <Spinner size={28} />
         </div>
       ) : error ? (
         <div className="c min-h-[200px] h-full">
-          <p className="-mt-14">Cannot load hypotheses</p>
+          <p>Cannot load hypotheses</p>
         </div>
       ) : res?.data.hypotheses.length ? (
         res?.data.hypotheses.map((h, idx) => (
@@ -43,7 +43,7 @@ export const HypothesisTable: React.FC<props> = ({ projectId }) => {
         ))
       ) : (
         <div className="c min-h-[200px] h-full">
-          <p className="-mt-14">No hypotheses</p>
+          <p>No hypotheses</p>
         </div>
       )}
     </div>

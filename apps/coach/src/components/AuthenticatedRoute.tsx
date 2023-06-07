@@ -1,6 +1,7 @@
 import { AppLayout, ProtectedRoute } from "common/src/components";
 import {
   DashboardIcon,
+  OfficeIcon,
   ProfileIcon,
   ProjectIcon,
   SettingsIcon,
@@ -16,6 +17,11 @@ export const items = [
         href: "/projects",
         icon: <ProjectIcon size={22} />,
         title: "Projects",
+      },
+      {
+        href: "/interviews",
+        icon: <OfficeIcon size={28} className="py-0.5" />,
+        title: "Interviews",
       },
       { href: "/profile", icon: <ProfileIcon size={24} />, title: "Profile" },
       {
