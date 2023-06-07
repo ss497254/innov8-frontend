@@ -1,4 +1,4 @@
-import { Button, NextPageWithLayout, TabButtons } from "common";
+import { Button, NextPageWithLayout, TabButtons, useUserStore } from "common";
 import { InterviewsTable, PageTopBar } from "common/src/components";
 import Link from "next/link";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 const tabs = ["Overview", "New", "Past"];
 
 const Interview: NextPageWithLayout = () => {
+  const { user } = useUserStore();
   const [activeTab, setActiveTab] = useState(tabs[0]);
 
   return (
@@ -28,12 +29,18 @@ const Interview: NextPageWithLayout = () => {
       <InterviewsTable
         name="New"
         url="/employee/interviews"
-        filter={(x) => !x.completed}
+        filter={(x) => {
+          if (typeof x.isCompleted !== "undefined") return !x.isCompleted;
+          return !(x.isCompleted = x.completed?.includes(user?.id || ""));
+        }}
       />
       <InterviewsTable
         name="Completed"
         url="/employee/interviews"
-        filter={(x) => x.completed}
+        filter={(x) => {
+          if (typeof x.isCompleted !== "undefined") return x.isCompleted;
+          return (x.isCompleted = x.completed?.includes(user?.id || ""));
+        }}
       />
     </div>
   );

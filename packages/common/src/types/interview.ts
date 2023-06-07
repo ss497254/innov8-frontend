@@ -8,7 +8,8 @@ export interface InterviewType extends HypothesesType {
   projectId: string;
   teamMembers: UserType[];
   coach: UserType;
-  completed?: boolean;
+  isCompleted?:boolean;
+  completed?: UserType["id"][];
   rating?: Record<string, number>;
   updatedAt: string;
 }

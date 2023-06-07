@@ -1,5 +1,6 @@
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
+import { useUserStore } from "common/src/stores";
 import {
   InterviewType,
   NextPageWithLayout,
@@ -13,21 +14,22 @@ import {
   Textarea,
 } from "common/src/ui";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import useSWR from "swr";
-
-let score: { hypothesis: number[] }[] = [];
+import useSWR from "swr/immutable";
 
 const InterviewForm: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const { user } = useUserStore();
   const [trigger, render] = useState(1);
 
+  let score = useRef<{ hypothesis: number[] }[]>([]);
+  const interviewId = query.interviewId as string;
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
-    query.interviewId && `/employee/interviews/${query.interviewId}`,
+    interviewId && `/employee/interviews/${interviewId}`,
     {
       onSuccess: ({ data: { hypotheses } }) => {
-        score = hypotheses.map((x) => ({
+        score.current = hypotheses.map((x) => ({
           hypothesis: x.questions.map(() => 0),
         }));
       },
@@ -35,7 +37,7 @@ const InterviewForm: NextPageWithLayout = () => {
   );
   const { run, loading } = useApi(
     "POST",
-    `/employee/project-score/${query.interviewId}`
+    `/employee/project-score/${res?.data.projectId}`
   );
 
   return (
@@ -70,9 +72,9 @@ const InterviewForm: NextPageWithLayout = () => {
                       </p>
                       <StarRating
                         className="ml-auto scale-[65%]"
-                        value={score[idx]?.hypothesis[qIdx]}
+                        value={score.current[idx]?.hypothesis[qIdx]}
                         setValue={(x) => {
-                          score[idx].hypothesis[qIdx] = x;
+                          score.current[idx].hypothesis[qIdx] = x;
                           render(-1 * trigger);
                         }}
                       />
@@ -91,9 +93,9 @@ const InterviewForm: NextPageWithLayout = () => {
               loading={loading}
               className="w-full mx-auto"
               onClick={async () => {
-                console.log(score);
+                console.log(score.current);
 
-                for (let x of score) {
+                for (let x of score.current) {
                   for (let y of x.hypothesis) {
                     if (y < 1) {
                       showToast("warning", "Please complete the form.");
@@ -102,7 +104,12 @@ const InterviewForm: NextPageWithLayout = () => {
                   }
                 }
                 const res = await run({
-                  body: JSON.stringify({ score }),
+                  body: JSON.stringify({
+                    score: score.current,
+                    interviewId,
+                    userId: user?.id,
+                    role: user?.role,
+                  }),
                 });
                 if (res && res.success)
                   showToast(
