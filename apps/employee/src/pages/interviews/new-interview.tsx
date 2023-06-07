@@ -1,17 +1,19 @@
-import { Button, NextPageWithLayout, ProjectType } from "common";
+import { Button, Input, NextPageWithLayout, ProjectType } from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { Avatar } from "common/src/ui/User";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { HypothesisTable } from "src/components/Projects/Hypotheses";
 import { ProjectNameInput } from "src/components/Projects/ProjectNameInput";
 
 const Interview: NextPageWithLayout = () => {
+  const { register, handleSubmit } = useForm();
   const [hypotheses, setHypotheses] = useState([]);
 
   const [project, setProject] = useState<ProjectType>();
-  const { run, loading } = useApi("POST", "/employee/interviews/");
+  const { run, loading } = useApi("POST", "/employee/interviews");
 
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
@@ -21,6 +23,12 @@ const Interview: NextPageWithLayout = () => {
           <ProjectNameInput onChange={setProject} value={project} />
           {project && (
             <>
+              <Input
+                label="Interview Title"
+                labelClassName="text-lg font-semibold"
+                placeholder="Enter interview title"
+                {...register("interviewTitle", { required: true })}
+              />
               <h4>Coach</h4>
               <h3 className="f ic !mt-2">
                 <Avatar
@@ -62,17 +70,21 @@ const Interview: NextPageWithLayout = () => {
               btn="success"
               loading={loading}
               className="mx-auto w-full my-4"
-              onClick={async () => {
+              onClick={handleSubmit(async ({ interviewTitle }) => {
                 const res = await run({
-                  body: JSON.stringify({ hypotheses, ...project }),
-                  parameter: project?.id,
+                  body: JSON.stringify({
+                    hypotheses,
+                    ...project,
+                    projectId: project.id,
+                    interviewTitle,
+                  }),
                 });
 
                 if (res && res.success)
                   showToast("success", "Interview submitted", res.message);
                 else
                   showToast("error", "Unable to submit interview", res.error);
-              }}
+              })}
             >
               Submit
             </Button>

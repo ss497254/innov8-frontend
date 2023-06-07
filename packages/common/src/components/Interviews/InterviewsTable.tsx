@@ -1,5 +1,5 @@
 import { ThreeDotsIcon } from "common/src/icons";
-import { ProjectType, ResponseType } from "common/src/types";
+import { InterviewType, ResponseType } from "common/src/types";
 import { Badge, IconButton, Spinner } from "common/src/ui";
 import React from "react";
 import useSWR from "swr";
@@ -8,7 +8,7 @@ import { InterviewSummaryCard } from "./InterviewSummaryCard";
 interface InterviewsTableProps extends React.PropsWithChildren {
   name: string;
   url: string;
-  filter?: (x: ProjectType) => boolean;
+  filter?: (x: InterviewType) => boolean;
 }
 
 export const InterviewsTable: React.FC<InterviewsTableProps> = ({
@@ -16,9 +16,9 @@ export const InterviewsTable: React.FC<InterviewsTableProps> = ({
   url,
   filter,
 }) => {
-  const { data: res, isLoading } = useSWR<ResponseType<ProjectType[]>>(url);
+  const { data: res, isLoading } = useSWR<ResponseType<InterviewType[]>>(url);
 
-  let interviews: ProjectType[] = [];
+  let interviews: InterviewType[] = [];
 
   if (res?.success && res?.data)
     if (filter) interviews = res.data.filter(filter);
