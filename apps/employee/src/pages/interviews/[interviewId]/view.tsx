@@ -19,23 +19,22 @@ import useSWR from "swr";
 
 let score: { hypothesis: number[] }[] = [];
 
-const InterviewDetails: NextPageWithLayout = () => {
+const InterviewFormView: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [trigger, render] = useState(1);
 
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
-    query.interviewId && `/employee/interviews/${query.interviewId}`,
+    query.interviewId && `/employee/interviews/${query.interviewId}`
+  );
+
+  useSWR<ResponseType<any>>(
+    query.interviewId && `/employee/project-score/${query.interviewId}`,
     {
-      onSuccess: ({ data: { hypotheses } }) => {
-        score = hypotheses.map((x) => ({
-          hypothesis: x.questions.map(() => 0),
-        }));
+      onSuccess: ({ data }) => {
+        score = data.score;
+        render(-1 * trigger);
       },
     }
-  );
-  const { run, loading } = useApi(
-    "POST",
-    `/employee/project-score/${query.interviewId}`
   );
 
   return (
@@ -86,35 +85,6 @@ const InterviewDetails: NextPageWithLayout = () => {
               labelClassName="md:text-lg"
               rows={4}
             />
-            <Button
-              btn="success"
-              loading={loading}
-              className="w-full mx-auto"
-              onClick={async () => {
-                console.log(score);
-
-                for (let x of score) {
-                  for (let y of x.hypothesis) {
-                    if (y < 1) {
-                      showToast("warning", "Please complete the form.");
-                      return;
-                    }
-                  }
-                }
-                const res = await run({
-                  body: JSON.stringify({ score }),
-                });
-                if (res && res.success)
-                  showToast(
-                    "success",
-                    "Review added successfully",
-                    res.message
-                  );
-                else showToast("error", "Unable to save review", res.error);
-              }}
-            >
-              Save
-            </Button>
           </>
         )}
       </div>
@@ -122,8 +92,8 @@ const InterviewDetails: NextPageWithLayout = () => {
   );
 };
 
-InterviewDetails.getLayout = (page) => (
+InterviewFormView.getLayout = (page) => (
   <AuthenticatedRoute>{page}</AuthenticatedRoute>
 );
 
-export default InterviewDetails;
+export default InterviewFormView;
