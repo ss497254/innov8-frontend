@@ -10,11 +10,12 @@ export const InterviewSummaryCard: React.FC<InterviewSummaryCardProps> = ({
   id,
   teamMembers,
   updatedAt,
+  completed,
   interviewTitle,
   coach,
 }) => {
   return (
-    <Link href={`/interviews/${id}`}>
+    <Link href={`/interviews/${id}/${completed ? "view":""}`}>
       <div className="bg-white rounded-lg p-6 my-2 space-y-4 shadow-md border">
         <div className="f jb ic space-x-4">
           <h4>{interviewTitle}</h4>

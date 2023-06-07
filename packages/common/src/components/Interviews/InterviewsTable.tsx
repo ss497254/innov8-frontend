@@ -8,7 +8,7 @@ import { InterviewSummaryCard } from "./InterviewSummaryCard";
 interface InterviewsTableProps extends React.PropsWithChildren {
   name: string;
   url: string;
-  filter?: (x: InterviewType) => boolean;
+  filter?: (x: InterviewType) => boolean | undefined;
 }
 
 export const InterviewsTable: React.FC<InterviewsTableProps> = ({

@@ -1,8 +1,8 @@
 import { Button, NextPageWithLayout, TabButtons } from "common";
-import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { PageTopBar, InterviewsTable } from "common/src/components";
+import { InterviewsTable, PageTopBar } from "common/src/components";
 import Link from "next/link";
 import { useState } from "react";
+import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 
 const tabs = ["Overview", "New", "Past"];
 
@@ -25,7 +25,16 @@ const Interview: NextPageWithLayout = () => {
           setActiveTab={setActiveTab}
         />
       </PageTopBar>
-      <InterviewsTable name="Interviews" url="/employee/interviews" />
+      <InterviewsTable
+        name="New"
+        url="/employee/interviews"
+        filter={(x) => !x.completed}
+      />
+      <InterviewsTable
+        name="Completed"
+        url="/employee/interviews"
+        filter={(x) => x.completed}
+      />
     </div>
   );
 };
