@@ -5,3 +5,4 @@ export * from "./Layouts";
 export * from "./Pages";
 export * from "./PageTopBar";
 export * from "./Projects";
+export * from "./Hypotheses";

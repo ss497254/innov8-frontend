@@ -2,6 +2,7 @@ import { NextPageWithLayout } from "common/src/types";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import { HypothesisTable } from "src/components/Projects/Hypotheses";
+import { ProjectScoreTable } from "common/src/components";
 
 const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
@@ -11,8 +12,7 @@ const ProjectView: NextPageWithLayout = () => {
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
         <HypothesisTable projectId={projectId} />
-        <h3>Project Score</h3>
-        <table></table>
+        <ProjectScoreTable projectId={projectId} />
       </div>
     </div>
   );
