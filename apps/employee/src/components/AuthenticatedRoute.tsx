@@ -16,9 +16,9 @@ export const items = [
     items: [
       { href: "/", icon: <DashboardIcon size={24} />, title: "Dashboard" },
       {
-        href: "/projects",
+        href: "/hypotheses",
         icon: <ProjectIcon size={24} />,
-        title: "Projects",
+        title: "Hypotheses",
       },
       {
         href: "/interviews",

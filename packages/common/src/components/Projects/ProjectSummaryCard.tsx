@@ -15,7 +15,7 @@ export const ProjectSummaryCard: React.FC<ProjectSummaryCardProps> = ({
   updatedAt,
 }) => {
   return (
-    <Link href={`/projects/${id}/${status}`}>
+    <Link href={`/projects/${id}/${status || ""}`}>
       <div className="bg-white rounded-lg p-6 my-2 space-y-4 shadow-md border">
         <div className="f jb ic space-x-4">
           <h4>{name}</h4>
