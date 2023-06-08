@@ -40,6 +40,8 @@ const InterviewForm: NextPageWithLayout = () => {
     `/coach/project-score/${interviewId}`
   );
 
+  const project = res?.data!;
+
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
@@ -52,16 +54,16 @@ const InterviewForm: NextPageWithLayout = () => {
               heading="Interview Title"
               headingClassName="md:text-lg font-semibold"
             >
-              {res?.data.interviewTitle}
+              {project.interviewTitle}
             </ProjectField>
             <ProjectField
               heading="Project Name"
               headingClassName="md:text-lg font-semibold"
             >
-              {res?.data.name}
+              {project.name}
             </ProjectField>
             <div className="text-lg font-semibold !-mb-4">Hypothesis score</div>
-            {res?.data.hypotheses.map((h, idx) => (
+            {project.hypotheses.map((h, idx) => (
               <div key={idx} className="border p-5 rounded border-gray-300">
                 <h4>{h.hypothesis}</h4>
                 <div className="font-medium space-y-2 mt-5">
@@ -95,8 +97,6 @@ const InterviewForm: NextPageWithLayout = () => {
               loading={loading}
               className="w-full mx-auto"
               onClick={async () => {
-                console.log(score.current);
-
                 for (let x of score.current) {
                   for (let y of x.hypothesis) {
                     if (y < 1) {
@@ -107,8 +107,8 @@ const InterviewForm: NextPageWithLayout = () => {
                 }
                 const res = await run({
                   body: JSON.stringify({
+                    projectId: project.id,
                     score: score.current,
-                    interviewId,
                     userId: user?.id,
                     role: user?.role,
                   }),

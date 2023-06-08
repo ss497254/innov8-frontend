@@ -1,3 +1,4 @@
+import { useUserStore } from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import {
@@ -22,6 +23,7 @@ let score: { hypothesis: number[] }[] = [];
 const InterviewFormView: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [trigger, render] = useState(1);
+  const { user } = useUserStore();
 
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
     query.interviewId && `/employee/interviews/${query.interviewId}`
@@ -31,7 +33,8 @@ const InterviewFormView: NextPageWithLayout = () => {
     query.interviewId && `/employee/project-score/${query.interviewId}`,
     {
       onSuccess: ({ data }) => {
-        score = data.score;
+        score = data.employee?.filter((x: any) => x.userId === user!.id)?.[0]
+          ?.score;
         render(-1 * trigger);
       },
     }
@@ -69,8 +72,10 @@ const InterviewFormView: NextPageWithLayout = () => {
                       </p>
                       <StarRating
                         className="ml-auto scale-[65%]"
-                        value={score[idx]?.hypothesis[qIdx]}
+                        value={score?.[idx]?.hypothesis[qIdx]}
                         setValue={(x) => {
+                          if (!score || !score[idx]) return;
+
                           score[idx].hypothesis[qIdx] = x;
                           render(-1 * trigger);
                         }}

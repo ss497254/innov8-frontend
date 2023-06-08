@@ -1,3 +1,4 @@
+import { useUserStore } from "common";
 import {
   InterviewType,
   NextPageWithLayout,
@@ -14,6 +15,7 @@ let score: { hypothesis: number[] }[] = [];
 const InterviewFormView: NextPageWithLayout = () => {
   const { query } = useRouter();
   const [trigger, render] = useState(1);
+  const { user } = useUserStore();
 
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
     query.interviewId && `/coach/interviews/${query.interviewId}`
@@ -23,7 +25,8 @@ const InterviewFormView: NextPageWithLayout = () => {
     query.interviewId && `/coach/project-score/${query.interviewId}`,
     {
       onSuccess: ({ data }) => {
-        score = data.score;
+        score = data.coach?.filter((x: any) => x.userId === user!.id)?.[0]
+          ?.score;
         render(-1 * trigger);
       },
     }
@@ -61,8 +64,9 @@ const InterviewFormView: NextPageWithLayout = () => {
                       </p>
                       <StarRating
                         className="ml-auto scale-[65%]"
-                        value={score[idx]?.hypothesis[qIdx]}
+                        value={score?.[idx]?.hypothesis[qIdx]}
                         setValue={(x) => {
+                          if (!score || !score[idx]) return;
                           score[idx].hypothesis[qIdx] = x;
                           render(-1 * trigger);
                         }}
