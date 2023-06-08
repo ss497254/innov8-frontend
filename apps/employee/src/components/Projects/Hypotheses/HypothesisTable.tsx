@@ -22,7 +22,7 @@ export const HypothesisTable: React.FC<props> = ({
     isLoading,
     error,
   } = useSWR<ResponseType<{ hypotheses: any[] }>>(
-    "/employee/hypotheses/" + projectId
+    projectId && "/employee/hypotheses/" + projectId
   );
 
   return (

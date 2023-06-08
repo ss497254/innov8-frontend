@@ -39,7 +39,7 @@ const InterviewForm: NextPageWithLayout = () => {
     "POST",
     `/employee/project-score/${interviewId}`
   );
-  const { projectId } = res?.data || {};
+  const { projectId, interviewTitle } = res?.data || {};
 
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
@@ -53,7 +53,7 @@ const InterviewForm: NextPageWithLayout = () => {
               heading="Interview Title"
               headingClassName="md:text-lg font-semibold"
             >
-              {res.data.interviewTitle}
+              {interviewTitle}
             </ProjectField>
             <ProjectField
               heading="Project Name"
@@ -107,6 +107,7 @@ const InterviewForm: NextPageWithLayout = () => {
                 const res = await run({
                   body: JSON.stringify({
                     projectId,
+                    interviewTitle,
                     score: score.current,
                     userId: user?.id,
                     role: user?.role,

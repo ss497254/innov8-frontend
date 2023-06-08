@@ -77,3 +77,7 @@ button:focus {
   @apply ring-2;
   outline: none;
 }
+
+.b-table {
+  @apply border border-slate-300;
+}

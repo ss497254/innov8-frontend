@@ -48,14 +48,16 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
   });
 
   return (
-    <div className="w-full overflow-x-scroll">
-      <h4>{interviewTitle}</h4>
-      <div className="bg-gray-100 f">
+    <div className="w-full b-table rounded-lg overflow-x-scroll remove-scroll">
+      <div className="min-w-[500px] bg-gray-100 b-table rounded-t-md text-center p-4 font-bold text-xl">
+        {interviewTitle}
+      </div>
+      <div className="min-w-[500px] bg-gray-100 f">
         <div
           style={{ width: 144 }}
-          className="py-10 w-36 border border-slate-300 font-semibold text-center"
+          className="py-10 w-36 b-table font-semibold text-center"
         >
-          Person
+          &nbsp;&nbsp;&nbsp;&nbsp;Person&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         {hypotheses.map((questions: any, idx: number) => (
           <div
@@ -65,13 +67,11 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
             // }}
             className="text-center font-semibold flex-1"
           >
-            <div className="p-4 border border-slate-300">
-              Hypothesis {idx + 1}
-            </div>
+            <div className="p-4 b-table">Hypothesis {idx + 1}</div>
             <div className="f">
               {questions.map((x: any, idx: number) => (
-                <div key={idx} className="flex-1 p-4 border border-slate-300">
-                  Q {idx + 1}
+                <div key={idx} className="flex-1 p-4 b-table">
+                  Q{idx + 1}
                 </div>
               ))}
             </div>
@@ -79,15 +79,15 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
         ))}
       </div>
       {employee?.map((x: any, idx: number) => (
-        <div key={idx} className="text-center f">
-          <div className="border border-slate-300 w-36 p-4">
+        <div key={idx} className="min-w-[500px] text-center f">
+          <div className="b-table w-36 p-4">
             Employee {x.userId?.substr(0, 2)}
           </div>
           {x.score.map(({ hypothesis }: any, idx: number) => (
             <div key={idx} className="text-center flex-1">
               <div className="f">
                 {hypothesis.map((x: any, idx: number) => (
-                  <div key={idx} className="flex-1 p-4 border border-slate-300">
+                  <div key={idx} className="flex-1 p-4 b-table">
                     {x}
                   </div>
                 ))}
@@ -96,17 +96,15 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
           ))}
         </div>
       ))}
-      <div className="bg-gray-50 border border-slate-300 h-14"></div>
+      <div className="min-w-[500px] bg-gray-50 b-table h-14"></div>
       {coach?.map((x: any, idx: number) => (
-        <div key={idx} className="text-center f">
-          <div className="border border-slate-300 w-36 p-4">
-            Coach {x.userId?.substr(0, 2)}
-          </div>
+        <div key={idx} className="min-w-[500px] text-center f">
+          <div className="b-table w-36 p-4">Coach {x.userId?.substr(0, 2)}</div>
           {x.score.map(({ hypothesis }: any, idx: number) => (
             <div key={idx} className="text-center flex-1">
               <div className="f">
                 {hypothesis.map((x: any, idx: number) => (
-                  <div key={idx} className="flex-1 p-4 border border-slate-300">
+                  <div key={idx} className="flex-1 p-4 b-table">
                     {x}
                   </div>
                 ))}
