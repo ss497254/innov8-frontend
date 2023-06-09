@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useMemo } from "react";
 import useSWR from "swr";
 import { ResponseType } from "../../types";
@@ -52,6 +53,10 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
       variance: number[][] = [],
       overallVariance: number[][] = [];
 
+    average.overallRating = 0;
+    variance.overallRating = 0;
+    overallVariance.overallRating = 0;
+
     if (coach)
       hypotheses = coach[0]?.score?.map(({ hypothesis }: any) => {
         average.push(Array(hypothesis.length).fill(0));
@@ -59,7 +64,7 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
         overallVariance.push(Array(hypothesis.length).fill(0));
 
         totalHypothesis++;
-        totalQuestions += hypothesis?.length || 0;
+        totalQuestions += hypothesis?.length;
         return hypothesis;
       });
     else
@@ -69,37 +74,50 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
         overallVariance.push(Array(hypothesis.length).fill(0));
 
         totalHypothesis++;
-        totalQuestions += hypothesis?.length || 0;
+        totalQuestions += hypothesis?.length;
         return hypothesis;
       });
 
-    employee?.forEach((x: any) =>
-      x.score.forEach(({ hypothesis }: any, idx: number) => {
+    employee?.forEach((x: any) => {
+      average.overallRating += parseInt(x.overallRating || 0);
+
+      return x.score.forEach(({ hypothesis }: any, idx: number) => {
         hypothesis.forEach((rating: number, idy: number) => {
           average[idx][idy] += rating;
         });
-      })
-    );
+      });
+    });
+    let x = average.overallRating / employee.length;
     average = average.map((x) => x.map((y) => y / employee.length));
+    average.overallRating = x;
 
-    employee?.forEach((x: any) =>
-      x.score.forEach(({ hypothesis }: any, idx: number) => {
+    employee?.forEach((x: any) => {
+      variance.overallRating +=
+        Math.abs(x.overallRating - average.overallRating) ** 2;
+
+      return x.score.forEach(({ hypothesis }: any, idx: number) => {
         hypothesis.forEach((rating: number, idy: number) => {
           variance[idx][idy] += Math.abs(rating - average[idx][idy]) ** 2;
         });
-      })
-    );
-    if (employee.length > 1)
+      });
+    });
+    if (employee.length > 1) {
+      let x = variance.overallRating / (employee.length - 1);
       variance = variance.map((x) => x.map((y) => y / (employee.length - 1)));
+      variance.overallRating = x;
+    }
 
-    coach?.forEach((x: any) =>
-      x.score.forEach(({ hypothesis }: any, idx: number) => {
+    coach?.forEach((x: any) => {
+      overallVariance.overallRating +=
+        Math.abs(x.overallRating - average.overallRating) ** 2 / 4;
+
+      return x.score.forEach(({ hypothesis }: any, idx: number) => {
         hypothesis.forEach((rating: number, idy: number) => {
           overallVariance[idx][idy] +=
             Math.abs(rating - average[idx][idy]) ** 2 / 4;
         });
-      })
-    );
+      });
+    });
 
     return {
       totalHypothesis,
@@ -111,18 +129,13 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
     };
   }, []);
 
-  console.log({ average, variance });
-
   return (
     <div className="w-full b-table overflow-x-scroll remove-scroll">
       <div className="min-w-[500px] bg-gray-100 b-table text-center p-4 font-bold text-xl">
         {interviewTitle}
       </div>
       <div className="min-w-[500px] bg-gray-100 f">
-        <div
-          style={{ width: 144 }}
-          className="align-middle c w-36 b-table font-semibold"
-        >
+        <div className="c w-36 b-table font-semibold">
           <p>Person</p>
         </div>
         {hypotheses?.map((questions: any, idx: number) => (
@@ -143,6 +156,9 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
             </div>
           </div>
         ))}
+        <div className="c w-20 text-center b-table font-semibold">
+          <p>Overall Rating</p>
+        </div>
       </div>
       {employee?.map((x: any, idx: number) => (
         <div key={idx} className="min-w-[500px] text-center f">
@@ -156,6 +172,9 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
               </div>
             ))
           )}
+          <div className="c w-20 text-center b-table">
+            <p>{x.overallRating}</p>
+          </div>
         </div>
       ))}
       <div className="min-w-[500px] bg-gray-100 h-14 f text-center font-bold">
@@ -163,20 +182,26 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
         {average.map((h: any) =>
           h.map((x: any, idx: number) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x}
+              {x.toFixed(3)}
             </div>
           ))
         )}
+        <div className="c w-20 text-center b-table">
+          <p>{average.overallRating?.toFixed(3)}</p>
+        </div>
       </div>
       <div className="min-w-[500px] bg-gray-100 h-14 f text-center font-bold">
         <div className="w-36 py-4 b-table">E. Variance</div>
         {variance.map((h: any) =>
           h.map((x: any, idx: number) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x}
+              {x.toFixed(3)}
             </div>
           ))
         )}
+        <div className="c w-20 text-center b-table">
+          <p>{variance.overallRating?.toFixed(3)}</p>
+        </div>
       </div>
       <div className="min-w-[500px] bg-gray-200 b-table h-5"></div>
       {coach?.map((x: any, idx: number) => (
@@ -189,6 +214,9 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
               </div>
             ))
           )}
+          <div className="c w-20 text-center b-table">
+            <p>{x.overallRating}</p>
+          </div>
         </div>
       ))}
       <div className="min-w-[500px] bg-gray-100 h-14 f text-center font-bold">
@@ -196,10 +224,13 @@ const ScoreTable = ({ employee, interviewTitle, coach }: any) => {
         {overallVariance.map((h: any) =>
           h.map((x: any, idx: number) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x}
+              {x.toFixed(3)}
             </div>
           ))
         )}
+        <div className="c w-20 text-center b-table">
+          <p>{overallVariance.overallRating?.toFixed(3)}</p>
+        </div>
       </div>
     </div>
   );
