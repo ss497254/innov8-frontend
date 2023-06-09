@@ -1,3 +1,4 @@
+import { useForceRender } from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { useUserStore } from "common/src/stores";
@@ -21,7 +22,7 @@ import useSWR from "swr/immutable";
 const InterviewForm: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { user } = useUserStore();
-  const [trigger, render] = useState(1);
+  const render = useForceRender();
   const [overallRating, setOverallRating] = useState(1);
 
   let score = useRef<{ hypothesis: number[] }[]>([]);
@@ -79,7 +80,7 @@ const InterviewForm: NextPageWithLayout = () => {
                           if (!score.current[idx]) return;
 
                           score.current[idx].hypothesis[qIdx] = x;
-                          render(-1 * trigger);
+                          render();
                         }}
                       />
                     </Fragment>
