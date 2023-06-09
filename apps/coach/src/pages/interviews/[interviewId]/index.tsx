@@ -22,6 +22,7 @@ const InterviewForm: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { user } = useUserStore();
   const [trigger, render] = useState(1);
+  const [overallRating, setOverallRating] = useState(1);
 
   let score = useRef<{ hypothesis: number[] }[]>([]);
   const interviewId = query.interviewId as string;
@@ -39,8 +40,7 @@ const InterviewForm: NextPageWithLayout = () => {
     "POST",
     `/coach/project-score/${interviewId}`
   );
-
-  const project = res?.data!;
+  const { projectId, interviewTitle } = res?.data || {};
 
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
@@ -54,16 +54,16 @@ const InterviewForm: NextPageWithLayout = () => {
               heading="Interview Title"
               headingClassName="md:text-lg font-semibold"
             >
-              {project.interviewTitle}
+              {res?.data.interviewTitle}
             </ProjectField>
             <ProjectField
               heading="Project Name"
               headingClassName="md:text-lg font-semibold"
             >
-              {project.name}
+              {res?.data.name}
             </ProjectField>
             <div className="text-lg font-semibold !-mb-4">Hypothesis score</div>
-            {project.hypotheses.map((h, idx) => (
+            {res?.data.hypotheses.map((h, idx) => (
               <div key={idx} className="border p-5 rounded border-gray-300">
                 <h4>{h.hypothesis}</h4>
                 <div className="font-medium space-y-2 mt-5">
@@ -92,6 +92,12 @@ const InterviewForm: NextPageWithLayout = () => {
               labelClassName="md:text-lg"
               rows={4}
             />
+            <p className="md:text-lg font-medium">Overall Rating</p>
+            <StarRating
+              className="mx-auto"
+              value={overallRating}
+              setValue={setOverallRating}
+            />
             <Button
               btn="success"
               loading={loading}
@@ -107,10 +113,12 @@ const InterviewForm: NextPageWithLayout = () => {
                 }
                 const res = await run({
                   body: JSON.stringify({
-                    projectId: project.id,
+                    projectId,
+                    interviewTitle,
                     score: score.current,
                     userId: user?.id,
                     role: user?.role,
+                    overallRating,
                   }),
                 });
                 if (res && res.success)

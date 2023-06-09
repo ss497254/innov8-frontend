@@ -70,10 +70,7 @@ export const NotificationDropdown: React.FC<
           </div>
           <ul>
             <li className="border-t border-slate-200 p-3">
-              <div className="mb-2">
-                📣 Sint occaecat cupidatat non proident, sunt in culpa qui
-                officia deserunt mollit anim.
-              </div>
+              NO new notification
               <div className="text-xs text-slate-600">Feb 12, 2024</div>
             </li>
           </ul>

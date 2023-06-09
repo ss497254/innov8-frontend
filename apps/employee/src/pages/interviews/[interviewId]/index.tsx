@@ -22,6 +22,7 @@ const InterviewForm: NextPageWithLayout = () => {
   const { query } = useRouter();
   const { user } = useUserStore();
   const [trigger, render] = useState(1);
+  const [overallRating, setOverallRating] = useState(1);
 
   let score = useRef<{ hypothesis: number[] }[]>([]);
   const interviewId = query.interviewId as string;
@@ -91,6 +92,12 @@ const InterviewForm: NextPageWithLayout = () => {
               labelClassName="md:text-lg"
               rows={4}
             />
+            <p className="md:text-lg font-medium">Overall Rating</p>
+            <StarRating
+              className="mx-auto"
+              value={overallRating}
+              setValue={setOverallRating}
+            />
             <Button
               btn="success"
               loading={loading}
@@ -111,6 +118,7 @@ const InterviewForm: NextPageWithLayout = () => {
                     score: score.current,
                     userId: user?.id,
                     role: user?.role,
+                    overallRating,
                   }),
                 });
                 if (res && res.success)
