@@ -47,14 +47,14 @@ const CoachReview: NextPageWithLayout = () => {
           {res?.data.slideLink}
         </ProjectField>
         <div className="border rounded-md p-5 space-y-4">
-          <h4>Judge assigned</h4>
+          <h4>Coach assigned</h4>
           <h3 className="f ic">
             <Avatar
               size={50}
-              src={res?.data.judge?.avatarUrl}
+              src={res?.data.coach?.avatarUrl}
               className="mr-4"
             />
-            {res?.data.judge?.firstName + " " + res?.data.judge?.lastName}
+            {res?.data.coach?.firstName + " " + res?.data.coach?.lastName}
           </h3>
         </div>
         <div className="!-mb-6 font-semibold">Team Members</div>

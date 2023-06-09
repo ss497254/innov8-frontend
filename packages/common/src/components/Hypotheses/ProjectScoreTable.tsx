@@ -1,22 +1,23 @@
-import useSWR from "swr/immutable";
 import React, { useMemo } from "react";
+import useSWR from "swr";
 import { ResponseType } from "../../types";
 import { Spinner } from "../../ui";
-import { availableParallelism } from "os";
 
 interface ProjectScoreTableProps extends React.PropsWithChildren {
   projectId: string;
+  role: string;
 }
 
 export const ProjectScoreTable: React.FC<ProjectScoreTableProps> = ({
   projectId,
+  role,
 }) => {
   const {
     data: res,
     isLoading,
     error,
   } = useSWR<ResponseType<any[]>>(
-    projectId && `/employee/project-score-all/${projectId}`
+    projectId && `/${role}/project-score-all/${projectId}`
   );
 
   return (
@@ -30,7 +31,7 @@ export const ProjectScoreTable: React.FC<ProjectScoreTableProps> = ({
         <div className="c min-h-[200px] h-full">
           <p>Cannot load hypotheses</p>
         </div>
-      ) : res?.data ? (
+      ) : res?.data && res.data.length ? (
         res.data.map((x, idx) => <ScoreTable key={idx} {...x} />)
       ) : (
         <div className="c min-h-[200px] h-full">

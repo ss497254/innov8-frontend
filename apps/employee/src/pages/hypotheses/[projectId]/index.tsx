@@ -12,7 +12,7 @@ const ProjectView: NextPageWithLayout = () => {
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
         <HypothesisTable projectId={projectId} />
-        <ProjectScoreTable projectId={projectId} />
+        <ProjectScoreTable role="employee" projectId={projectId} />
       </div>
     </div>
   );

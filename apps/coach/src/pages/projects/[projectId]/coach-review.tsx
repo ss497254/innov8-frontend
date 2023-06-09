@@ -9,11 +9,13 @@ import { Avatar } from "common/src/ui/User";
 import { useRouter } from "next/router";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
+import { ProjectScoreTable } from "common/src/components";
 
 const ProjectView: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const projectId = query.projectId as string;
   const { data: res } = useSWR<ResponseType<ProjectType>>(
-    query.projectId && `/coach/projects/${query.projectId}`
+    projectId && `/coach/projects/${projectId}`
   );
 
   return (
@@ -77,7 +79,10 @@ const ProjectView: NextPageWithLayout = () => {
           </h4>
         </div>
         {res?.data.hasHypotheses ? (
-          <HypothesisTable projectId={query.projectId as string} />
+          <>
+            <HypothesisTable projectId={projectId} />
+            <ProjectScoreTable role="coach" projectId={projectId} />
+          </>
         ) : (
           <h4>Project don't have hypotheses</h4>
         )}
