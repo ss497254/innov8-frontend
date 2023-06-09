@@ -79,5 +79,5 @@ button:focus {
 }
 
 .b-table {
-  @apply border border-slate-300;
+  @apply border border-gray-400;
 }
