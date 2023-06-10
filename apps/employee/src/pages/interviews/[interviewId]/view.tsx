@@ -1,41 +1,37 @@
-import { useUserStore } from "common";
-import { useApi } from "common/src/hooks/useApi";
+import { InterviewSummaryCard, useUserStore } from "common";
 import { showToast } from "common/src/lib/showToast";
 import {
   InterviewType,
   NextPageWithLayout,
   ResponseType,
 } from "common/src/types";
-import {
-  Button,
-  ProjectField,
-  Spinner,
-  StarRating,
-  Textarea,
-} from "common/src/ui";
+import { ProjectField, Spinner, StarRating, Textarea } from "common/src/ui";
 import { useRouter } from "next/router";
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 import useSWR from "swr";
 
-let score: { hypothesis: number[] }[] = [];
-
 const InterviewFormView: NextPageWithLayout = () => {
   const { query } = useRouter();
-  const [trigger, render] = useState(1);
   const { user } = useUserStore();
+  const [overallRating, setOverallRating] = useState(1);
 
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
     query.interviewId && `/employee/interviews/${query.interviewId}`
   );
 
-  useSWR<ResponseType<any>>(
+  const score = useRef<{ hypothesis: string; questions: number[] }[]>([]);
+  useSWR<ResponseType<{ employee: any[] }>>(
     query.interviewId && `/employee/project-score/${query.interviewId}`,
     {
       onSuccess: ({ data }) => {
-        score = data.employee?.filter((x: any) => x.userId === user!.id)?.[0]
-          ?.score;
-        render(-1 * trigger);
+        const res = data.employee?.find((x: any) => x.userId === user!.id);
+
+        if (!res) {
+          return showToast("error", "Review not found");
+        }
+        score.current = res.score;
+        setOverallRating(res.overallRating);
       },
     }
   );
@@ -43,17 +39,12 @@ const InterviewFormView: NextPageWithLayout = () => {
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
-        <h3>Interview Guide</h3>
+        <h3>Your Review</h3>
         {isLoading || !res?.success ? (
           <Spinner className="mx-auto min-h-[200px]" size={40} />
         ) : (
           <>
-            <ProjectField
-              heading="Interview Title"
-              headingClassName="md:text-lg font-semibold"
-            >
-              {res?.data.interviewTitle}
-            </ProjectField>
+            <InterviewSummaryCard {...res.data} />
             <ProjectField
               heading="Project Name"
               headingClassName="md:text-lg font-semibold"
@@ -72,13 +63,7 @@ const InterviewFormView: NextPageWithLayout = () => {
                       </p>
                       <StarRating
                         className="ml-auto scale-[65%]"
-                        value={score?.[idx]?.hypothesis[qIdx]}
-                        setValue={(x) => {
-                          if (!score || !score[idx]) return;
-
-                          score[idx].hypothesis[qIdx] = x;
-                          render(-1 * trigger);
-                        }}
+                        value={score.current?.[idx]?.questions[qIdx]}
                       />
                     </Fragment>
                   ))}
@@ -90,6 +75,8 @@ const InterviewFormView: NextPageWithLayout = () => {
               labelClassName="md:text-lg"
               rows={4}
             />
+            <p className="md:text-lg font-medium">Overall Rating</p>
+            <StarRating className="mx-auto" value={overallRating} />
           </>
         )}
       </div>
