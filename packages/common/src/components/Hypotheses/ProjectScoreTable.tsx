@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useSWR from "swr";
 import { ResponseType } from "../../types";
 import { Spinner } from "../../ui";
@@ -13,6 +13,7 @@ export const ProjectScoreTable: React.FC<ProjectScoreTableProps> = ({
   projectId,
   role,
 }) => {
+  const [cumulativeScore, setCumulativeScore] = useState<any>({});
   const {
     data: res,
     isLoading,
@@ -33,7 +34,13 @@ export const ProjectScoreTable: React.FC<ProjectScoreTableProps> = ({
           <p>Cannot load hypotheses</p>
         </div>
       ) : res?.data && res.data.length ? (
-        res.data.map((x, idx) => <ScoreTable key={idx} {...x} />)
+        res.data.map((x, idx) => (
+          <ScoreTable
+            key={idx}
+            setCumulativeScore={setCumulativeScore}
+            {...x}
+          />
+        ))
       ) : (
         <div className="c min-h-[200px] h-full">
           <p>No Score found</p>

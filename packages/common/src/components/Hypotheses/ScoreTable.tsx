@@ -7,6 +7,7 @@ interface ProjectScoreProps extends React.PropsWithChildren {
   average: HypothesesReviewType;
   variance: HypothesesReviewType;
   interviewTitle: string;
+  setCumulativeScore: any;
 }
 
 const Row: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({
@@ -24,6 +25,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
   coach,
   variance,
   interviewTitle,
+  setCumulativeScore,
 }) => {
   const { overallVariance } = useMemo(() => {
     let totalQuestions = 0,
@@ -106,7 +108,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
           </div>
         </Row>
       ))}
-      <Row>
+      <Row className="font-bold bg-gray-100">
         <div className="w-36 py-4 b-table">E. Average</div>
         {average.score.map(({ questions }) =>
           questions.map((x, idx) => (
@@ -119,7 +121,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
           <p>{average.overallRating.toFixed(3)}</p>
         </div>
       </Row>
-      <Row>
+      <Row className="font-bold bg-gray-100">
         <div className="w-36 py-4 b-table">E. Variance</div>
         {variance.score.map(({ questions }) =>
           questions.map((x, idx) => (
@@ -132,7 +134,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
           <p>{variance.overallRating.toFixed(3)}</p>
         </div>
       </Row>
-      <Row className="bg-gray-200 h-5 b-table" />
+      <Row className="bg-gray-400 h-2 b-table" />
       {coach?.map(({ score, userId, overallRating }, idx) => (
         <Row key={idx}>
           <div className="b-table w-36 p-4">
