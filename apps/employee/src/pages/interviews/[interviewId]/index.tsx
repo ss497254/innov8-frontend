@@ -1,4 +1,8 @@
-import { InterviewSummaryCard, useForceRender } from "common";
+import {
+  HypothesesReviewType,
+  InterviewSummaryCard,
+  useForceRender,
+} from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
 import { useUserStore } from "common/src/stores";
@@ -25,7 +29,7 @@ const InterviewForm: NextPageWithLayout = () => {
   const render = useForceRender();
   const [overallRating, setOverallRating] = useState(1);
 
-  const score = useRef<{ hypothesis: string; questions: number[] }[]>([]);
+  const score = useRef<HypothesesReviewType["score"]>([]);
   const interviewId = query.interviewId as string;
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
     interviewId && `/employee/interviews/${interviewId}`,

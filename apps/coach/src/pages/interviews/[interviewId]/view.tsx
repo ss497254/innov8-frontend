@@ -1,4 +1,8 @@
-import { InterviewSummaryCard, useUserStore } from "common";
+import {
+  HypothesesReviewType,
+  InterviewSummaryCard,
+  useUserStore,
+} from "common";
 import { showToast } from "common/src/lib/showToast";
 import {
   InterviewType,
@@ -20,12 +24,12 @@ const InterviewFormView: NextPageWithLayout = () => {
     query.interviewId && `/coach/interviews/${query.interviewId}`
   );
 
-  const score = useRef<{ hypothesis: string; questions: number[] }[]>([]);
-  useSWR<ResponseType<{ coach: any[] }>>(
+  const score = useRef<HypothesesReviewType["score"]>([]);
+  useSWR<ResponseType<{ coach: HypothesesReviewType[] }>>(
     query.interviewId && `/coach/project-score/${query.interviewId}`,
     {
       onSuccess: ({ data }) => {
-        const res = data.coach?.find((x: any) => x.userId === user!.id);
+        const res = data.coach?.find((x) => x.userId === user!.id);
 
         if (!res) {
           return showToast("error", "Review not found");
