@@ -1,5 +1,10 @@
 import { NextPageWithLayout, PasswordEditSection, TabButtons } from "common";
-import { PageTopBar, ProfileEditSection } from "common/src/components";
+import {
+  PageTopBar,
+  ProfileEditSection,
+  ProfilePicUpload,
+  DeleteAccountSection,
+} from "common/src/components";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 
@@ -13,15 +18,20 @@ const Profile: NextPageWithLayout = () => {
         <TabButtons
           tabs={tabs}
           activeTab={activeTab}
-          //@ts-ignore
-          setActiveTab={setActiveTab}
+          setActiveTab={setActiveTab as any}
         />
       </PageTopBar>
 
       {activeTab === "General" ? (
-        <ProfileEditSection />
+        <>
+          <ProfilePicUpload />
+          <ProfileEditSection />
+        </>
       ) : (
-        <PasswordEditSection />
+        <>
+          <PasswordEditSection />
+          <DeleteAccountSection />
+        </>
       )}
     </div>
   );

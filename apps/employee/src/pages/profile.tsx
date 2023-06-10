@@ -3,6 +3,7 @@ import {
   PageTopBar,
   ProfileEditSection,
   ProfilePicUpload,
+  DeleteAccountSection,
 } from "common/src/components";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
@@ -17,7 +18,7 @@ const Profile: NextPageWithLayout = () => {
         <TabButtons
           tabs={tabs}
           activeTab={activeTab}
-          setActiveTab={setActiveTab}
+          setActiveTab={setActiveTab as any}
         />
       </PageTopBar>
 
@@ -27,7 +28,10 @@ const Profile: NextPageWithLayout = () => {
           <ProfileEditSection />
         </>
       ) : (
-        <PasswordEditSection />
+        <>
+          <PasswordEditSection />
+          <DeleteAccountSection />
+        </>
       )}
     </div>
   );
