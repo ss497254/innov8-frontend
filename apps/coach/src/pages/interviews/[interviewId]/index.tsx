@@ -1,6 +1,7 @@
-import { useForceRender, useUserStore } from "common";
+import { InterviewSummaryCard, useForceRender } from "common";
 import { useApi } from "common/src/hooks/useApi";
 import { showToast } from "common/src/lib/showToast";
+import { useUserStore } from "common/src/stores";
 import {
   InterviewType,
   NextPageWithLayout,
@@ -24,14 +25,15 @@ const InterviewForm: NextPageWithLayout = () => {
   const render = useForceRender();
   const [overallRating, setOverallRating] = useState(1);
 
-  let score = useRef<{ hypothesis: number[] }[]>([]);
+  const score = useRef<{ hypothesis: string; questions: number[] }[]>([]);
   const interviewId = query.interviewId as string;
   const { data: res, isLoading } = useSWR<ResponseType<InterviewType>>(
     interviewId && `/coach/interviews/${interviewId}`,
     {
       onSuccess: ({ data: { hypotheses } }) => {
         score.current = hypotheses.map((x) => ({
-          hypothesis: x.questions.map(() => 0),
+          ...x,
+          questions: x.questions.map(() => 1),
         }));
       },
     }
@@ -45,25 +47,20 @@ const InterviewForm: NextPageWithLayout = () => {
   return (
     <div className="max-w-6xl rounded-md mx-auto min-h-full p-4 md:p-6">
       <div className="bg-white rounded-md shadow-xl p-6 md:p-8 space-y-6">
-        <h3>Interview Guide</h3>
+        <h3>Interview Review</h3>
         {isLoading || !res?.success ? (
           <Spinner className="mx-auto min-h-[200px]" size={40} />
         ) : (
           <>
-            <ProjectField
-              heading="Interview Title"
-              headingClassName="md:text-lg font-semibold"
-            >
-              {res?.data.interviewTitle}
-            </ProjectField>
+            <InterviewSummaryCard {...res.data} />
             <ProjectField
               heading="Project Name"
               headingClassName="md:text-lg font-semibold"
             >
-              {res?.data.name}
+              {res.data.name}
             </ProjectField>
             <div className="text-lg font-semibold !-mb-4">Hypothesis score</div>
-            {res?.data.hypotheses.map((h, idx) => (
+            {res.data.hypotheses.map((h, idx) => (
               <div key={idx} className="border p-5 rounded border-gray-300">
                 <h4>{h.hypothesis}</h4>
                 <div className="font-medium space-y-2 mt-5">
@@ -74,11 +71,11 @@ const InterviewForm: NextPageWithLayout = () => {
                       </p>
                       <StarRating
                         className="ml-auto scale-[65%]"
-                        value={score.current[idx]?.hypothesis[qIdx]}
+                        value={score.current[idx]?.questions[qIdx]}
                         setValue={(x) => {
                           if (!score.current[idx]) return;
 
-                          score.current[idx].hypothesis[qIdx] = x;
+                          score.current[idx].questions[qIdx] = x;
                           render();
                         }}
                       />
@@ -103,14 +100,6 @@ const InterviewForm: NextPageWithLayout = () => {
               loading={loading}
               className="w-full mx-auto"
               onClick={async () => {
-                for (let x of score.current) {
-                  for (let y of x.hypothesis) {
-                    if (y < 1) {
-                      showToast("warning", "Please complete the form.");
-                      return;
-                    }
-                  }
-                }
                 const res = await run({
                   body: JSON.stringify({
                     projectId,
