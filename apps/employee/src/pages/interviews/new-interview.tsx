@@ -9,7 +9,11 @@ import { HypothesisTable } from "src/components/Projects/Hypotheses";
 import { ProjectNameInput } from "src/components/Projects/ProjectNameInput";
 
 const Interview: NextPageWithLayout = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
   const [hypotheses, setHypotheses] = useState([]);
 
   const [project, setProject] = useState<ProjectType>();
@@ -27,6 +31,7 @@ const Interview: NextPageWithLayout = () => {
                 label="Interview Title"
                 labelClassName="text-lg font-semibold"
                 placeholder="Enter interview title"
+                error={errors.interviewTitle?.type?.toString()}
                 {...register("interviewTitle", { required: true })}
               />
               <h4>Coach</h4>

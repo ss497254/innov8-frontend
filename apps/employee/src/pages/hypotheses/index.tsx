@@ -1,18 +1,17 @@
+import { MultiUserAvatar, Spinner, TabButtons } from "common";
+import { PageTopBar } from "common/src/components";
 import {
   NextPageWithLayout,
   ProjectType,
   ResponseType,
 } from "common/src/types";
-import { ProjectSummaryCard } from "common/src/components";
+import { Avatar } from "common/src/ui/User";
+import Link from "next/link";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
-import { ProjectsTopBar } from "src/components/Projects/ProjectsTopBar";
 import useSWR from "swr";
-import { MultiUserAvatar, Spinner } from "common";
-import Link from "next/link";
-import { Avatar } from "common/src/ui/User";
 
-const tabs = ["All", "Drafts", "In progress", "Completed"];
+const tabs = ["New", "Completed"];
 
 const Projects: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -23,11 +22,13 @@ const Projects: NextPageWithLayout = () => {
 
   return (
     <div className="max-w-7xl mx-auto min-h-full p-4 md:p-6">
-      <ProjectsTopBar
-        tabs={tabs}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
-      />
+      <PageTopBar heading="Hypotheses">
+        <TabButtons
+          tabs={tabs}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
+      </PageTopBar>
       <div className="my-6 space-y-4">
         {isLoading ? (
           <div className="c">
