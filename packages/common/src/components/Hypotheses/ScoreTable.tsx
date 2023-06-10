@@ -46,9 +46,31 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
       return score.forEach(({ questions }, idx) => {
         questions.forEach((rating, idy) => {
           overallVariance.score[idx].questions[idy] +=
-            Math.abs(rating - average.score[idx].questions[idy]) ** 2 / 4;
+            (rating - average.score[idx].questions[idy]) ** 2 / 2;
         });
       });
+    });
+
+    setCumulativeScore((x: any) => {
+      if (x.completed.includes(interviewTitle)) return x;
+
+      overallVariance.score.forEach((y) => {
+        if (x.hypotheses[y.hypothesis]) {
+          x.hypotheses[y.hypothesis].sum += y.questions.reduce((a, b) => a + b);
+          x.hypotheses[y.hypothesis].n += y.questions.length;
+        } else {
+          x.hypotheses[y.hypothesis] = {
+            sum: y.questions.reduce((a, b) => a + b),
+            n: y.questions.length,
+          };
+        }
+      });
+
+      x.overallRating.sum += overallVariance.overallRating;
+      x.overallRating.n++;
+
+      x.completed.push(interviewTitle);
+      return { ...x };
     });
 
     return {
@@ -56,7 +78,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
       totalQuestions,
       overallVariance,
     };
-  }, []);
+  }, [employee, average, coach, variance]);
 
   return (
     <div className="w-full b-table overflow-x-scroll remove-scroll">
@@ -79,7 +101,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
               Hypothesis {idx + 1}
             </div>
             <div className="f">
-              {questions.map((x: any, idx: number) => (
+              {questions.map((_, idx) => (
                 <div key={idx} className="flex-1 py-4 b-table">
                   Q{idx + 1}
                 </div>
@@ -113,12 +135,12 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
         {average.score.map(({ questions }) =>
           questions.map((x, idx) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x.toFixed(3)}
+              {x}
             </div>
           ))
         )}
         <div className="c w-20 text-center b-table">
-          <p>{average.overallRating.toFixed(3)}</p>
+          <p>{average.overallRating}</p>
         </div>
       </Row>
       <Row className="font-bold bg-gray-100">
@@ -126,19 +148,19 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
         {variance.score.map(({ questions }) =>
           questions.map((x, idx) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x.toFixed(3)}
+              {x}
             </div>
           ))
         )}
         <div className="c w-20 text-center b-table">
-          <p>{variance.overallRating.toFixed(3)}</p>
+          <p>{variance.overallRating}</p>
         </div>
       </Row>
       <Row className="bg-gray-400 h-2 b-table" />
       {coach?.map(({ score, userId, overallRating }, idx) => (
         <Row key={idx}>
           <div className="b-table w-36 p-4">
-            Employee {userId?.substring(0, 2)}
+            Coach {userId?.substring(0, 2)}
           </div>
           {score.map(({ questions }) =>
             questions.map((x, idx) => (
@@ -157,12 +179,12 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
         {overallVariance.score.map(({ questions }) =>
           questions.map((x, idx) => (
             <div key={idx} className="py-4 flex-1 b-table">
-              {x.toFixed(3)}
+              {x}
             </div>
           ))
         )}
         <div className="c w-20 text-center b-table">
-          <p>{overallVariance.overallRating?.toFixed(3)}</p>
+          <p>{overallVariance.overallRating}</p>
         </div>
       </Row>
     </div>
