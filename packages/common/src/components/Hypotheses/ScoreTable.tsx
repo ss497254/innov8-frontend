@@ -28,9 +28,6 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
   setCumulativeScore,
 }) => {
   const { overallVariance } = useMemo(() => {
-    let totalQuestions = 0,
-      totalHypothesis = 0;
-
     let overallVariance: Omit<HypothesesReviewType, "userId"> = {
       score: average.score.map((x) => ({
         ...x,
@@ -73,11 +70,7 @@ export const ScoreTable: React.FC<ProjectScoreProps> = ({
       return { ...x };
     });
 
-    return {
-      totalHypothesis,
-      totalQuestions,
-      overallVariance,
-    };
+    return { overallVariance };
   }, [employee, average, coach, variance]);
 
   return (

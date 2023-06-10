@@ -47,7 +47,7 @@ export const useUserStore = create<UserState>()((set, get) => ({
 
     Cfetch(`/${user.role}/logout`)
       .then((res) => {
-        showToast("error", "Logout Successful", res.message);
+        showToast("info", "Logout Successful", res.message);
       })
       .catch((e) => {
         showToast("error", "Please try again", e.message);
