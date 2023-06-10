@@ -42,8 +42,18 @@ export const useUserStore = create<UserState>()((set, get) => ({
     } catch {}
   },
   logout: async () => {
-    set({ user: undefined });
+    const { user } = get();
+    if (!user) return;
 
+    Cfetch(`/${user.role}/logout`)
+      .then((res) => {
+        showToast("error", "Logout Successful", res.message);
+      })
+      .catch((e) => {
+        showToast("error", "Please try again", e.message);
+      });
+
+    set({ user: undefined });
     try {
       localStorage.removeItem(userKey);
     } catch {}

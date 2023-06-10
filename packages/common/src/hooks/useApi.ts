@@ -36,7 +36,7 @@ export const useApi = <T>(
           return output;
         }
 
-        console.warn(output);
+        console.warn("API ERROR:", output);
         throw new Error(output.message || "Some error occured.");
       } catch (e) {
         setLoading(false);
