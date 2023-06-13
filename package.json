@@ -11,6 +11,7 @@
     "dev:coach": "turbo run dev --filter=coach --no-daemon",
     "dev:employee": "turbo run dev --filter=employee --no-daemon",
     "dev:judge": "turbo run dev --filter=judge --no-daemon",
+    "dev:super-admin": "turbo run dev --filter=super-admin --no-daemon",
     "lint": "turbo run lint"
   },
   "devDependencies": {
