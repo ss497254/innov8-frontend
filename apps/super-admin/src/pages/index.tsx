@@ -2,7 +2,7 @@ import { NextPageWithLayout, PageTopBar, TabButtons } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
 
-let tabs = ["Overview", "New", "Working", "Completed", "More"];
+let tabs = ["Overview", "More"];
 
 const Home: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
