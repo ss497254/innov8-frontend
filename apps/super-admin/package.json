@@ -12,6 +12,9 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/x-data-grid": "^6.7.0",
     "@next/bundle-analyzer": "^13.4.3",
     "common": "*",
     "config": "*",

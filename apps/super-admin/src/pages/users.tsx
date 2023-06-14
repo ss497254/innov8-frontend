@@ -1,8 +1,15 @@
 import { NextPageWithLayout, PageTopBar, TabButtons } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
+import { UsersTable } from "src/components/UsersTable";
 
 let tabs = ["Admin", "Coach", "Employee", "Judge"];
+const urlMap: Record<string, string> = {
+  Admin: "admins",
+  Coach: "coaches",
+  Judge: "judges",
+  Employee: "employees",
+};
 
 const ProjectForm: NextPageWithLayout = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);
@@ -16,6 +23,10 @@ const ProjectForm: NextPageWithLayout = () => {
           setActiveTab={setActiveTab}
         />
       </PageTopBar>
+      <UsersTable
+        heading={activeTab}
+        url={"/super-admin/" + urlMap[activeTab]}
+      />
     </div>
   );
 };
