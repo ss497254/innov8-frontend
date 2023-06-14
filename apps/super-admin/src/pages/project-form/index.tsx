@@ -1,6 +1,7 @@
 import { NextPageWithLayout, PageTopBar, TabButtons } from "common";
 import { useState } from "react";
 import { AuthenticatedRoute } from "src/components/AuthenticatedRoute";
+import { EditForm, ViewForm } from "src/components/ProjectForm";
 
 let tabs = ["View", "Edit"];
 
@@ -16,6 +17,7 @@ const ProjectForm: NextPageWithLayout = () => {
           setActiveTab={setActiveTab}
         />
       </PageTopBar>
+      {activeTab === "View" ? <ViewForm /> : <EditForm />}
     </div>
   );
 };
