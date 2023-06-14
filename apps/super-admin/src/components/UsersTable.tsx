@@ -43,8 +43,11 @@ export const UsersTable: React.FC<UsersTableProps> = ({ url, heading }) => {
       ) : (
         <DataGrid
           rows={res?.data || []}
-          className="bg-white"
-          classes={{ columnHeader: "bg-gray-100" }}
+          className="bg-white border !border-slate-300 !rounded"
+          classes={{
+            columnHeader: "bg-gray-100",
+            footerContainer: "bg-gray-100",
+          }}
           showColumnVerticalBorder
           columns={columns}
           initialState={{

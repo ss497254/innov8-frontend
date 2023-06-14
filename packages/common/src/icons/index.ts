@@ -34,4 +34,5 @@ export * from "./SyncIcon";
 export * from "./ThreeDotsIcon";
 export * from "./TickIcon";
 export * from "./TrashIcon";
+export * from "./UsersIcon";
 export * from "./WarningIcon";
