@@ -7,7 +7,7 @@ const Register: NextPageWithLayout = () => {
 
   return (
     <div className="space-y-4 w-80 md:w-96">
-      <RegisterForm url={"/super-admin/register" + query.secret} />
+      <RegisterForm url={"/super-admin/register/" + query.secret} />
     </div>
   );
 };
