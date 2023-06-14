@@ -129,14 +129,19 @@ const Field = ({ name, desc, required, onChange, onDelete }: any) => {
           </Button>
         </form>
       </Modal>
-      <div className="f space-x-2 justify-end -mb-14">
+      <div className="f space-x-2 justify-end -mb-10 md:-mb-12">
         <IconButton
+          size={32}
           onClick={() => setOpen(true)}
           className="bg-blue-200 !p-1.5 text-blue-500"
         >
           <EditIcon size={22} />
         </IconButton>
-        <IconButton onClick={onDelete} className="!bg-red-200 !text-red-500">
+        <IconButton
+          size={32}
+          onClick={onDelete}
+          className="!bg-red-200 !text-red-500"
+        >
           <TrashIcon />
         </IconButton>
       </div>
@@ -145,7 +150,7 @@ const Field = ({ name, desc, required, onChange, onDelete }: any) => {
         desc={desc}
         containerClassName="flex-1"
         placeholder={required ? "" : "optional"}
-        labelClassName="!font-bold md:text-lg"
+        labelClassName="!font-bold md:text-lg mr-24"
       />
     </div>
   );

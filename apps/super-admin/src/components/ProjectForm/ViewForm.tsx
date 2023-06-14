@@ -9,7 +9,7 @@ interface ViewFormProps extends React.PropsWithChildren {
 export const ViewForm: React.FC<ViewFormProps> = ({ fields }) => {
   return (
     <div className="py-4 md:bg-white md:p-6 lg:p-8 md:shadow-md rounded-md space-y-6">
-      <h3>New project form</h3>
+      <h3>Project form</h3>
       {fields?.map((x, idx) => (
         <Textarea
           key={idx}

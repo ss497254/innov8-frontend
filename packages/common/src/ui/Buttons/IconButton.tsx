@@ -1,16 +1,45 @@
 import React from "react";
+import { Spinner } from "../Spinner";
+import { ButtonTypes } from "./ButtonTypes";
 
-interface props {}
-
-export const IconButton: React.FC<
-  props & React.ButtonHTMLAttributes<HTMLButtonElement>
-> = ({ className, children, ...prop }) => {
+export interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  loading?: boolean;
+  disabled?: boolean;
+  btn?: keyof typeof ButtonTypes;
+  iconSize?: number;
+  icon?: React.ReactNode;
+  className?: string;
+  children?: React.ReactNode;
+  Icon?: React.ReactNode;
+  loadingCentered?: boolean;
+  size?: number;
+}
+export const IconButton: React.FC<IconButtonProps> = ({
+  className,
+  btn,
+  children,
+  loading,
+  size = 40,
+  ...prop
+}) => {
   return (
     <button
-      className={["c rounded-md bg-dark-200 h-10 w-10", className].join(" ")}
+      style={{ height: size, width: size }}
+      className={[
+        "c rounded-md",
+        btn ? ButtonTypes[btn] : "bg-dark-200",
+        className,
+      ].join(" ")}
       {...prop}
     >
-      {children}
+      {loading ? (
+        <div className="absolute c bg-inherit">
+          <Spinner />
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };
