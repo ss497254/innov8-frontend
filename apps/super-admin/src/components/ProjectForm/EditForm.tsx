@@ -1,13 +1,14 @@
 import { useApi } from "common/src/hooks/useApi";
 import { EditIcon, TrashIcon } from "common/src/icons";
 import { showToast } from "common/src/lib/showToast";
+import { ProjectFormType } from "common/src/types";
 import { Button, IconButton, Input, Modal, Textarea } from "common/src/ui";
 import React, { useCallback, useState } from "react";
 
 interface props {}
 
 export const EditForm: React.FC<props> = () => {
-  const [fields, setFields] = useState<any[]>([]);
+  const [fields, setFields] = useState<ProjectFormType["fields"]>([]);
   const [open, setOpen] = useState(false);
   const { loading, run } = useApi("PUT", "/super-admin/hypotheses/");
 
@@ -37,7 +38,7 @@ export const EditForm: React.FC<props> = () => {
         <Field
           key={idx}
           {...x}
-          onChange={(x: any) =>
+          onChange={(x: ProjectFormType["fields"][number]) =>
             setFields(
               fields.map((y) => {
                 if (y.id !== x.id) return y;
