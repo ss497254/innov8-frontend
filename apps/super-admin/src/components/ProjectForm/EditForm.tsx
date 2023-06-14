@@ -11,9 +11,10 @@ import {
   Checkbox,
 } from "common/src/ui";
 import React, { useCallback, useState } from "react";
+import { mutate } from "swr";
 
 interface props {
-  initialFields: ProjectFormType["fields"];
+  initialFields?: ProjectFormType["fields"];
 }
 
 export const EditForm: React.FC<props> = ({ initialFields = [] }) => {
@@ -34,8 +35,8 @@ export const EditForm: React.FC<props> = ({ initialFields = [] }) => {
   }, []);
 
   return (
-    <div className="space-y-5 py-4">
-      <h2>Edit Form</h2>
+    <div className="space-y-6 py-4 md:bg-white md:p-6 lg:p-8 md:shadow-md rounded-md">
+      <h3>Edit Form</h3>
       <Modal open={open} onClose={() => setOpen(false)}>
         <form className="space-y-4 w-80 md:w-96" onSubmit={addField}>
           <h4>Add Field</h4>
@@ -66,7 +67,7 @@ export const EditForm: React.FC<props> = ({ initialFields = [] }) => {
       ))}
       <div className="md:flex space-y-2 md:space-y-0 jb">
         <Button
-          className="!px-4 !rounded-md relative custom-top-bar"
+          className="!px-4 !rounded-md relative custom-top-bar w-40"
           onClick={() => setOpen(true)}
         >
           + Add Field
@@ -87,6 +88,7 @@ export const EditForm: React.FC<props> = ({ initialFields = [] }) => {
               res.message
             );
           else showToast("error", "Unable to update Project form", res.error);
+          await mutate("/super-admin/project-form");
         }}
       >
         Submit
@@ -127,13 +129,7 @@ const Field = ({ name, desc, required, onChange, onDelete }: any) => {
           </Button>
         </form>
       </Modal>
-      <Textarea
-        label={name}
-        desc={desc}
-        containerClassName="flex-1"
-        placeholder={required ? "" : "optional"}
-      />
-      <div className="f space-x-2 justify-end">
+      <div className="f space-x-2 justify-end -mb-14">
         <IconButton
           onClick={() => setOpen(true)}
           className="bg-blue-200 !p-1.5 text-blue-500"
@@ -144,6 +140,13 @@ const Field = ({ name, desc, required, onChange, onDelete }: any) => {
           <TrashIcon />
         </IconButton>
       </div>
+      <Textarea
+        label={name}
+        desc={desc}
+        containerClassName="flex-1"
+        placeholder={required ? "" : "optional"}
+        labelClassName="!font-bold md:text-lg"
+      />
     </div>
   );
 };
