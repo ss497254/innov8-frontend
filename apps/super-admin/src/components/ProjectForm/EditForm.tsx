@@ -20,7 +20,7 @@ export const EditForm: React.FC<props> = ({ initialFields = [] }) => {
   const [fields, setFields] =
     useState<ProjectFormType["fields"]>(initialFields);
   const [open, setOpen] = useState(false);
-  const { loading, run } = useApi("PUT", "/super-admin/hypotheses/");
+  const { loading, run } = useApi("PUT", "/super-admin/project-form");
 
   const addField = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -118,6 +118,7 @@ const Field = ({ name, desc, required, onChange, onDelete }: any) => {
           <Input label="Field Description" name="desc" defaultValue={desc} />
           <Checkbox
             label="Required"
+            desc="Mark this field as required"
             defaultChecked={required}
             name="required"
           />
